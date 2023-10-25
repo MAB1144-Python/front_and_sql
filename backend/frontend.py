@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from funcionessql import llamar_usuarios, buscar_estudiante_documento
 
 app = Tk()
 app.title("MODULOS SALAS")
@@ -58,6 +59,9 @@ def agregar_estudiante():
     semestre = entrada_SEMES.get()
     jornada = entrada_JOR.get()
 
+    data_usuarios = buscar_estudiante_documento(documento)
+    data_usuarios = list(data_usuarios[0])
+
     estudiante = Estudiante(nombre, apellido, documento, programa, semestre, jornada)
     estudiantes.append(estudiante)
     actualizar_dropdown_estudiantes()
@@ -69,9 +73,22 @@ def agregar_estudiante():
     entrada_SEMES.delete(0, 'end')
     entrada_JOR.delete(0, 'end')
 
+    print(data_usuarios)
+    entrada_NOM.insert(INSERT,str(data_usuarios[2]))
+    entrada_APE.insert(INSERT,str(data_usuarios[3]))
+    entrada_DOCMID.insert(INSERT,str(data_usuarios[1]))
+    entrada_PROG.insert(INSERT,str(data_usuarios[4]))
+    entrada_SEMES.insert(INSERT,str(data_usuarios[6]))
+    entrada_JOR.insert(INSERT,str(data_usuarios[7]))
+
+
+
 def mostrar_estudiantes():
+    print("entro linea 74")
     ventana_estudiantes = Toplevel(app)
     ventana_estudiantes.title("Estudiantes registrados")
+    print(llamar_usuarios())
+    print("salio linea 78")
 
 # Crear etiquetas para mostrar los detalles de cada estudiante
     for idx, estudiante in enumerate(estudiantes):
