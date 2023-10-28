@@ -3,7 +3,7 @@ from tkinter import ttk
 from tkinter import messagebox
 from funcionessql import llamar_usuarios, buscar_estudiante_documento
 
-app = Tk()
+app = Tk() 
 app.title("MODULOS SALAS")
 app.config(bg="white")
 app.geometry("800x600")
