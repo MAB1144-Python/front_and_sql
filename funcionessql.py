@@ -70,11 +70,22 @@ def registrar_prestamo(idprestamo,descripcion,idusuario,idequipo,idauxiliar):
     conexion.commit()
     conexion.close()
 
-#       idprestamo integer auto_increment PRIMARY KEY,
-#   descripcion text NOT NULL,
-#   idusuario integer NOT NULL,
-#   idequipo integer NOT NULL,
-#   idauxiliar integer NOT NULL
+def listado_prestamos(idusuario,fecha,programa):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    if idusuario !="":
+        print("listado_prestamo * idusuario")
+        df = pd.read_sql_query("SELECT * from prestamo WHERE idusuario='"+str(idusuario)+"'", conexion)
+    elif fecha !="":
+        print("listado_prestamo * fecha")
+        df = pd.read_sql_query("SELECT * from prestamo WHERE idusuario='"+str(idusuario)+"'", conexion)
+    elif programa !="":
+        print("listado_prestamo * programa")
+        df = pd.read_sql_query("SELECT * from prestamo WHERE idusuario='"+str(idusuario)+"'", conexion)
+    print(df)
+    #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
+ 
+    return df
 
-#print(registrar_prestamo(2,"prestamo_equipo_computo",1,1,1))
+print(listado_prestamos(1,1,1))
 
