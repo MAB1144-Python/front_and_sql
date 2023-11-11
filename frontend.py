@@ -59,26 +59,7 @@ def agregar_estudiante():
     programa = entrada_PROG.get()
     semestre = entrada_SEMES.get()
     jornada = entrada_JOR.get()
-
-
-
-
-
-
-
-
-
-
-
-
-def agregar_prestamo():
-    IDusuario = entrada_IDusuario.get()
-    IDequipo= entrada_IDequipo.get()
-    IDauxiliar = entrada_IDauxiliar.get()
-    Descripcion = entrada_Descripcion.get()
- 
-    
-    if nombre !="" and apellido !="" and documento !="" and  programa !="" and semestre !="" and jornada !="":
+    if nombre !="" and apellido !="" and documento !="" and  programa !="" and semestre !="" and jornada !="":# en la 81
         data_usuarios = buscar_estudiante_documento(documento)
         print("/*/*/*/*/*/*/*/*/*/*/*/*",len(data_usuarios))
         if  len(data_usuarios)==0:
@@ -104,6 +85,20 @@ def agregar_prestamo():
     else:
         print("faltan datos")
 
+
+def agregar_prestamo():# en la 74
+    IDusuario = entrada_IDusuario.get()
+    IDequipo= entrada_IDequipo.get()
+    IDauxiliar = entrada_IDauxiliar.get()
+    Descripcion = entrada_Descripcion.get()
+
+
+
+
+
+
+
+    
 
 
 def mostrar_estudiantes():
