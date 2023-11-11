@@ -64,9 +64,9 @@ def generar_idprestamo():
     
     return idprestamo
 
-def registrar_prestamo(idprestamo,descripcion,idusuario,idequipo,idauxiliar):
+def registrar_prestamo(idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
-    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,idusuario,idequipo,idauxiliar) values (?,?,?,?,?)", (idprestamo,descripcion,idusuario,idequipo,idauxiliar))
+    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha_prestamo) values (?,?,?,?,?,?)", (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha))
     conexion.commit()
     conexion.close()
 
