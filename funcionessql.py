@@ -123,7 +123,7 @@ def listado_usuario():
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df = pd.read_sql_query("SELECT * from usuario", conexion)
-    return list(df.values)
+    return df.values
 
 
 print("muchos por",listado_usuario())
