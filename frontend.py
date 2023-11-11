@@ -111,6 +111,10 @@ def mostrar_estudiantes():
     ventana_estudiantes.title("Estudiantes registrados")
     print(llamar_usuarios())
     print("salio linea 78")
+
+def mostrar_equipos():
+    ventana_equipos = Toplevel(app)
+    ventana_equipos.title("Equipos")    
     
 
 # Crear etiquetas para mostrar los detalles de cada estudiante
@@ -344,25 +348,28 @@ entrada_JOR.grid(column=1, row=8, sticky="w")
 
 # Botones de registro
 btn_mostrar_registros = Button(Ventana_principal, text="Mostrar registros", font="arial 8 bold", command=mostrar_registros)
-btn_mostrar_registros.grid(column=7, row=49, sticky="w")
+btn_mostrar_registros.grid(column=0, row=51, columnspan= 1, pady=15, sticky="w")
 
 btn_agregar_estudiante = Button(Ventana_principal, text="Agregar Estudiantes", font="arial 8 bold", command=agregar_estudiante)
-btn_agregar_estudiante.grid(row=1, column=3, columnspan=2, pady=15)
+btn_agregar_estudiante.grid(row=1, column=3, columnspan=1, pady=15)
 
 btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
-btn_agregar_sala.grid(row=9, column=0, columnspan=2, pady=15)
+btn_agregar_sala.grid(row=9, column=0, columnspan=1, pady=15)
 
 btn_registrar = Button(Ventana_principal, text="Registrar Estudiante en Sala", font="arial 8 bold", command=registrar_estudiante_en_sala)
-btn_registrar.grid(row=1, column=9, columnspan=2, pady=15)
+btn_registrar.grid(row=1, column=9, columnspan=1, pady=15)
 
 btn_ver_estudiantes = Button(Ventana_principal, text="Ver Usuarios", font="arial 8 bold", command=mostrar_estudiantes)
-btn_ver_estudiantes.grid(row=51, column=7, columnspan=2, pady=15)
+btn_ver_estudiantes.grid(row=51, column=1, columnspan=1, pady=15)
+
+btn_ver_equipos = Button(Ventana_principal, text="Ver Equipos", font="arial 8 bold", command=mostrar_equipos)
+btn_ver_equipos.grid(row=51, column=8, columnspan=1, pady=15)
 
 btn_ver_salas = Button(Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas)
-btn_ver_salas.grid(row=52, column=7, columnspan=2, pady=15)
+btn_ver_salas.grid(row=51, column=2, columnspan=1, pady=15)
 
 btn_agregar_prestamos = Button(Ventana_principal, text="Agregar Prestamo", font="arial 8 bold", command=agregar_prestamo)
-btn_agregar_prestamos.grid(row=53, column=7, columnspan=2, pady=15)
+btn_agregar_prestamos.grid(row=53, column=7, columnspan=1, pady=15)
 
 
 # Titulos
@@ -374,25 +381,25 @@ titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 8 bol
 titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 
 titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 8 bold", bg="mint cream",  width=10)
-titulo_sala.grid(row=49, column=0, columnspan=1, sticky=(N, W))
+titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
 
 #label de prestamos
 NOM_text = Label(Ventana_principal, text="ID Usuario:", font="arial 8 bold", bg="mint cream")
-NOM_text.grid(column=0, row=50, sticky=(N, W))
+NOM_text.grid(column=0, row=55, sticky=(N, W))
 entrada_IDusuario = Entry(Ventana_principal,width=15)
-entrada_IDusuario.grid(row=50, column=1, sticky="w")
+entrada_IDusuario.grid(row=55, column=1, sticky="w")
 APE_text = Label(Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream")
-APE_text.grid(column=0, row=51, sticky=(N, W))
+APE_text.grid(column=0, row=56, sticky=(N, W))
 entrada_IDequipo = Entry(Ventana_principal,width=15)
-entrada_IDequipo.grid(row=51, column=1, sticky="w")
+entrada_IDequipo.grid(row=56, column=1, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream")
-DOCMID_text.grid(column=0, row=52, sticky=(N, W))
+DOCMID_text.grid(column=0, row=57, sticky=(N, W))
 entrada_IDauxiliar = ttk.Combobox(Ventana_principal, values=listado_auxiliares(), width=5)
-entrada_IDauxiliar.grid(column=1, row=52, sticky="w")
+entrada_IDauxiliar.grid(column=1, row=57, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream")
-DOCMID_text.grid(column=0, row=53, sticky=(N, W))
+DOCMID_text.grid(column=0, row=58, sticky=(N, W))
 entrada_Descripcion = Entry(Ventana_principal,width=20)
-entrada_Descripcion.grid(row=53, column=1, sticky="w")
+entrada_Descripcion.grid(row=58, column=1, sticky="w")
 
 
 
