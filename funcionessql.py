@@ -113,6 +113,6 @@ def listado_tipousuario(idtipousuario):
     return df
 
 
-print(listado_auxiliares())
+#print(listado_sala())
 
 
