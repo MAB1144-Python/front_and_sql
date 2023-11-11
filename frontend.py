@@ -150,7 +150,7 @@ def mostrar_salas():
 
 def registrar_estudiante_en_sala():
     
-# Obtener la sala seleccionada del Combobox
+    #Obtener la sala seleccionada del Combobox
     nombre_registro = entrada_nombre_registro.get()
     documento_registro = entrada_documento_registro.get()
     sala_seleccionada = lista_salas_registrar.get()
@@ -192,6 +192,13 @@ def mostrar_registros():
         Label(ventana_registros, text=registro_str).grid(row=idx, column=0, sticky="w")
 
 # Combobox para seleccionar una sala
+
+
+numsala_text = Label(Ventana_principal, text="Salas:", font="arial 8 bold", bg="mint cream")
+numsala_text.grid(row=8, column=0, sticky=(N, W))
+entrada_Sala = ttk.Combobox(Ventana_principal, values=listado_sala(), width=15)
+entrada_Sala.grid(column=1, row=8, sticky="w")
+
 sala_registro_text = Label(Ventana_principal, text="Seleccione una sala:", font="arial 8 bold", bg="mint cream")
 sala_registro_text.grid(column=0, row=26, sticky=(N, W))
 lista_salas_registrar = ttk.Combobox(Ventana_principal, values=[str(s) for s in salas], width=20)
@@ -284,15 +291,9 @@ SEMES_text.grid(column=0, row=6, sticky=(N, W))
 JOR_text = Label(Ventana_principal, text="Ingrese la jornada:", font="arial 8 bold", bg="mint cream")
 JOR_text.grid(column=0, row=7, sticky=(N, W))
 # Etiquetas y entradas para salas
-numsala_text = Label(Ventana_principal, text="Salas:", font="arial 8 bold", bg="mint cream")
-numsala_text.grid(row=8, column=0, sticky=(N, W))
-entrada_Sala = ttk.Combobox(Ventana_principal, values=listado_sala(), width=15)
-entrada_Sala.grid(column=1, row=8, sticky="w")
 
-numequipo_text = Label(Ventana_principal, text="Equipos:", font="arial 8 bold", bg="mint cream")
-numequipo_text.grid(row=9, column=0, sticky=(N, W))
-entrada_numequipo = Entry(Ventana_principal,width=15)
-entrada_numequipo.grid(row=9, column=1, sticky="w")
+
+
 
 # Entradas de texto
 entrada_NOM = Entry(Ventana_principal, width=15)
@@ -352,11 +353,9 @@ btn_agregar_prestamos.grid(row=35, column=0, columnspan=2, pady=15)
 titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 8 bold", bg="mint cream",  width=16)
 titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
 
-#titulo_sala = Label(Ventana_principal, text="Crear Salas", font="arial 10 bold", bg="mint cream",  width=50)
-#titulo_sala.grid(row=12, column=0, columnspan=1, sticky=(N, W))
 
 titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 8 bold", bg="mint cream",  width=14)
-titulo_sala.grid(row=16, column=0, columnspan=1, sticky=(N, W))
+titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 
 titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 8 bold", bg="mint cream",  width=10)
 titulo_sala.grid(row=29, column=0, columnspan=1, sticky=(N, W))
