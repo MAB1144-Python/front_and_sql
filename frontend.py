@@ -182,16 +182,16 @@ def mostrar_equipos():
         tabla = ttk.Treeview(ventana_equipos, columns=("id equipo", "descripcion", "sala"))
         #()
         # Definir encabezados de columnas
-        tabla.heading("id equipo", text="ID")
-        tabla.heading("documento", text="Nombre")
-        tabla.heading("nombres", text="Edad")
+        tabla.heading("id equipo", text="ID Equipo")
+        tabla.heading("descripcion", text="Descrpcion")
+        tabla.heading("sala", text="Sala")
         
         # Agregar datos a la tabla
         # Puedes reemplazar esto con tus propios datos
-        for data_usuario in listado_equipo():
-            print(data_usuario)
-            data_usuario = list(data_usuario)
-            tabla.insert("", "end", text="1", values=(data_usuario[0],data_usuario[1],data_usuario[2]))
+        for data_equipo in listado_equipo():
+            print(data_equipo)
+            data_equipo = list(data_equipo)
+            tabla.insert("", "end", text="1", values=(data_equipo[0],data_equipo[1],data_equipo[2]))
         tabla.pack()
         # Ejecutar el bucle principal
         ventana_equipos.mainloop()
@@ -645,7 +645,8 @@ entrada_APE.grid(column=1, row=3, sticky="w")
 entrada_DOCMID = Entry(Ventana_principal, width=15)
 entrada_DOCMID.grid(column=1, row=4, sticky="w")
 entrada_PROG = Entry(Ventana_principal, width=15)
-entrada_PROG.grid(column=1, row=5, sticky="w")
+entrada_ingrese_programa = ttk.Combobox(Ventana_principal, values=["Administracion de empresas", "Derecho", "Psicologia", "Comercio Internacional", "Contaduria Publica", "Ingenieria Ambiental", "Ingenieria Industrial", "Ingenieria de Sistemas",], width=23)
+entrada_ingrese_programa.grid(column=1, row=5, sticky="w")
 entrada_SEMES = Entry(Ventana_principal, width=15)
 entrada_SEMES.grid(column=1, row=6, sticky="w")
 entrada_JOR = Entry(Ventana_principal, width=15)
@@ -715,7 +716,7 @@ entrada_IDequipo = Entry(Ventana_principal,width=15)
 entrada_IDequipo.grid(row=56, column=1, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=57, sticky=(N, W))
-entrada_IDauxiliar = ttk.Combobox(Ventana_principal, values=listado_auxiliares(), width=5)
+entrada_IDauxiliar = ttk.Combobox(Ventana_principal, values=listado_auxiliares(), width=15)
 entrada_IDauxiliar.grid(column=1, row=57, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=58, sticky=(N, W))
