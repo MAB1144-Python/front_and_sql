@@ -1,7 +1,8 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from funcionessql import llamar_usuarios, buscar_estudiante_documento,generar_idusuario,agregar_estudiante_sql
+from funcionessql import llamar_usuarios, buscar_estudiante_documento,generar_idusuario,agregar_estudiante_sql,registrar_prestamo,generar_idprestamo
+from datetime import datetime
 
 app = Tk() 
 app.title("MODULOS SALAS")
@@ -91,18 +92,21 @@ def agregar_prestamo():# en la 74
     IDequipo= entrada_IDequipo.get()
     IDauxiliar = entrada_IDauxiliar.get()
     Descripcion = entrada_Descripcion.get()
+    idprestamo= generar_idprestamo()
+    fecha_prestamo = datetime.fromisoformat('2011-11-04T00:05:23')
+    try:
+        registrar_prestamo(int(idprestamo),Descripcion,int(IDusuario),int(IDequipo),int(IDauxiliar),fecha_prestamo)
+    except:
+        print("se genero un error en agregrar_prestamo linea 98")
 
 
 
 
 
-
-
-    
 
 
 def mostrar_estudiantes():
-    print("entro linea 74")
+    print("entro linea 105")
     ventana_estudiantes = Toplevel(app)
     ventana_estudiantes.title("Estudiantes registrados")
     print(llamar_usuarios())
