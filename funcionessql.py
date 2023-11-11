@@ -87,5 +87,39 @@ def listado_prestamos(idusuario,fecha,programa):
  
     return df
 
-print(listado_prestamos(1,1,1))
+def listado_auxiliares():
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    df = pd.read_sql_query("SELECT * from auxiliar", conexion)
+    print(df)
+    #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
+    print(df)
+    return df
+
+def listado_sala():
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    df = pd.read_sql_query("SELECT * from sala", conexion)
+    print(df)
+    #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
+    print(df)
+    return df
+
+def listado_tipousuario(idtipousuario):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+
+    if idtipousuario==0:
+        df = pd.read_sql_query("SELECT * from tipousuario", conexion)
+    else:
+        df = pd.read_sql_query("SELECT * from tipousuario WHERE idtipousuario ='"+str(idtipousuario)+"'", conexion)
+        df = df["descripcion"].values   
+    print(df)
+    #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
+    print(df)
+    return df
+
+
+print(listado_tipousuario(3))
+
 
