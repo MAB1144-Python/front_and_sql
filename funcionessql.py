@@ -76,5 +76,5 @@ def registrar_prestamo(idprestamo,descripcion,idusuario,idequipo,idauxiliar):
 #   idequipo integer NOT NULL,
 #   idauxiliar integer NOT NULL
 
-print(registrar_prestamo(2,"prestamo_equipo_computo",1,1,1))
+#print(registrar_prestamo(1,"prestamo_equipo_computo",1,1,1))
 
