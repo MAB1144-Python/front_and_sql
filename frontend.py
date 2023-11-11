@@ -68,16 +68,18 @@ def actualizar_dropdown_estudiantes():
 
     entrada_nombre_registro["values"] = nombres
     entrada_documento_registro["values"] = documentos
-
+def fecha_entrada():
+    fecha_entrada = entrada_Año.get()+"-"+entrada_Mes+"-"+entrada_dia+"T"+entrada_Hora+":"+entrada_Minuto+":00" 
 
 def agregar_estudiante():
     nombre = entrada_NOM.get()
     apellido = entrada_APE.get()
     documento = entrada_DOCMID.get()
-    programa = entrada_PROG.get()
+    programa = entrada_ingrese_programa.get()
     semestre = entrada_ingrese_semestre.get()
-    jornada = entrada_JOR.get()
+    jornada = entrada_ingrese_jornada.get()
     tipodeusuario = entrada_Sala.get()
+    print(nombre,apellido,documento,programa,semestre,jornada,tipodeusuario)
     if (
         nombre != ""
         and apellido != ""
@@ -107,16 +109,16 @@ def agregar_estudiante():
         entrada_APE.delete(0, "end")
         entrada_DOCMID.delete(0, "end")
         entrada_PROG.delete(0, "end")
-        entrada_SEMES.delete(0, "end")
-        entrada_JOR.delete(0, "end")
+        entrada_ingrese_semestre.delete(0, "end")
+        entrada_ingrese_jornada.delete(0, "end")
 
         print(data_usuarios)
         entrada_NOM.insert(INSERT, str(data_usuarios[2]))
         entrada_APE.insert(INSERT, str(data_usuarios[3]))
         entrada_DOCMID.insert(INSERT, str(data_usuarios[1]))
-        entrada_PROG.insert(INSERT, str(data_usuarios[4]))
-        entrada_SEMES.insert(INSERT, str(data_usuarios[6]))
-        entrada_JOR.insert(INSERT, str(data_usuarios[7]))
+        entrada_ingrese_programa.insert(INSERT, str(data_usuarios[4]))
+        entrada_ingrese_semestre.insert(INSERT, str(data_usuarios[6]))
+        entrada_ingrese_jornada.insert(INSERT, str(data_usuarios[7]))
     else:
         print("faltan datos") 
         messagebox.showinfo(
@@ -655,8 +657,7 @@ entrada_ingrese_semestre = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7
 entrada_ingrese_semestre.grid(column=1, row=6, sticky="w")
 entrada_ingrese_jornada = ttk.Combobox(Ventana_principal, values=["Diurna", "Nocturna"], width=8)
 entrada_ingrese_jornada.grid(column=1, row=7, sticky="w")
-# entrada_JOR = Entry(Ventana_principal, width=15)
-# entrada_JOR.grid(column=1, row=8, sticky="w")
+
 
 
 # Reemplace los Entry por ttk.Combobox
