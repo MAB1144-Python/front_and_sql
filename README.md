@@ -6,4 +6,4 @@ cd backend
 ## para ejecutar el front
 darle play
 
-hola mundo
+hola mundo sm
