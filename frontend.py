@@ -51,6 +51,7 @@ def actualizar_dropdown_estudiantes():
     entrada_nombre_registro['values'] = nombres
     entrada_documento_registro['values'] = documentos
 
+
 def agregar_estudiante():
     nombre = entrada_NOM.get()
     apellido = entrada_APE.get()
@@ -59,6 +60,23 @@ def agregar_estudiante():
     semestre = entrada_SEMES.get()
     jornada = entrada_JOR.get()
 
+
+
+
+
+
+
+
+
+
+
+
+def agregar_prestamo():
+    IDusuario = entrada_IDusuario.get()
+    IDequipo= entrada_IDequipo.get()
+    IDauxiliar = entrada_IDauxiliar.get()
+    Descripcion = entrada_Descripcion.get()
+ 
     
     if nombre !="" and apellido !="" and documento !="" and  programa !="" and semestre !="" and jornada !="":
         data_usuarios = buscar_estudiante_documento(documento)
@@ -277,6 +295,12 @@ btn_ver_estudiantes.grid(row=26, column=0, columnspan=2, pady=15)
 btn_ver_salas = Button(Ventana_principal, text="Ver Salas", command=mostrar_salas)
 btn_ver_salas.grid(row=26, column=1, columnspan=2, pady=15)
 
+#Boton Prestamos
+
+btn_agregar_prestamos = Button(Ventana_principal, text="Agregar Prestamo", command=agregar_prestamo)
+btn_agregar_prestamos.grid(row=1, column=7, columnspan=2, pady=15)
+
+
 # Titulos
 titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="mint cream",  width=50)
 titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
@@ -293,21 +317,20 @@ titulo_sala.grid(row=1, column=5, columnspan=1, sticky=(N, W))
 #label de prestamos
 NOM_text = Label(Ventana_principal, text="ID Usuaio:", font="arial 8 bold", bg="mint cream")
 NOM_text.grid(column=5, row=6, sticky=(N, W))
-entrada_numsala = Entry(Ventana_principal,width=15)
-entrada_numsala.grid(row=6, column=6, sticky="w")
+entrada_IDusuario = Entry(Ventana_principal,width=15)
+entrada_IDusuario.grid(row=6, column=6, sticky="w")
 APE_text = Label(Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream")
 APE_text.grid(column=5, row=7, sticky=(N, W))
-entrada_numsala = Entry(Ventana_principal,width=15)
-entrada_numsala.grid(row=7, column=6, sticky="w")
+entrada_IDequipo = Entry(Ventana_principal,width=15)
+entrada_IDequipo.grid(row=7, column=6, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=5, row=8, sticky=(N, W))
-entrada_numsala = Entry(Ventana_principal,width=15)
-entrada_numsala.grid(row=8, column=6, sticky="w")
+entrada_IDauxiliar = Entry(Ventana_principal,width=15)
+entrada_IDauxiliar.grid(row=8, column=6, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=5, row=9, sticky=(N, W))
-entrada_numsala = Entry(Ventana_principal,width=20)
-entrada_numsala.grid(row=9, column=6, sticky="w")
-
+entrada_Descripcion = Entry(Ventana_principal,width=20)
+entrada_Descripcion.grid(row=9, column=6, sticky="w")
 
 
 
