@@ -87,5 +87,5 @@ def listado_prestamos(idusuario,fecha,programa):
  
     return df
 
-print(listado_prestamos(1,1,1))
+#print(listado_prestamos(1,1,1))
 
