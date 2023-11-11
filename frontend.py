@@ -77,6 +77,7 @@ def agregar_estudiante():
     programa = entrada_PROG.get()
     semestre = entrada_SEMES.get()
     jornada = entrada_JOR.get()
+    tipodeusuario = entrada_Sala.get()
     if (
         nombre != ""
         and apellido != ""
@@ -98,7 +99,7 @@ def agregar_estudiante():
                 semestre,
                 jornada,
                 1,
-                1,
+                tipodeusuario,
             )  # idprograma,idtipousuario
         data_usuarios = buscar_estudiante_documento(documento)
         data_usuarios = list(data_usuarios[0])
@@ -117,7 +118,11 @@ def agregar_estudiante():
         entrada_SEMES.insert(INSERT, str(data_usuarios[6]))
         entrada_JOR.insert(INSERT, str(data_usuarios[7]))
     else:
-        print("faltan datos")
+        print("faltan datos") 
+        messagebox.showinfo(
+        message="faltan datos",
+        title="Selección"
+    )
 
 
 def agregar_prestamo():  # en la 74
@@ -288,13 +293,12 @@ numsala_text.grid(row=12, column=0, sticky=(N, W))
 entrada_Sala = ttk.Combobox(Ventana_principal, values=listado_sala(), width=15)
 entrada_Sala.grid(column=1, row=12, sticky="w")
 
-tipo_usuario= Label(
+tipo_usuario_text= Label(
     Ventana_principal, text="Tipo de usuario:", font="arial 8 bold", bg="mint cream"
 )
-tipo_usuario.grid(column=0, row=8, sticky=(N, W))
-tipo_usuario = ttk.Combobox(
-    Ventana_principal, values=["a","b"], width=20
-)
+tipo_usuario_text.grid(column=0, row=8, sticky=(N, W))
+tipo_usuario = ttk.Combobox(Ventana_principal, values=listado_tipousuario(), width=20)
+   
 tipo_usuario.grid(column=1, row=8, sticky="w")
 
 nombre_registro_text = Label(
