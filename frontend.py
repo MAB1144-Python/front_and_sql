@@ -111,6 +111,7 @@ def mostrar_estudiantes():
     ventana_estudiantes.title("Estudiantes registrados")
     print(llamar_usuarios())
     print("salio linea 78")
+    
 
 # Crear etiquetas para mostrar los detalles de cada estudiante
     for idx, estudiante in enumerate(estudiantes):
