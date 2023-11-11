@@ -286,7 +286,7 @@ JOR_text.grid(column=0, row=7, sticky=(N, W))
 # Etiquetas y entradas para salas
 numsala_text = Label(Ventana_principal, text="sala:", font="arial 8 bold", bg="mint cream")
 numsala_text.grid(row=8, column=0, sticky=(N, W))
-entrada_Sala = ttk.Combobox(Ventana_principal, values=[], width=15)
+entrada_Sala = ttk.Combobox(Ventana_principal, values=listado_sala(), width=15)
 entrada_Sala.grid(column=1, row=8, sticky="w")
 
 numequipo_text = Label(Ventana_principal, text="equipos:", font="arial 8 bold", bg="mint cream")

@@ -100,7 +100,7 @@ def listado_sala():
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df = pd.read_sql_query("SELECT * from sala", conexion)
-    df = df["descripcion"].values
+    df = list(df["descripcion"].values)
     return df
 
 def listado_tipousuario(idtipousuario):
