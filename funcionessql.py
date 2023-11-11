@@ -13,6 +13,8 @@ def llamar_usuarios():
     conexion.close()
     return filas
 
+
+
 def buscar_estudiante_documento(documento):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
