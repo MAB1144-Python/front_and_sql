@@ -100,9 +100,7 @@ def listado_sala():
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df = pd.read_sql_query("SELECT * from sala", conexion)
-    print(df)
-    #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
-    print(df)
+    df = df["descripcion"].values
     return df
 
 def listado_tipousuario(idtipousuario):
@@ -120,6 +118,6 @@ def listado_tipousuario(idtipousuario):
     return df
 
 
-print(listado_tipousuario(3))
+print(listado_sala())
 
 

@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from funcionessql import llamar_usuarios, buscar_estudiante_documento,generar_idusuario,agregar_estudiante_sql,registrar_prestamo,generar_idprestamo
+from funcionessql import llamar_usuarios, buscar_estudiante_documento,generar_idusuario,agregar_estudiante_sql,registrar_prestamo,generar_idprestamo,listado_sala,listado_auxiliares,listado_prestamos,listado_tipousuario
 from datetime import datetime
 
 app = Tk() 
