@@ -315,7 +315,7 @@ titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 10 bold", b
 titulo_sala.grid(row=1, column=5, columnspan=1, sticky=(N, W))
 
 #label de prestamos
-NOM_text = Label(Ventana_principal, text="ID Usuaio:", font="arial 8 bold", bg="mint cream")
+NOM_text = Label(Ventana_principal, text="ID Usuario:", font="arial 8 bold", bg="mint cream")
 NOM_text.grid(column=5, row=6, sticky=(N, W))
 entrada_IDusuario = Entry(Ventana_principal,width=15)
 entrada_IDusuario.grid(row=6, column=6, sticky="w")
