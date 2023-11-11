@@ -203,6 +203,32 @@ def mostrar_equipos():
         # Ejecutar el bucle principal
         ventana_equipos.mainloop()
 
+def mostrar_prestamos(): 
+    ventana_prestamos = Toplevel(app)
+    ventana_prestamos.title("Prestamos")    
+    
+    # Crear etiquetas para mostrar los detalles de cada equipo
+    if True:
+    # Crear un Treeview con columnas
+        tabla = ttk.Treeview(ventana_prestamos, columns=("ID prestamo", "Descripcion", "ID usuario", "ID equipo", "ID auxiliar", "Fecha prestamo"))
+        #()
+        # Definir encabezados de columnas
+        tabla.heading("ID equipo", text="ID Equipo")
+        tabla.heading("Descripcion", text="Descripcion")
+        tabla.heading("ID usuario", text="ID usuario")
+        tabla.heading("ID equipo", text="ID equipo")
+        tabla.heading("ID auxiliar", text="ID auxiliar")
+        tabla.heading("fecha prestamo", text="Fecha prestamo")
+        
+        # Agregar datos a la tabla
+        # Puedes reemplazar esto con tus propios datos
+        for data_prestamos in listado_prestamos():
+            print(data_prestamos)
+            data_prestamos = list(data_prestamos)
+            tabla.insert("", "end", text="1", values=(data_prestamos[0],data_prestamos[1],data_prestamos[2], data_prestamos[3], data_prestamos[4], data_prestamos[5]))
+        tabla.pack()
+        # Ejecutar el bucle principal
+        ventana_prestamos.mainloop()
 
 def agregar_sala():  # 142
     numsala = entrada_numsala.get()
@@ -253,7 +279,7 @@ def registrar_estudiante_en_sala():
 
         if estudiante_seleccionado and sala_seleccionada:
             registro = Registro(
-                estudiante_seleccionado, sala_seleccionada, fecha_entrada, fecha_salida
+                estudiante_seleccionado, sala_seleccionada, fecha_entrada, fecha_salida,
             )
             registros.append(registro)
 
@@ -346,16 +372,16 @@ fecha_salida_text.grid(column=6, row=9, sticky=(N, W))
 fecha_entrada_text = Label(
     Ventana_principal, text="Dia:", font="arial 8 bold", bg="mint cream"
 )
-fecha_entrada_text.grid(column=7, row=6, sticky=(N, W))
-entrada_fecha_DD = Entry(Ventana_principal, width=5)
-entrada_fecha_DD.grid(column=7, row=7, sticky="w")
+fecha_entrada_text.grid(column=9, row=6, sticky=(N, W))
+entrada_dia = Entry(Ventana_principal, width=5)
+entrada_dia.grid(column=9, row=7, sticky="w")
 
 fecha_salida_text = Label(
     Ventana_principal, text="Dia:", font="arial 8 bold", bg="mint cream"
 )
-fecha_salida_text.grid(column=7, row=9, sticky=(N, W))
-salida_fecha_DD = Entry(Ventana_principal, width=5)
-salida_fecha_DD.grid(column=7, row=10, sticky="w")
+fecha_salida_text.grid(column=9, row=9, sticky=(N, W))
+salida_dia = Entry(Ventana_principal, width=5)
+salida_dia.grid(column=9, row=10, sticky="w")
 
 
 fecha_entrada_text = Label(
@@ -380,20 +406,20 @@ salida_Mes.grid(column=8, row=10, sticky="w")
 fecha_entrada_text = Label(
     Ventana_principal, text="Año:", font="arial 8 bold", bg="mint cream"
 )
-fecha_entrada_text.grid(column=9, row=6, sticky=(N, W))
+fecha_entrada_text.grid(column=7, row=6, sticky=(N, W))
 entrada_Año = ttk.Combobox(
     Ventana_principal, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
 )
-entrada_Año.grid(column=9, row=7, sticky="w")
+entrada_Año.grid(column=7, row=7, sticky="w")
 
 fecha_salida_text = Label(
     Ventana_principal, text="Año:", font="arial 8 bold", bg="mint cream"
 )
-fecha_salida_text.grid(column=9, row=9, sticky=(N, W))
+fecha_salida_text.grid(column=7, row=9, sticky=(N, W))
 salida_Año = ttk.Combobox(
     Ventana_principal, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
 )
-salida_Año.grid(column=9, row=10, sticky="w")
+salida_Año.grid(column=7, row=10, sticky="w")
 
 fecha_entrada_text = Label(
     Ventana_principal, text="Hora:", font="arial 8 bold", bg="mint cream"
@@ -694,6 +720,9 @@ btn_ver_equipos.grid(row=51, column=8, columnspan=1, pady=15)
 
 btn_ver_salas = Button(Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas)
 btn_ver_salas.grid(row=51, column=2, columnspan=1, pady=15)
+
+btn_ver_prestamos = Button(Ventana_principal, text="Ver Prestamos", font="arial 8 bold", command=mostrar_prestamos)
+btn_ver_prestamos.grid(row=51, column=9, columnspan=1, pady=15)
 
 btn_agregar_prestamos = Button(Ventana_principal, text="Agregar Prestamo", font="arial 8 bold", command=agregar_prestamo)
 btn_agregar_prestamos.grid(row=53, column=7, columnspan=1, pady=15)
