@@ -219,54 +219,54 @@ fecha_salida_text.grid(column=6, row=9, sticky=(N, W))
 
 fecha_entrada_text = Label(Ventana_principal, text="Dia:", font="arial 8 bold", bg="mint cream")
 fecha_entrada_text.grid(column=7, row=6, sticky=(N, W))
-entrada_fecha_DD = Entry(Ventana_principal, width=10)
+entrada_fecha_DD = Entry(Ventana_principal, width=5)
 entrada_fecha_DD.grid(column=7, row=7, sticky="w")
 
 fecha_salida_text = Label(Ventana_principal, text="Dia:", font="arial 8 bold", bg="mint cream")
 fecha_salida_text.grid(column=7, row=9, sticky=(N, W))
-salida_fecha_DD = Entry(Ventana_principal, width=10)
+salida_fecha_DD = Entry(Ventana_principal, width=5)
 salida_fecha_DD.grid(column=7, row=10, sticky="w")
 
 
 fecha_entrada_text = Label(Ventana_principal, text="Mes:", font="arial 8 bold", bg="mint cream")
 fecha_entrada_text.grid(column=8, row=6, sticky=(N, W))
-entrada_Mes = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,11,12], width=15)
+entrada_Mes = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,11,12], width=5)
 entrada_Mes.grid(column=8, row=7, sticky="w")
 
 fecha_salida_text = Label(Ventana_principal, text="Mes:", font="arial 8 bold", bg="mint cream")
 fecha_salida_text.grid(column=8, row=9, sticky=(N, W))
-salida_Mes = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,11,12], width=15)
+salida_Mes = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,11,12], width=5)
 salida_Mes.grid(column=8, row=10, sticky="w")
 
 
 fecha_entrada_text = Label(Ventana_principal, text="Año:", font="arial 8 bold", bg="mint cream")
 fecha_entrada_text.grid(column=9, row=6, sticky=(N, W))
-entrada_Año = ttk.Combobox(Ventana_principal, values=[2023,2024,2025,2026,2027,2028], width=15)
+entrada_Año = ttk.Combobox(Ventana_principal, values=[2023,2024,2025,2026,2027,2028], width=5)
 entrada_Año.grid(column=9, row=7, sticky="w")
 
 fecha_salida_text = Label(Ventana_principal, text="Año:", font="arial 8 bold", bg="mint cream")
 fecha_salida_text.grid(column=9, row=9, sticky=(N, W))
-salida_Año = ttk.Combobox(Ventana_principal, values=[2023,2024,2025,2026,2027,2028], width=15)
+salida_Año = ttk.Combobox(Ventana_principal, values=[2023,2024,2025,2026,2027,2028], width=5)
 salida_Año.grid(column=9, row=10, sticky="w")
 
 fecha_entrada_text = Label(Ventana_principal, text="Hora:", font="arial 8 bold", bg="mint cream")
 fecha_entrada_text.grid(column=10, row=6, sticky=(N, W))
-entrada_Hora = ttk.Combobox(Ventana_principal, values=[00,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], width=15)
+entrada_Hora = ttk.Combobox(Ventana_principal, values=[00,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], width=5)
 entrada_Hora.grid(column=10, row=7, sticky="w")
 
 fecha_salida_text = Label(Ventana_principal, text="Hora:", font="arial 8 bold", bg="mint cream")
 fecha_salida_text.grid(column=10, row=9, sticky=(N, W))
-salida_Hora = ttk.Combobox(Ventana_principal, values=[00,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], width=15)
+salida_Hora = ttk.Combobox(Ventana_principal, values=[00,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23], width=5)
 salida_Hora.grid(column=10, row=10, sticky="w")
 
 fecha_entrada_text = Label(Ventana_principal, text="Minuto:", font="arial 8 bold", bg="mint cream")
 fecha_entrada_text.grid(column=11, row=6, sticky=(N, W))
-entrada_Minuto = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60], width=15)
+entrada_Minuto = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60], width=5)
 entrada_Minuto.grid(column=11, row=7, sticky="w")
 
 fecha_salida_text = Label(Ventana_principal, text="Minuto:", font="arial 8 bold", bg="mint cream")
 fecha_salida_text.grid(column=11, row=9, sticky=(N, W))
-salida_Minuto = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60], width=15)
+salida_Minuto = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45,46,47,48,49,50,51,52,53,54,55,56,57,58,59,60], width=5)
 salida_Minuto.grid(column=11, row=10, sticky="w")
 
 
@@ -286,8 +286,8 @@ JOR_text.grid(column=0, row=7, sticky=(N, W))
 # Etiquetas y entradas para salas
 numsala_text = Label(Ventana_principal, text="sala:", font="arial 8 bold", bg="mint cream")
 numsala_text.grid(row=8, column=0, sticky=(N, W))
-entrada_numsala = Entry(Ventana_principal,width=15)
-entrada_numsala.grid(row=8, column=1, sticky="w")
+entrada_Sala = ttk.Combobox(Ventana_principal, values=[], width=15)
+entrada_Sala.grid(column=1, row=8, sticky="w")
 
 numequipo_text = Label(Ventana_principal, text="equipos:", font="arial 8 bold", bg="mint cream")
 numequipo_text.grid(row=9, column=0, sticky=(N, W))
