@@ -75,7 +75,7 @@ def agregar_estudiante():
     apellido = entrada_APE.get()
     documento = entrada_DOCMID.get()
     programa = entrada_PROG.get()
-    semestre = entrada_SEMES.get()
+    semestre = entrada_ingrese_semestre.get()
     jornada = entrada_JOR.get()
     tipodeusuario = entrada_Sala.get()
     if (
