@@ -681,8 +681,8 @@ entrada_ingrese_semestre = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7
 entrada_ingrese_semestre.grid(column=1, row=6, sticky="w")
 entrada_ingrese_jornada = ttk.Combobox(Ventana_principal, values=["Diurna", "Nocturna"], width=8)
 entrada_ingrese_jornada.grid(column=1, row=7, sticky="w")
-entrada_JOR = Entry(Ventana_principal, width=15)
-entrada_JOR.grid(column=1, row=8, sticky="w")
+# entrada_JOR = Entry(Ventana_principal, width=15)
+# entrada_JOR.grid(column=1, row=8, sticky="w")
 
 
 # Reemplace los Entry por ttk.Combobox
