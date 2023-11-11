@@ -124,6 +124,21 @@ def mostrar_estudiantes():
 
         Label(ventana_estudiantes, text=detalles_estudiante).grid(row=idx * 7, column=0, sticky="w")
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+        
+
 def agregar_sala():
     numsala = entrada_numsala.get()
     numequipo = entrada_numequipo.get()
