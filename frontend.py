@@ -195,14 +195,14 @@ def mostrar_registros():
 
 
 numsala_text = Label(Ventana_principal, text="Salas:", font="arial 8 bold", bg="mint cream")
-numsala_text.grid(row=8, column=0, sticky=(N, W))
+numsala_text.grid(row=26, column=0, sticky=(N, W))
 entrada_Sala = ttk.Combobox(Ventana_principal, values=listado_sala(), width=15)
-entrada_Sala.grid(column=1, row=8, sticky="w")
+entrada_Sala.grid(column=1, row=26, sticky="w")
 
-sala_registro_text = Label(Ventana_principal, text="Seleccione una sala:", font="arial 8 bold", bg="mint cream")
-sala_registro_text.grid(column=0, row=26, sticky=(N, W))
+sala_registro_text = Label(Ventana_principal, text="Tipo de usuario:", font="arial 8 bold", bg="mint cream")
+sala_registro_text.grid(column=0, row=8, sticky=(N, W))
 lista_salas_registrar = ttk.Combobox(Ventana_principal, values=[str(s) for s in salas], width=20)
-lista_salas_registrar.grid(column=1, row=26, sticky="w")
+lista_salas_registrar.grid(column=1, row=8, sticky="w")
 
 nombre_registro_text = Label(Ventana_principal, text="Nombre del Estudiante:", font="arial 8 bold", bg="mint cream")
 nombre_registro_text.grid(column=0, row=27, sticky=(N, W))
