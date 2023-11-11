@@ -627,15 +627,15 @@ DOCMID_text = Label(
 )
 DOCMID_text.grid(column=0, row=4, sticky=(N, W))
 PROG_text = Label(
-    Ventana_principal, text="Ingrese el programa:", font="arial 8 bold", bg="mint cream"
+    Ventana_principal, text="Seleccione el programa:", font="arial 8 bold", bg="mint cream"
 )
 PROG_text.grid(column=0, row=5, sticky=(N, W))
 SEMES_text = Label(
-    Ventana_principal, text="Ingrese el semestre:", font="arial 8 bold", bg="mint cream"
+    Ventana_principal, text="Seleccione el semestre:", font="arial 8 bold", bg="mint cream"
 )
 SEMES_text.grid(column=0, row=6, sticky=(N, W))
 JOR_text = Label(
-    Ventana_principal, text="Ingrese la jornada:", font="arial 8 bold", bg="mint cream"
+    Ventana_principal, text="Seleccione la jornada:", font="arial 8 bold", bg="mint cream"
 )
 JOR_text.grid(column=0, row=7, sticky=(N, W))
 # Etiquetas y entradas para salas
@@ -651,10 +651,10 @@ entrada_DOCMID.grid(column=1, row=4, sticky="w")
 entrada_PROG = Entry(Ventana_principal, width=15)
 entrada_ingrese_programa = ttk.Combobox(Ventana_principal, values=["Administracion de empresas", "Derecho", "Psicologia", "Comercio Internacional", "Contaduria Publica", "Ingenieria Ambiental", "Ingenieria Industrial", "Ingenieria de Sistemas",], width=23)
 entrada_ingrese_programa.grid(column=1, row=5, sticky="w")
-entrada_SEMES = Entry(Ventana_principal, width=15)
-entrada_SEMES.grid(column=1, row=6, sticky="w")
-entrada_JOR = Entry(Ventana_principal, width=15)
-entrada_JOR.grid(column=1, row=7, sticky="w")
+entrada_ingrese_semestre = ttk.Combobox(Ventana_principal, values=[1,2,3,4,5,6,7,8,9,10,], width=6)
+entrada_ingrese_semestre.grid(column=1, row=6, sticky="w")
+entrada_ingrese_jornada = ttk.Combobox(Ventana_principal, values=["Diurna", "Nocturna"], width=8)
+entrada_ingrese_jornada.grid(column=1, row=7, sticky="w")
 entrada_JOR = Entry(Ventana_principal, width=15)
 entrada_JOR.grid(column=1, row=8, sticky="w")
 
