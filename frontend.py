@@ -655,8 +655,8 @@ entrada_SEMES = Entry(Ventana_principal, width=15)
 entrada_SEMES.grid(column=1, row=6, sticky="w")
 entrada_JOR = Entry(Ventana_principal, width=15)
 entrada_JOR.grid(column=1, row=7, sticky="w")
-entrada_JOR = Entry(Ventana_principal, width=15)
-entrada_JOR.grid(column=1, row=8, sticky="w")
+# entrada_JOR = Entry(Ventana_principal, width=15)
+# entrada_JOR.grid(column=1, row=8, sticky="w")
 
 
 # Reemplace los Entry por ttk.Combobox
