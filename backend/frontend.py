@@ -8,7 +8,7 @@ app.title("MODULOS SALAS")
 app.config(bg="white")
 app.geometry("800x600")
 
-Ventana_principal = Frame(app, bg='peach puff')
+Ventana_principal = Frame(app, bg='cadetblue4')
 Ventana_principal.pack(fill="both", expand="true")
 
 # Listas para almacenar estudiantes , registros y salas 
@@ -175,7 +175,7 @@ def mostrar_registros():
         Label(ventana_registros, text=registro_str).grid(row=idx, column=0, sticky="w")
 
 # Combobox para seleccionar una sala
-sala_registro_text = Label(Ventana_principal, text="Seleccione una sala:", font="arial 8 bold", bg="linen")
+sala_registro_text = Label(Ventana_principal, text="Seleccione una sala:", font="arial 8 bold", bg="mint cream")
 sala_registro_text.grid(column=0, row=16, sticky=(N, W))
 lista_salas_registrar = ttk.Combobox(Ventana_principal, values=[str(s) for s in salas], width=20)
 lista_salas_registrar.grid(column=1, row=16, sticky="w")
@@ -184,38 +184,39 @@ lista_salas_registrar.grid(column=1, row=16, sticky="w")
 actualizar_dropdown_salas()
 
 # Agregar las etiquetas y entradas para la fecha y hora al registrar un estudiante en una sala
-fecha_entrada_text = Label(Ventana_principal, text="Fecha y Hora de Entrada (DD-MM-AAAA HH:MM):", font="arial 8 bold", bg="linen")
+fecha_entrada_text = Label(Ventana_principal, text="Fecha y Hora de Entrada (DD-MM-AAAA HH:MM):", font="arial 8 bold", bg="mint cream")
 fecha_entrada_text.grid(column=0, row=20, sticky=(N, W))
 entrada_fecha_entrada = Entry(Ventana_principal, width=20)
 entrada_fecha_entrada.grid(column=1, row=20, sticky="w")
 
-fecha_salida_text = Label(Ventana_principal, text="Fecha y Hora de Salida (DD-MM-AAAA HH:MM):", font="arial 8 bold", bg="linen")
+fecha_salida_text = Label(Ventana_principal, text="Fecha y Hora de Salida (DD-MM-AAAA HH:MM):", font="arial 8 bold", bg="mint cream")
 fecha_salida_text.grid(column=0, row=21, sticky=(N, W))
 entrada_fecha_salida = Entry(Ventana_principal, width=20)
 entrada_fecha_salida.grid(column=1, row=21, sticky="w")
 
-nombre_registro_text = Label(Ventana_principal, text="Nombre del Estudiante:", font="arial 8 bold", bg="linen")
+nombre_registro_text = Label(Ventana_principal, text="Nombre del Estudiante:", font="arial 8 bold", bg="mint cream")
 nombre_registro_text.grid(column=0, row=19, sticky=(N, W))
 entrada_nombre_registro = ttk.Combobox(Ventana_principal, values=[], width=15)
 entrada_nombre_registro.grid(column=1, row=19, sticky="w")
 
-documento_registro_text = Label(Ventana_principal, text="Documento del Estudiante:", font="arial 8 bold", bg="linen")
+documento_registro_text = Label(Ventana_principal, text="Documento del Estudiante:", font="arial 8 bold", bg="mint cream")
 documento_registro_text.grid(column=0, row=18, sticky=(N, W))
 entrada_documento_registro = ttk.Combobox(Ventana_principal, values=[], width=15)
 entrada_documento_registro.grid(column=1, row=18, sticky="w")
 # Widgets de texto
-NOM_text = Label(Ventana_principal, text="Ingrese el nombre:", font="arial 8 bold", bg="linen")
+NOM_text = Label(Ventana_principal, text="Ingrese el nombre:", font="arial 8 bold", bg="mint cream")
 NOM_text.grid(column=0, row=6, sticky=(N, W))
-APE_text = Label(Ventana_principal, text="Ingrese el apellido:", font="arial 8 bold", bg="linen")
+APE_text = Label(Ventana_principal, text="Ingrese el apellido:", font="arial 8 bold", bg="mint cream")
 APE_text.grid(column=0, row=7, sticky=(N, W))
-DOCMID_text = Label(Ventana_principal, text="Ingrese el documento de identidad:", font="arial 8 bold", bg="linen")
+DOCMID_text = Label(Ventana_principal, text="Ingrese el documento de identidad:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=8, sticky=(N, W))
-PROG_text = Label(Ventana_principal, text="Ingrese el programa:", font="arial 8 bold", bg="linen")
+PROG_text = Label(Ventana_principal, text="Ingrese el programa:", font="arial 8 bold", bg="mint cream")
 PROG_text.grid(column=0, row=9, sticky=(N, W))
-SEMES_text = Label(Ventana_principal, text="Ingrese el semestre:", font="arial 8 bold", bg="linen")
+SEMES_text = Label(Ventana_principal, text="Ingrese el semestre:", font="arial 8 bold", bg="mint cream")
 SEMES_text.grid(column=0, row=10, sticky=(N, W))
-JOR_text = Label(Ventana_principal, text="Ingrese la jornada:", font="arial 8 bold", bg="linen")
+JOR_text = Label(Ventana_principal, text="Ingrese la jornada:", font="arial 8 bold", bg="mint cream")
 JOR_text.grid(column=0, row=11, sticky=(N, W))
+
 
 # Entradas de texto
 entrada_NOM = Entry(Ventana_principal, width=15)
@@ -230,17 +231,19 @@ entrada_SEMES = Entry(Ventana_principal, width=15)
 entrada_SEMES.grid(column=1, row=10, sticky="w")
 entrada_JOR = Entry(Ventana_principal, width=15)
 entrada_JOR.grid(column=1, row=11, sticky="w")
+entrada_JOR = Entry(Ventana_principal, width=15)
+entrada_JOR.grid(column=1, row=12, sticky="w")
 
 # Etiquetas y entradas para salas
-numsala_text = Label(Ventana_principal, text="sala:", font="arial 10 bold", bg="linen")
-numsala_text.grid(row=13, column=0, sticky=(N, W))
+numsala_text = Label(Ventana_principal, text="sala:", font="arial 10 bold", bg="mint cream")
+numsala_text.grid(row=12, column=0, sticky=(N, W))
 entrada_numsala = Entry(Ventana_principal,width=15)
-entrada_numsala.grid(row=13, column=1, sticky="w")
+entrada_numsala.grid(row=12, column=1, sticky="w")
 
-numequipo_text = Label(Ventana_principal, text="equipos:", font="arial 10 bold", bg="linen")
-numequipo_text.grid(row=14, column=0, sticky=(N, W))
+numequipo_text = Label(Ventana_principal, text="equipos:", font="arial 10 bold", bg="mint cream")
+numequipo_text.grid(row=13, column=0, sticky=(N, W))
 entrada_numequipo = Entry(Ventana_principal,width=15)
-entrada_numequipo.grid(row=14, column=1, sticky="w")
+entrada_numequipo.grid(row=13, column=1, sticky="w")
 
 # Reemplace los Entry por ttk.Combobox
 entrada_nombre_registro = ttk.Combobox(Ventana_principal, values=[], width=15)
@@ -275,13 +278,39 @@ btn_ver_salas = Button(Ventana_principal, text="Ver Salas", command=mostrar_sala
 btn_ver_salas.grid(row=26, column=1, columnspan=2, pady=15)
 
 # Titulos
-titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="linen",  width=50)
+titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="mint cream",  width=50)
 titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
 
-titulo_sala = Label(Ventana_principal, text="Crear Salas", font="arial 10 bold", bg="linen",  width=50)
-titulo_sala.grid(row=12, column=0, columnspan=1, sticky=(N, W))
+#titulo_sala = Label(Ventana_principal, text="Crear Salas", font="arial 10 bold", bg="mint cream",  width=50)
+#titulo_sala.grid(row=12, column=0, columnspan=1, sticky=(N, W))
 
-titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 10 bold", bg="linen",  width=50)
+titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 10 bold", bg="mint cream",  width=50)
 titulo_sala.grid(row=15, column=0, columnspan=1, sticky=(N, W))
+
+titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 10 bold", bg="mint cream",  width=50)
+titulo_sala.grid(row=1, column=5, columnspan=1, sticky=(N, W))
+
+#label de prestamos
+NOM_text = Label(Ventana_principal, text="ID Usuaio:", font="arial 8 bold", bg="mint cream")
+NOM_text.grid(column=5, row=6, sticky=(N, W))
+entrada_numsala = Entry(Ventana_principal,width=15)
+entrada_numsala.grid(row=6, column=6, sticky="w")
+APE_text = Label(Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream")
+APE_text.grid(column=5, row=7, sticky=(N, W))
+entrada_numsala = Entry(Ventana_principal,width=15)
+entrada_numsala.grid(row=7, column=6, sticky="w")
+DOCMID_text = Label(Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream")
+DOCMID_text.grid(column=5, row=8, sticky=(N, W))
+entrada_numsala = Entry(Ventana_principal,width=15)
+entrada_numsala.grid(row=8, column=6, sticky="w")
+DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream")
+DOCMID_text.grid(column=5, row=9, sticky=(N, W))
+entrada_numsala = Entry(Ventana_principal,width=20)
+entrada_numsala.grid(row=9, column=6, sticky="w")
+
+
+
+
+
 
 app.mainloop()
