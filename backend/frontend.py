@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from funcionessql import llamar_usuarios, buscar_estudiante_documento
+from funcionessql import llamar_usuarios, buscar_estudiante_documento,generar_idusuario,agregar_estudiante_sql
 
 app = Tk() 
 app.title("MODULOS SALAS")
@@ -59,27 +59,32 @@ def agregar_estudiante():
     semestre = entrada_SEMES.get()
     jornada = entrada_JOR.get()
 
-    data_usuarios = buscar_estudiante_documento(documento)
-    data_usuarios = list(data_usuarios[0])
+    
+    if nombre !="" and apellido !="" and documento !="" and  programa !="" and semestre !="" and jornada !="":
+        data_usuarios = buscar_estudiante_documento(documento)
+        print("/*/*/*/*/*/*/*/*/*/*/*/*",len(data_usuarios))
+        if  len(data_usuarios)==0:
+            idusuario = generar_idusuario()
+            print(idusuario)
+            agregar_estudiante_sql(int(idusuario),int(documento),nombre,apellido,semestre,jornada,1,1)  #idprograma,idtipousuario
+        data_usuarios = buscar_estudiante_documento(documento)
+        data_usuarios = list(data_usuarios[0])
+        entrada_NOM.delete(0, 'end')
+        entrada_APE.delete(0, 'end')
+        entrada_DOCMID.delete(0, 'end')
+        entrada_PROG.delete(0, 'end')
+        entrada_SEMES.delete(0, 'end')
+        entrada_JOR.delete(0, 'end')
 
-    estudiante = Estudiante(nombre, apellido, documento, programa, semestre, jornada)
-    estudiantes.append(estudiante)
-    actualizar_dropdown_estudiantes()
-
-    entrada_NOM.delete(0, 'end')
-    entrada_APE.delete(0, 'end')
-    entrada_DOCMID.delete(0, 'end')
-    entrada_PROG.delete(0, 'end')
-    entrada_SEMES.delete(0, 'end')
-    entrada_JOR.delete(0, 'end')
-
-    print(data_usuarios)
-    entrada_NOM.insert(INSERT,str(data_usuarios[2]))
-    entrada_APE.insert(INSERT,str(data_usuarios[3]))
-    entrada_DOCMID.insert(INSERT,str(data_usuarios[1]))
-    entrada_PROG.insert(INSERT,str(data_usuarios[4]))
-    entrada_SEMES.insert(INSERT,str(data_usuarios[6]))
-    entrada_JOR.insert(INSERT,str(data_usuarios[7]))
+        print(data_usuarios)
+        entrada_NOM.insert(INSERT,str(data_usuarios[2]))
+        entrada_APE.insert(INSERT,str(data_usuarios[3]))
+        entrada_DOCMID.insert(INSERT,str(data_usuarios[1]))
+        entrada_PROG.insert(INSERT,str(data_usuarios[4]))
+        entrada_SEMES.insert(INSERT,str(data_usuarios[6]))
+        entrada_JOR.insert(INSERT,str(data_usuarios[7]))
+    else:
+        print("faltan datos")
 
 
 
