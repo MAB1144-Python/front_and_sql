@@ -198,14 +198,38 @@ actualizar_dropdown_salas()
 
 # Agregar las etiquetas y entradas para la fecha y hora al registrar un estudiante en una sala
 fecha_entrada_text = Label(Ventana_principal, text="Fecha y Hora de Entrada (DD-MM-AAAA HH:MM):", font="arial 8 bold", bg="mint cream")
-fecha_entrada_text.grid(column=0, row=20, sticky=(N, W))
-entrada_fecha_entrada = Entry(Ventana_principal, width=20)
-entrada_fecha_entrada.grid(column=1, row=20, sticky="w")
+fecha_entrada_text.grid(column=0, row=21, sticky=(N, W))
 
-fecha_salida_text = Label(Ventana_principal, text="Fecha y Hora de Salida (DD-MM-AAAA HH:MM):", font="arial 8 bold", bg="mint cream")
-fecha_salida_text.grid(column=0, row=21, sticky=(N, W))
-entrada_fecha_salida = Entry(Ventana_principal, width=20)
-entrada_fecha_salida.grid(column=1, row=21, sticky="w")
+fecha_entrada_text = Label(Ventana_principal, text="Dia:", font="arial 8 bold", bg="mint cream")
+fecha_entrada_text.grid(column=1, row=20, sticky=(N, W))
+entrada_fecha_DD = Entry(Ventana_principal, width=10)
+entrada_fecha_DD.grid(column=1, row=21, sticky="w")
+
+fecha_entrada_text = Label(Ventana_principal, text="Mes:", font="arial 8 bold", bg="mint cream")
+fecha_entrada_text.grid(column=2, row=20, sticky=(N, W))
+entrada_fecha_MM = Entry(Ventana_principal, width=10)
+entrada_fecha_MM.grid(column=2, row=21, sticky="w")
+
+fecha_entrada_text = Label(Ventana_principal, text="Año:", font="arial 8 bold", bg="mint cream")
+fecha_entrada_text.grid(column=3, row=20, sticky=(N, W))
+entrada_fecha_AAAA = Entry(Ventana_principal, width=10)
+entrada_fecha_AAAA.grid(column=3, row=21, sticky="w")
+
+fecha_entrada_text = Label(Ventana_principal, text="Hora:", font="arial 8 bold", bg="mint cream")
+fecha_entrada_text.grid(column=4, row=20, sticky=(N, W))
+entrada_fecha_HH = Entry(Ventana_principal, width=10)
+entrada_fecha_HH.grid(column=4, row=21, sticky="w")
+
+fecha_entrada_text = Label(Ventana_principal, text="Minuto:", font="arial 8 bold", bg="mint cream")
+fecha_entrada_text.grid(column=5, row=20, sticky=(N, W))
+entrada_fecha_MM = Entry(Ventana_principal, width=10)
+entrada_fecha_MM.grid(column=5, row=21, sticky="w")
+
+
+#fecha_salida_text = Label(Ventana_principal, text="Fecha y Hora de Salida (DD-MM-AAAA HH:MM):", font="arial 8 bold", bg="mint cream")
+#fecha_salida_text.grid(column=0, row=21, sticky=(N, W))
+#entrada_fecha_salida = Entry(Ventana_principal, width=20)
+#entrada_fecha_salida.grid(column=1, row=21, sticky="w")
 
 nombre_registro_text = Label(Ventana_principal, text="Nombre del Estudiante:", font="arial 8 bold", bg="mint cream")
 nombre_registro_text.grid(column=0, row=19, sticky=(N, W))
@@ -265,11 +289,11 @@ entrada_nombre_registro.grid(column=1, row=19, sticky="w")
 entrada_documento_registro = ttk.Combobox(Ventana_principal, values=[], width=15)
 entrada_documento_registro.grid(column=1, row=18, sticky="w")
 
-entrada_fecha_entrada = Entry(Ventana_principal, width=20)
-entrada_fecha_entrada.grid(column=1, row=20, sticky="w")
+#entrada_fecha_entrada = Entry(Ventana_principal, width=20)
+#entrada_fecha_entrada.grid(column=1, row=20, sticky="w")
 
-entrada_fecha_salida = Entry(Ventana_principal, width=20)
-entrada_fecha_salida.grid(column=1, row=21, sticky="w")
+#entrada_fecha_salida = Entry(Ventana_principal, width=20)
+#entrada_fecha_salida.grid(column=1, row=21, sticky="w")
 
 # Botones de registro
 btn_mostrar_registros = Button(Ventana_principal, text="Mostrar registros", command=mostrar_registros)
