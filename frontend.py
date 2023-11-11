@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
-from funcionessql import llamar_usuarios, buscar_estudiante_documento,generar_idusuario,agregar_estudiante_sql,registrar_prestamo,generar_idprestamo
+from funcionessql import llamar_usuarios, buscar_estudiante_documento,generar_idusuario,agregar_estudiante_sql,registrar_prestamo,generar_idprestamo,listado_sala,listado_auxiliares,listado_prestamos,listado_tipousuario
 from datetime import datetime
 
 app = Tk() 
@@ -286,8 +286,8 @@ JOR_text.grid(column=0, row=7, sticky=(N, W))
 # Etiquetas y entradas para salas
 numsala_text = Label(Ventana_principal, text="Salas:", font="arial 8 bold", bg="mint cream")
 numsala_text.grid(row=8, column=0, sticky=(N, W))
-entrada_Salas = ttk.Combobox(Ventana_principal, values=[], width=5)
-entrada_Salas.grid(column=1, row=8, sticky="w")
+entrada_Sala = ttk.Combobox(Ventana_principal, values=listado_sala(), width=15)
+entrada_Sala.grid(column=1, row=8, sticky="w")
 
 numequipo_text = Label(Ventana_principal, text="Equipos:", font="arial 8 bold", bg="mint cream")
 numequipo_text.grid(row=9, column=0, sticky=(N, W))
