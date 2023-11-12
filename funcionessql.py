@@ -139,13 +139,36 @@ def listado_usuario():
     df = pd.read_sql_query("SELECT * from usuario", conexion)
     return df.values
 
-def descargar_usuarios():
+def descargar_usuarios(filename):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df = pd.read_sql_query("SELECT * from usuario", conexion)
-    df.to_excel("datos_usuario.xlsx",sheet_name="usuarios")
+    df.to_excel(filename+"/datos_usuario.xlsx",sheet_name="usuarios")
     #convierte el data frame a archivo de excel
 
-print("muchos por",buscar_id_auxiliar("majo auxiliar"))
+def descargar_equipos(filename):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    df = pd.read_sql_query("SELECT * from equipo", conexion)
+    df.to_excel(filename+"/datos_equipos.xlsx",sheet_name="equipos")
+    #convierte el data frame a archivo de excel
+
+def descargar_prestamos(filename):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    df = pd.read_sql_query("SELECT * from prestamo", conexion)
+    df.to_excel(filename+"/datos_prestamos.xlsx",sheet_name="prestamos")
+    #convierte el data frame a archivo de excel
+
+def buscar_usuario(documento_usuario):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    df = pd.read_sql_query("SELECT  * from usuario WHERE numerodocumento='"+str(documento_usuario)+"'", conexion)
+    df =list(df.values)
+    #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
+    print(df)
+    return df
+
+print("muchos por",buscar_usuario(1064427622))
 
 

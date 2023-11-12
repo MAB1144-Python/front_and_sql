@@ -1,6 +1,7 @@
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
+from tkinter import filedialog as fd
 from funcionessql import (
     llamar_usuarios,
     buscar_estudiante_documento,
@@ -17,7 +18,10 @@ from funcionessql import (
     registrar_prestamo,
     generar_idprestamo,
     buscar_id_auxiliar,
-    descargar_usuarios
+    descargar_usuarios,
+    descargar_equipos,
+    descargar_prestamos
+
 )
 from datetime import datetime
 
@@ -169,13 +173,21 @@ def agregar_estudiante():
 
 def Descargar_usuarios():
     print("descargar usuarios")
-    descargar_usuarios()
+    filename = fd.askdirectory()
+    print(filename)
+    descargar_usuarios(filename)
 
 def Descargar_equipos():
     print("descargar equipos")
+    filename = fd.askdirectory()
+    print(filename)
+    descargar_equipos(filename)
 
 def Descargar_prestamos():
     print("descargar prestamos")   
+    filename = fd.askdirectory()
+    print(filename)
+    descargar_prestamos(filename)
 
 def Buscar_usuario():
     print("Buscar Usuario") 
