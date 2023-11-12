@@ -16,7 +16,8 @@ from funcionessql import (
     listado_equipo,
     registrar_prestamo,
     generar_idprestamo,
-    buscar_id_auxiliar
+    buscar_id_auxiliar,
+    descargar_usuarios
 )
 from datetime import datetime
 
@@ -168,6 +169,7 @@ def agregar_estudiante():
 
 def Descargar_usuarios():
     print("descargar usuarios")
+    descargar_usuarios()
 
 def Descargar_equipos():
     print("descargar equipos")

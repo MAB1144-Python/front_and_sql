@@ -1,5 +1,6 @@
 import sqlite3
 import pandas as pd
+from openpyxl import Workbook
 
 def llamar_usuarios():
     conexion=sqlite3.connect("control_de_modulo_salas.db")
@@ -138,6 +139,12 @@ def listado_usuario():
     df = pd.read_sql_query("SELECT * from usuario", conexion)
     return df.values
 
+def descargar_usuarios():
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    df = pd.read_sql_query("SELECT * from usuario", conexion)
+    df.to_excel("datos_usuario.xlsx",sheet_name="usuarios")
+    #convierte el data frame a archivo de excel
 
 print("muchos por",buscar_id_auxiliar("majo auxiliar"))
 
