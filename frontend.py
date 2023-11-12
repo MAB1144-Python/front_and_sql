@@ -214,6 +214,8 @@ def Buscar_usuario():
         entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[7]))
         entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))    
 
+def Registrar_en_sala():
+    print("registrar en sala") 
    
 def mostrar_estudiantes():
     print("entro linea 105")
@@ -805,6 +807,9 @@ btn_descargar_prestamos.grid(row=90, column=2, columnspan=1, pady=15)
 
 btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="arial 8 bold", command=Buscar_usuario)
 btn_buscar_usuario.grid(row=9, column=0, columnspan=1, pady=15)
+
+btn_registrar_en_sala = Button(Ventana_principal, text="Registrar en sala", font="arial 8 bold", command=Buscar_usuario)
+btn_registrar_en_sala.grid(row=80, column=0, columnspan=1, pady=15)
 
 # Titulos
 titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="#132740", fg="white",  width=16)
