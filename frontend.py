@@ -26,7 +26,7 @@ IDUSUARIO_GLOBAL = 0
 app = Tk()
 app.title("MODULOS SALAS")
 app.config(bg="white")
-app.geometry("800x600")
+app.geometry("1500x800")
 
 Ventana_principal = Frame(app, bg="#00acc9")
 Ventana_principal.pack(fill="both", expand="true")
