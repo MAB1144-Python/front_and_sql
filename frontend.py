@@ -172,6 +172,36 @@ def agregar_estudiante():
         title="Selección"
     )
 
+#deletes de todas las entradas 
+
+    entrada_NOM.delete(0, "end")
+    entrada_APE.delete(0, "end")
+    entrada_DOCMID.delete(0, "end")
+    entrada_PROG.delete(0, "end")
+    entrada_ingrese_semestre.delete(0, "end")
+    entrada_ingrese_jornada.delete(0, "end")
+    entrada_nombre_registro.delete(0, "end")
+    entrada_nombre_auxiliar.delete(0, "end")
+    entrada_Año.delete(0, "end")
+    entrada_Descripcion.delete(0, "end")
+    entrada_dia.delete(0, "end")
+    entrada_documento_registro.delete(0, "end")
+    entrada_Hora.delete(0, "end")
+    entrada_idauxiliar.delete(0, "end")
+    entrada_IDequipo.delete(0, "end")
+    entrada_IDusuario.delete(0, "end")
+    entrada_ingrese_jornada.delete(0, "end")
+    entrada_ingrese_programa.delete(0, "end")
+    entrada_ingrese_semestre.delete(0, "end")
+    entrada_Mes.delete(0, "end")
+    entrada_Minuto.delete(0, "end")
+    entrada_nombre_registro.delete(0, "end")
+    entrada_Sala.delete(0, "end")
+    tipo_usuario.delete(0, "end")
+    
+    
+
+
 
 
 
@@ -858,6 +888,11 @@ label_imagen.grid(column=13, row=1)
 etiqueta = Label(Ventana_principal, text="Developer Maria Jose Noreña, Alexandra Otero and Samuel.")
 etiqueta.grid(column=13, row=2, sticky=(W, E))
 
+
+
+
+btn_registrar_en_sala = Button(Ventana_principal, text="Limpiar Formulario", font="arial 8 bold", command=Buscar_usuario)
+btn_registrar_en_sala.grid(row=80, column=0, columnspan=1, pady=15)
 
 
 app.mainloop()
