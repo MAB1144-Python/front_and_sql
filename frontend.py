@@ -21,7 +21,8 @@ from funcionessql import (
     descargar_usuarios,
     descargar_equipos,
     descargar_prestamos,
-    buscar_usuario_sql
+    buscar_usuario_sql,
+    agregar_registro_sala
 
 )
 from datetime import datetime
@@ -212,7 +213,8 @@ def Buscar_usuario():
         entrada_ingrese_programa.insert(INSERT, str(Usuario_recibido[4]))
         entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[6]))
         entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[7]))
-        entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))    
+        entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))  
+        entrada_documento_registro.insert(INSERT, str(Usuario_recibido[1]))  
 
    
 def mostrar_estudiantes():
@@ -829,7 +831,7 @@ APE_text = Label(Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="
 APE_text.grid(column=0, row=56, sticky=(N, W))
 entrada_IDequipo = Entry(Ventana_principal,width=15)
 entrada_IDequipo.grid(row=56, column=1, sticky="w")
-DOCMID_text = Label(Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream")
+DOCMID_text = Label(Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=57, sticky=(N, W))
 entrada_nombre_auxiliar = ttk.Combobox(Ventana_principal, values=listado_auxiliares(), width=15)
 entrada_nombre_auxiliar.grid(column=1, row=57, sticky="w")

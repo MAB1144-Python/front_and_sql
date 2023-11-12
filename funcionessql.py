@@ -169,6 +169,15 @@ def buscar_usuario_sql(documento_usuario):
     print(df)
     return df
 
-print("muchos por",buscar_usuario_sql(1064427622))
+def agregar_registro_sala(idregistro,idusuario,idauxiliar,fecha,descripcion):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    cursor=conexion.execute("insert into registro_ingreso_sala (idregistro,idusuario,idauxiliar,fecha,descripcion) values (?,?,?,?,?)", (idregistro,idusuario,idauxiliar,fecha,descripcion))
+    conexion.commit()
+    conexion.close()
+#conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario) values (?,?,?,?,?,?,?,?)", (1,147,'jhon','cano',None,None,1,1))
+#print(buscar_elementos())
+
+
+print("muchos por",agregar_registro_sala(1,10,4,"2023-01-01 T4:00:00","entrada"))
 
 
