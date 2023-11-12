@@ -118,7 +118,7 @@ def agregar_estudiante():
     programa = entrada_ingrese_programa.get()
     semestre = entrada_ingrese_semestre.get()
     jornada = entrada_ingrese_jornada.get()
-    tipodeusuario = entrada_Sala.get()
+    tipodeusuario = tipo_usuario.get()
     print(nombre,apellido,documento,programa,semestre,jornada,tipodeusuario)
     if (
         nombre != ""
@@ -127,6 +127,7 @@ def agregar_estudiante():
         and programa != ""
         and semestre != ""
         and jornada != ""
+        and tipodeusuario != ""
     ):  # en la 81
         data_usuarios = buscar_estudiante_documento(documento)
         print("/*/*/*/*/*/*/*/*/*/*/*/*", len(data_usuarios))
@@ -162,6 +163,7 @@ def agregar_estudiante():
         entrada_ingrese_programa.insert(INSERT, str(data_usuarios[4]))
         entrada_ingrese_semestre.insert(INSERT, str(data_usuarios[6]))
         entrada_ingrese_jornada.insert(INSERT, str(data_usuarios[7]))
+        entrada_nombre_registro.insert(INSERT, str(data_usuarios[2]))
     else:
         print("faltan datos") 
         messagebox.showinfo(
@@ -194,11 +196,23 @@ def Buscar_usuario():
     print("Buscar Usuario") 
     documento_usuario = entrada_DOCMID.get()
     print(documento_usuario)
-    Usuario_recibido = buscar_usuario_sql(documento_usuario)  
+    Usuario_recibido = buscar_usuario_sql(documento_usuario)
+    Usuario_recibido = Usuario_recibido[0]  
     print(Usuario_recibido)
     if len(Usuario_recibido) ==0:
         print("usuario no existente")
         messagebox.showerror("Error", "Usuario no existente, complete el formulario y de Click en el boton 'Agregar Usuario' ")
+    else: 
+        IDUSUARIO_GLOBAL = Usuario_recibido[0]
+        entrada_IDusuario.insert(INSERT, str(IDUSUARIO_GLOBAL))
+        print("este es idusuario global",IDUSUARIO_GLOBAL)
+        entrada_NOM.insert(INSERT, str(Usuario_recibido[2]))
+        entrada_APE.insert(INSERT, str(Usuario_recibido[3]))
+        entrada_DOCMID.insert(INSERT, str(Usuario_recibido[1]))
+        entrada_ingrese_programa.insert(INSERT, str(Usuario_recibido[4]))
+        entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[6]))
+        entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[7]))
+        entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))    
 
    
 def mostrar_estudiantes():
@@ -385,22 +399,24 @@ tipo_usuario.grid(column=1, row=8, sticky="w")
 
 nombre_registro_text = Label(
     Ventana_principal,
-    text="Nombre del Estudiante:",
+    text="Nombre del Usuario:",
     font="arial 8 bold",
     bg="mint cream",
 )
 nombre_registro_text.grid(column=0, row=27, sticky=(N, W))
-entrada_nombre_registro = ttk.Combobox(Ventana_principal, values=[], width=15)
+entrada_nombre_registro = Entry(Ventana_principal, width=15)
 entrada_nombre_registro.grid(column=1, row=27, sticky="w")
+
+#salida_dia = Entry(Ventana_principal, width=5)
 
 documento_registro_text = Label(
     Ventana_principal,
-    text="Documento del Estudiante:",
+    text="Documento del Usuario:",
     font="arial 8 bold",
     bg="mint cream",
 )
 documento_registro_text.grid(column=0, row=28, sticky=(N, W))
-entrada_documento_registro = ttk.Combobox(Ventana_principal, values=[], width=15)
+entrada_documento_registro = Entry(Ventana_principal, width=15)
 entrada_documento_registro.grid(column=1, row=28, sticky="w")
 
 # Llamar a la función para actualizar las opciones iniciales
