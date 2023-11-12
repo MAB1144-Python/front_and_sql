@@ -13,9 +13,14 @@ from funcionessql import (
     listado_prestamos,
     listado_tipousuario,
     listado_usuario,
-    listado_equipo
+    listado_equipo,
+    registrar_prestamo,
+    generar_idprestamo,
+    buscar_id_auxiliar
 )
 from datetime import datetime
+
+IDUSUARIO_GLOBAL = 0
 
 app = Tk()
 app.title("MODULOS SALAS")
@@ -70,6 +75,35 @@ def actualizar_dropdown_estudiantes():
     entrada_documento_registro["values"] = documentos
 def fecha_entrada():
     fecha_entrada = entrada_Año.get()+"-"+entrada_Mes+"-"+entrada_dia+"T"+entrada_Hora+":"+entrada_Minuto+":00" 
+def fecha_salida():
+    fecha_salida = salida_Año.get()+"-"+salida_Mes+"-"+salida_dia+"T"+salida_Hora+":"+salida_Minuto+":00" 
+    # registrar_prestamo(idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha):
+
+
+
+
+
+def agregar_prestamo():
+    descripcion = entrada_Descripcion.get()
+    idusuario = entrada_IDusuario
+    idequipo = entrada_IDequipo
+    idauxiliar = entrada_IDauxiliar
+    FechaEntrada = fecha_entrada()
+    FechaSalida = fecha_salida() 
+    idauxiliar = buscar_id_auxiliar(entrada_IDauxiliar)
+    print(descripcion,idusuario,idequipo,idauxiliar,FechaEntrada,FechaSalida)
+    try:
+        registrar_prestamo(
+            int(idprestamo),
+            Descripcion,
+            IDUSUARIO_GLOBAL,
+            int(idequipo),
+            int(idauxiliar),
+            FechaEntrada,
+            FechaSalida
+        )
+    except:
+        print("se genero un error en agregrar_prestamo linea 98")
 
 def agregar_estudiante():
     nombre = entrada_NOM.get()
@@ -113,6 +147,9 @@ def agregar_estudiante():
         entrada_ingrese_jornada.delete(0, "end")
 
         print(data_usuarios)
+        IDUSUARIO_GLOBAL = data_usuarios[0]
+        entrada_IDusuario.insert(INSERT, str(IDUSUARIO_GLOBAL))
+        print("este es idusuario global",IDUSUARIO_GLOBAL)
         entrada_NOM.insert(INSERT, str(data_usuarios[2]))
         entrada_APE.insert(INSERT, str(data_usuarios[3]))
         entrada_DOCMID.insert(INSERT, str(data_usuarios[1]))
@@ -127,24 +164,7 @@ def agregar_estudiante():
     )
 
 
-def agregar_prestamo():  # en la 74
-    IDusuario = entrada_IDusuario.get()
-    IDequipo = entrada_IDequipo.get()
-    IDauxiliar = entrada_IDauxiliar.get()
-    Descripcion = entrada_Descripcion.get()
-    idprestamo = generar_idprestamo()
-    fecha_prestamo = datetime.fromisoformat("2011-11-04T00:05:23")
-    try:
-        registrar_prestamo(
-            int(idprestamo),
-            Descripcion,
-            int(IDusuario),
-            int(IDequipo),
-            int(IDauxiliar),
-            fecha_prestamo,
-        )
-    except:
-        print("se genero un error en agregrar_prestamo linea 98")
+
 
 
 def mostrar_estudiantes():
@@ -709,7 +729,7 @@ btn_agregar_estudiante.grid(row=1, column=3, columnspan=1, pady=15)
 btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
 btn_agregar_sala.grid(row=9, column=0, columnspan=1, pady=15)
 
-btn_registrar = Button(Ventana_principal, text="Registrar Estudiante en Sala", font="arial 8 bold", command=registrar_estudiante_en_sala)
+btn_registrar = Button(Ventana_principal, text="Registrar Estudiante en Sala", font="arial 8 bold", command= agregar_prestamo)
 btn_registrar.grid(row=1, column=9, columnspan=1, pady=15)
 
 btn_ver_estudiantes = Button(Ventana_principal, text="Ver Usuarios", font="arial 8 bold", command=mostrar_estudiantes)

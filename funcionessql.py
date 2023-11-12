@@ -94,6 +94,16 @@ def listado_auxiliares():
     print(df)
     return df
 
+#parametros
+def buscar_id_auxiliar(nombre_auxiliar):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    df = pd.read_sql_query("SELECT  idauxiliar from auxiliar WHERE nombres='"+nombre_auxiliar+"'", conexion)
+    df =list(df["idauxiliar"].values)
+    #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
+    print(df)
+    return df
+
 def listado_sala():
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
@@ -129,6 +139,6 @@ def listado_usuario():
     return df.values
 
 
-print("muchos por",listado_sala())
+print("muchos por",buscar_id_auxiliar("majo auxiliar"))
 
 
