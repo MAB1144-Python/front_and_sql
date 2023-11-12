@@ -160,7 +160,7 @@ def descargar_prestamos(filename):
     df.to_excel(filename+"/datos_prestamos.xlsx",sheet_name="prestamos")
     #convierte el data frame a archivo de excel
 
-def buscar_usuario(documento_usuario):
+def buscar_usuario_sql(documento_usuario):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df = pd.read_sql_query("SELECT  * from usuario WHERE numerodocumento='"+str(documento_usuario)+"'", conexion)
@@ -169,6 +169,6 @@ def buscar_usuario(documento_usuario):
     print(df)
     return df
 
-print("muchos por",buscar_usuario(1064427622))
+print("muchos por",buscar_usuario_sql(1064427622))
 
 

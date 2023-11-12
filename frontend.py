@@ -21,7 +21,7 @@ from funcionessql import (
     descargar_usuarios,
     descargar_equipos,
     descargar_prestamos,
-    buscar_usuario
+    buscar_usuario_sql
 
 )
 from datetime import datetime
@@ -192,8 +192,14 @@ def Descargar_prestamos():
 
 def Buscar_usuario():
     print("Buscar Usuario") 
-    buscar_usuario(documento_usuario)
-    entrada_DOCMID.get(Buscar_usuario = documento_usuario)
+    documento_usuario = entrada_DOCMID.get()
+    print(documento_usuario)
+    Usuario_recibido = buscar_usuario_sql(documento_usuario)  
+    print(Usuario_recibido)
+    if len(Usuario_recibido) ==0:
+        print("usuario no existente")
+        messagebox.showerror("Error", "Usuario no existente, complete el formulario y de Click en el boton 'Agregar Usuario' ")
+
    
 def mostrar_estudiantes():
     print("entro linea 105")
@@ -751,7 +757,7 @@ entrada_ingrese_jornada.grid(column=1, row=7, sticky="w")
 btn_mostrar_registros = Button(Ventana_principal, text="Mostrar registros", font="arial 8 bold", command=mostrar_registros)
 btn_mostrar_registros.grid(column=0, row=51, columnspan= 1, pady=15, sticky="w")
 
-btn_agregar_estudiante = Button(Ventana_principal, text="Agregar Estudiantes", font="arial 8 bold", command=agregar_estudiante)
+btn_agregar_estudiante = Button(Ventana_principal, text="Agregar Usuario", font="arial 8 bold", command=agregar_estudiante)
 btn_agregar_estudiante.grid(row=9, column=1, columnspan=1, pady=15)
 
 #btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
