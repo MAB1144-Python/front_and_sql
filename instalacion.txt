@@ -1,1 +1,2 @@
 pip install SQLAlchemy Flask-SQLAlchemy
+pip install --user xlsxwriter
