@@ -767,25 +767,25 @@ btn_ver_estudiantes = Button(Ventana_principal, text="Ver Usuarios", font="arial
 btn_ver_estudiantes.grid(row=51, column=1, columnspan=1, pady=15)
 
 btn_ver_equipos = Button(Ventana_principal, text="Ver Equipos", font="arial 8 bold", command=mostrar_equipos)
-btn_ver_equipos.grid(row=51, column=8, columnspan=1, pady=15)
+btn_ver_equipos.grid(row=72, column=1, columnspan=1, pady=15)
 
 btn_ver_salas = Button(Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas)
 btn_ver_salas.grid(row=51, column=2, columnspan=1, pady=15)
 
 btn_ver_prestamos = Button(Ventana_principal, text="Ver Prestamos", font="arial 8 bold", command=mostrar_prestamos)
-btn_ver_prestamos.grid(row=51, column=9, columnspan=1, pady=15)
+btn_ver_prestamos.grid(row=72, column=2, columnspan=1, pady=15)
 
 btn_agregar_prestamos = Button(Ventana_principal, text="Agregar Prestamo", font="arial 8 bold", command=agregar_prestamo)
 btn_agregar_prestamos.grid(row=69, column=1, columnspan=1, pady=15)
 
 btn_descargar_usuarios = Button(Ventana_principal, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
-btn_descargar_usuarios.grid(row=72, column=0, columnspan=1, pady=15)
+btn_descargar_usuarios.grid(row=75, column=0, columnspan=1, pady=15)
 
 btn_descargar_equipos = Button(Ventana_principal, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
-btn_descargar_equipos.grid(row=72, column=1, columnspan=1, pady=15)
+btn_descargar_equipos.grid(row=75, column=1, columnspan=1, pady=15)
 
 btn_descargar_prestamos = Button(Ventana_principal, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
-btn_descargar_prestamos.grid(row=72, column=2, columnspan=1, pady=15)
+btn_descargar_prestamos.grid(row=75, column=2, columnspan=1, pady=15)
 
 btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="arial 8 bold", command=Buscar_usuario)
 btn_buscar_usuario.grid(row=9, column=0, columnspan=1, pady=15)
@@ -831,6 +831,9 @@ imagen_redimensionada = img.subsample(10)
 label_imagen = Label(Ventana_principal, image=imagen_redimensionada)
 label_imagen.grid(column=13, row=1)
 
+
+etiqueta = Label(Ventana_principal, text="Developer Maria Jose Noreña, Alexandra Otero and Samuel.")
+etiqueta.grid(column=13, row=2, sticky=(W, E))
 
 
 
