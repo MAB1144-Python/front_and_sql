@@ -20,7 +20,8 @@ from funcionessql import (
     buscar_id_auxiliar,
     descargar_usuarios,
     descargar_equipos,
-    descargar_prestamos
+    descargar_prestamos,
+    buscar_usuario
 
 )
 from datetime import datetime
@@ -191,7 +192,9 @@ def Descargar_prestamos():
 
 def Buscar_usuario():
     print("Buscar Usuario") 
-
+    buscar_usuario(documento_usuario)
+    entrada_DOCMID.get(Buscar_usuario = documento_usuario)
+   
 def mostrar_estudiantes():
     print("entro linea 105")
     ventana_estudiantes = Toplevel(app)
