@@ -81,36 +81,62 @@ def actualizar_dropdown_estudiantes():
     entrada_nombre_registro["values"] = nombres
     entrada_documento_registro["values"] = documentos
 def fecha_entrada():
-    fecha_entrada = entrada_Año.get()+"-"+entrada_Mes+"-"+entrada_dia+"T"+entrada_Hora+":"+entrada_Minuto+":00" 
+    # try:
+        fecha_entrada = entrada_Año.get()+"-"+entrada_Mes.get()+"-"+entrada_dia.get()+"T"+entrada_Hora.get()+":"+entrada_Minuto.get()+":00" 
+        #fecha_entrada = datetime.strptime(fecha_entrada,"%Y-%m-%d %H:%M:%S")
+    # except:
+    #     messagebox.showinfo(
+    #     message="registrar la fecha",
+    #     title="Selección"
+    #     )
+    #     fecha_entrada = ""
+        return fecha_entrada
+
 def fecha_salida():
-    fecha_salida = salida_Año.get()+"-"+salida_Mes+"-"+salida_dia+"T"+salida_Hora+":"+salida_Minuto+":00" 
+    # try:
+        print("123456789//*/*/*/*/*/*/")
+        fecha_salida = salida_Año.get()+"-"+salida_Mes.get()+"-"+salida_dia.get()+"T"+salida_Hora.get()+":"+salida_Minuto.get()+":00" 
+        #fecha_salida = datetime.strptime(fecha_salida,"%Y-%m-%d %H:%M:%S")
+        print(fecha_salida)
+    # except:
+    #     messagebox.showinfo(
+    #     message="registrar la fecha",
+    #     title="Selección"
+    #     )
+    #     fecha_salida = ""
+        return fecha_salida
+
     # registrar_prestamo(idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha):
 
 
-
+def clean():
+        entrada_NOM.delete(0, "end")
+        entrada_APE.delete(0, "end")
+        entrada_DOCMID.delete(0, "end")
+        entrada_PROG.delete(0, "end")
+        entrada_ingrese_semestre.delete(0, "end")
+        entrada_ingrese_jornada.delete(0, "end")
 
 
 def agregar_prestamo():
-    descripcion = entrada_Descripcion.get()
+    descripcion = entrada_descripcion.get() 
     idusuario = entrada_IDusuario
-    idequipo = entrada_IDequipo
-    idauxiliar = entrada_IDauxiliar
+    idequipo = entrada_IDequipo.get() 
+    idauxiliar =  buscar_id_auxiliar(entrada_nombre_auxiliar.get())
+    entrada_idauxiliar.insert(INSERT, str(idauxiliar))
     FechaEntrada = fecha_entrada()
     FechaSalida = fecha_salida() 
-    idauxiliar = buscar_id_auxiliar(entrada_IDauxiliar)
     print(descripcion,idusuario,idequipo,idauxiliar,FechaEntrada,FechaSalida)
-    try:
-        registrar_prestamo(
-            int(idprestamo),
-            Descripcion,
+    registrar_prestamo(
+            descripcion,
             IDUSUARIO_GLOBAL,
-            int(idequipo),
-            int(idauxiliar),
+            idequipo,
+            idauxiliar,
             FechaEntrada,
-            FechaSalida
+            FechaSalida,
         )
-    except:
-        print("se genero un error en agregrar_prestamo linea 98")
+    # except:
+    #     print("se genero un error en agregrar_prestamo linea 98")
 
 def agregar_estudiante():
     nombre = entrada_NOM.get()
@@ -131,7 +157,6 @@ def agregar_estudiante():
         and tipodeusuario != ""
     ):  # en la 81
         data_usuarios = buscar_estudiante_documento(documento)
-        print("/*/*/*/*/*/*/*/*/*/*/*/*", len(data_usuarios))
         if len(data_usuarios) == 0:
             idusuario = generar_idusuario()
             print(idusuario)
@@ -153,6 +178,8 @@ def agregar_estudiante():
         entrada_PROG.delete(0, "end")
         entrada_ingrese_semestre.delete(0, "end")
         entrada_ingrese_jornada.delete(0, "end")
+
+
 
         print(data_usuarios)
         IDUSUARIO_GLOBAL = data_usuarios[0]
@@ -198,6 +225,7 @@ def Buscar_usuario():
     documento_usuario = entrada_DOCMID.get()
     print(documento_usuario)
     Usuario_recibido = buscar_usuario_sql(documento_usuario)
+    print(Usuario_recibido)
     Usuario_recibido = Usuario_recibido[0]  
     print(Usuario_recibido)
     if len(Usuario_recibido) ==0:
@@ -218,6 +246,16 @@ def Buscar_usuario():
 
 def Registrar_en_sala():
     print("registrar en sala") 
+    idusuario = IDUSUARIO_GLOBAL
+    idauxiliar =  buscar_id_auxiliar(entrada_nombre_auxiliar.get())
+    entrada_idauxiliar.insert(INSERT, str(idauxiliar))
+    fecha = fecha_entrada()
+    descripcion_sala= entrada_descripcion.get() 
+    if idusuario != "" and idauxiliar != "" and fecha != "" and descripcion_sala:
+        agregar_registro_sala(idusuario,idauxiliar,fecha,descripcion_sala)
+    else:
+        messagebox.showerror("Error", "Por favor, ingrese los datos")
+
    
 def mostrar_estudiantes():
     print("entro linea 105")
@@ -264,9 +302,6 @@ def mostrar_equipos():
         tabla.heading("id equipo", text="ID Equipo")
         tabla.heading("descripcion", text="Descrpcion")
         tabla.heading("sala", text="Sala")
-        
-        # Agregar datos a la tabla
-        # Puedes reemplazar esto con tus propios datos
         for data_equipo in listado_equipo():
             print(data_equipo)
             data_equipo = list(data_equipo)
@@ -810,8 +845,8 @@ btn_descargar_prestamos.grid(row=90, column=2, columnspan=1, pady=15)
 btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="arial 8 bold", command=Buscar_usuario)
 btn_buscar_usuario.grid(row=9, column=0, columnspan=1, pady=15)
 
-btn_registrar_en_sala = Button(Ventana_principal, text="Registrar en sala", font="arial 8 bold", command=Buscar_usuario)
-btn_registrar_en_sala.grid(row=80, column=0, columnspan=1, pady=15)
+btn_registrar_en_sala = Button(Ventana_principal, text="Registrar en sala", font="arial 8 bold", command=Registrar_en_sala)
+btn_registrar_en_sala.grid(row=54, column=1, columnspan=1, pady=15)
 
 # Titulos
 titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="#132740", fg="white",  width=16)
@@ -844,8 +879,11 @@ entrada_idauxiliar= Entry(Ventana_principal,width=20)
 entrada_idauxiliar.grid(row=57, column=2, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=58, sticky=(N, W))
-entrada_Descripcion = Entry(Ventana_principal,width=20)
-entrada_Descripcion.grid(row=58, column=1, sticky="w")
+entrada_descripcion= ttk.Combobox(Ventana_principal, values=["Entrada sala", "Salida de sala"], width=15)
+entrada_descripcion.grid(column=1, row=58, sticky="w")
+
+
+
 
 
 # Crear un widget Label para mostrar la imagen

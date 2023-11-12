@@ -67,11 +67,7 @@ def generar_idprestamo():
     
     return idprestamo
 
-def registrar_prestamo(idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha):
-    conexion=sqlite3.connect("control_de_modulo_salas.db")
-    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha_prestamo) values (?,?,?,?,?,?)", (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha))
-    conexion.commit()
-    conexion.close()
+
 
 def listado_prestamos(idusuario,fecha,programa):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
@@ -101,9 +97,10 @@ def buscar_id_auxiliar(nombre_auxiliar):
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df = pd.read_sql_query("SELECT  idauxiliar from auxiliar WHERE nombres='"+nombre_auxiliar+"'", conexion)
     df =list(df["idauxiliar"].values)
+    print("/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/*/",df)
     #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
     print(df)
-    return df
+    return df[0]
 
 def listado_sala():
     conexion=sqlite3.connect("control_de_modulo_salas.db")
@@ -169,15 +166,41 @@ def buscar_usuario_sql(documento_usuario):
     print(df)
     return df
 
-def agregar_registro_sala(idregistro,idusuario,idauxiliar,fecha,descripcion):
+def agregar_registro_sala(idusuario,idauxiliar,fecha,descripcion):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
-    cursor=conexion.execute("insert into registro_ingreso_sala (idregistro,idusuario,idauxiliar,fecha,descripcion) values (?,?,?,?,?)", (idregistro,idusuario,idauxiliar,fecha,descripcion))
+    df = pd.read_sql_query("SELECT  * from registro_ingreso_sala", conexion)
+    print(fecha)
+    try:
+        idregistro = df["idregistro"].max()+1
+    except:
+        idregistro = 1
+    cursor=conexion.execute("insert into registro_ingreso_sala (idregistro,idusuario,idauxiliar,fecha,descripcion) values (?,?,?,?,?)", (int(idregistro),int(idusuario),int(idauxiliar),fecha,descripcion))
     conexion.commit()
     conexion.close()
 #conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario) values (?,?,?,?,?,?,?,?)", (1,147,'jhon','cano',None,None,1,1))
 #print(buscar_elementos())
+def registrar_prestamo(descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,fecha_salida):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    df = pd.read_sql_query("SELECT  * from prestamo", conexion)
+    print(df)
+    idprestamo = 1
+    try:
+        idprestamo = df["idprestamo"].max()+1
+    except:
+        idprestamo = 1
+    print(idprestamo,type(idprestamo))
+    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,fecha_salida) values (?,?,?,?,?,?,?)", (int(idprestamo),descripcion,int(idusuario),int(idequipo),int(idauxiliar),"2023-01-01 T4:00:00","2023-01-01 T4:00:00"))#idprestamo,descripcion,3,4,int(idauxiliar),fecha_entrada,fecha_salida))
+    conexion.commit()
+    conexion.close()
 
-
-print("muchos por",agregar_registro_sala(1,10,4,"2023-01-01 T4:00:00","entrada"))
+#     """CREATE TABLE prestamo (
+#   idprestamo integer auto_increment PRIMARY KEY,
+#   descripcion text NOT NULL,
+#   idusuario integer NOT NULL,
+#   idequipo integer NOT NULL,
+#   idauxiliar integer NOT NULL,
+#   fecha_entrada TIMESTAMP  NULL, 
+#   fecha_salida TIMESTAMP  NULL  
+#print("muchos por",registrar_prestamo("hola",1,10,4,"2023-01-01 T4:00:00","2023-01-01 T4:00:00"))
 
 
