@@ -144,6 +144,14 @@ def agregar_prestamo():  # en la 74
     except:
         print("se genero un error en agregrar_prestamo linea 98")
 
+def Descargar_usuarios():
+    print("descargar usuarios")
+
+def Descargar_equipos():
+    print("descargar equipos")
+
+def Descargar_prestamos():
+    print("descargar prestamos")    
 
 def mostrar_estudiantes():
     print("entro linea 105")
@@ -726,6 +734,15 @@ btn_ver_prestamos.grid(row=51, column=9, columnspan=1, pady=15)
 btn_agregar_prestamos = Button(Ventana_principal, text="Agregar Prestamo", font="arial 8 bold", command=agregar_prestamo)
 btn_agregar_prestamos.grid(row=53, column=7, columnspan=1, pady=15)
 
+btn_descargar_usuarios = Button(Ventana_principal, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
+btn_descargar_usuarios.grid(row=69, column=0, columnspan=1, pady=15)
+
+btn_descargar_equipos = Button(Ventana_principal, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
+btn_descargar_equipos.grid(row=69, column=1, columnspan=1, pady=15)
+
+btn_descargar_prestamos = Button(Ventana_principal, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
+btn_descargar_prestamos.grid(row=69, column=2, columnspan=1, pady=15)
+
 
 # Titulos
 titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 8 bold", bg="mint cream",  width=16)
@@ -737,6 +754,9 @@ titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 
 titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 8 bold", bg="mint cream",  width=10)
 titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
+
+titulo_informacion = Label(Ventana_principal, text="Información", font="arial 8 bold", bg="mint cream",  width=10)
+titulo_informacion.grid(row=68, column=0, columnspan=1, sticky=(N, W))
 
 #label de prestamos
 NOM_text = Label(Ventana_principal, text="ID Usuario:", font="arial 8 bold", bg="mint cream")
