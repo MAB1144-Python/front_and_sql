@@ -807,6 +807,12 @@ entrada_Descripcion = Entry(Ventana_principal,width=20)
 entrada_Descripcion.grid(row=58, column=1, sticky="w")
 
 
+# Crear un widget Label para mostrar la imagen
+img = PhotoImage(file='UCC.png')
+imagen_redimensionada = img.subsample(10)
+label_imagen = Label(Ventana_principal, image=imagen_redimensionada)
+label_imagen.grid(column=13, row=1)
+
 
 
 
