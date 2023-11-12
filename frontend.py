@@ -30,7 +30,7 @@ IDUSUARIO_GLOBAL = 0
 app = Tk()
 app.title("MODULOS SALAS")
 app.config(bg="white")
-app.geometry("800x600")
+app.geometry("1500x800")
 
 Ventana_principal = Frame(app, bg="#00acc9")
 Ventana_principal.pack(fill="both", expand="true")
@@ -785,17 +785,17 @@ btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="aria
 btn_buscar_usuario.grid(row=1, column=2, columnspan=1, pady=15)
 
 # Titulos
-titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 8 bold", bg="#132740",  width=16)
+titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="#132740", fg="white",  width=16)
 titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
 
 
-titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 8 bold", bg="#132740",  width=14)
+titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 10 bold", bg="#132740", fg="white",  width=14)
 titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 
-titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 8 bold", bg="#132740",  width=10)
+titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 10 bold", bg="#132740", fg="white",  width=10)
 titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
 
-titulo_informacion = Label(Ventana_principal, text="Información", font="arial 8 bold", bg="#132740",  width=10)
+titulo_informacion = Label(Ventana_principal, text="Información", font="arial 10 bold", bg="#132740", fg="white",  width=10)
 titulo_informacion.grid(row=68, column=0, columnspan=1, sticky=(N, W))
 
 #label de prestamos
@@ -818,6 +818,12 @@ DOCMID_text.grid(column=0, row=58, sticky=(N, W))
 entrada_Descripcion = Entry(Ventana_principal,width=20)
 entrada_Descripcion.grid(row=58, column=1, sticky="w")
 
+
+# Crear un widget Label para mostrar la imagen
+img = PhotoImage(file='UCC.png')
+imagen_redimensionada = img.subsample(10)
+label_imagen = Label(Ventana_principal, image=imagen_redimensionada)
+label_imagen.grid(column=13, row=1)
 
 
 
