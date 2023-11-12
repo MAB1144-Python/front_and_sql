@@ -28,7 +28,7 @@ app.title("MODULOS SALAS")
 app.config(bg="white")
 app.geometry("800x600")
 
-Ventana_principal = Frame(app, bg="cadetblue4")
+Ventana_principal = Frame(app, bg="#00acc9")
 Ventana_principal.pack(fill="both", expand="true")
 
 # Listas para almacenar estudiantes , registros y salas
@@ -175,7 +175,10 @@ def Descargar_equipos():
     print("descargar equipos")
 
 def Descargar_prestamos():
-    print("descargar prestamos")    
+    print("descargar prestamos")   
+
+def Buscar_usuario():
+    print("Buscar Usuario") 
 
 def mostrar_estudiantes():
     print("entro linea 105")
@@ -766,19 +769,21 @@ btn_descargar_equipos.grid(row=69, column=1, columnspan=1, pady=15)
 btn_descargar_prestamos = Button(Ventana_principal, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
 btn_descargar_prestamos.grid(row=69, column=2, columnspan=1, pady=15)
 
+btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="arial 8 bold", command=Buscar_usuario)
+btn_buscar_usuario.grid(row=1, column=2, columnspan=1, pady=15)
 
 # Titulos
-titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 8 bold", bg="mint cream",  width=16)
+titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 8 bold", bg="#132740",  width=16)
 titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
 
 
-titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 8 bold", bg="mint cream",  width=14)
+titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 8 bold", bg="#132740",  width=14)
 titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 
-titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 8 bold", bg="mint cream",  width=10)
+titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 8 bold", bg="#132740",  width=10)
 titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
 
-titulo_informacion = Label(Ventana_principal, text="Información", font="arial 8 bold", bg="mint cream",  width=10)
+titulo_informacion = Label(Ventana_principal, text="Información", font="arial 8 bold", bg="#132740",  width=10)
 titulo_informacion.grid(row=68, column=0, columnspan=1, sticky=(N, W))
 
 #label de prestamos
@@ -792,8 +797,10 @@ entrada_IDequipo = Entry(Ventana_principal,width=15)
 entrada_IDequipo.grid(row=56, column=1, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=57, sticky=(N, W))
-entrada_IDauxiliar = ttk.Combobox(Ventana_principal, values=listado_auxiliares(), width=15)
-entrada_IDauxiliar.grid(column=1, row=57, sticky="w")
+entrada_nombre_auxiliar = ttk.Combobox(Ventana_principal, values=listado_auxiliares(), width=15)
+entrada_nombre_auxiliar.grid(column=1, row=57, sticky="w")
+entrada_idauxiliar= Entry(Ventana_principal,width=20)
+entrada_idauxiliar.grid(row=57, column=2, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=58, sticky=(N, W))
 entrada_Descripcion = Entry(Ventana_principal,width=20)
