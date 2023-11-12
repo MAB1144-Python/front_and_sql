@@ -27,7 +27,7 @@ app.title("MODULOS SALAS")
 app.config(bg="white")
 app.geometry("800x600")
 
-Ventana_principal = Frame(app, bg="cadetblue4")
+Ventana_principal = Frame(app, bg="#00acc9")
 Ventana_principal.pack(fill="both", expand="true")
 
 # Listas para almacenar estudiantes , registros y salas
@@ -771,17 +771,17 @@ btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="aria
 btn_buscar_usuario.grid(row=1, column=2, columnspan=1, pady=15)
 
 # Titulos
-titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 8 bold", bg="mint cream",  width=16)
+titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 8 bold", bg="#132740",  width=16)
 titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
 
 
-titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 8 bold", bg="mint cream",  width=14)
+titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 8 bold", bg="#132740",  width=14)
 titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 
-titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 8 bold", bg="mint cream",  width=10)
+titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 8 bold", bg="#132740",  width=10)
 titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
 
-titulo_informacion = Label(Ventana_principal, text="Información", font="arial 8 bold", bg="mint cream",  width=10)
+titulo_informacion = Label(Ventana_principal, text="Información", font="arial 8 bold", bg="#132740",  width=10)
 titulo_informacion.grid(row=68, column=0, columnspan=1, sticky=(N, W))
 
 #label de prestamos
