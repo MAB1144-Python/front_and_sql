@@ -303,13 +303,13 @@ def mostrar_estudiantes():
         #("idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario")
         # Definir encabezados de columnas
         tabla.heading("id usuario", text="ID")
-        tabla.heading("documento", text="Nombre")
-        tabla.heading("nombres", text="Edad")
-        tabla.heading("apellidos", text="Ciudad")
-        tabla.heading("semestre", text="ID")
-        tabla.heading("jornada", text="Nombre")
-        tabla.heading("id programa", text="Edad")
-        tabla.heading("id tipousuario", text="Ciudad")
+        tabla.heading("documento", text="Documento")
+        tabla.heading("nombres", text="Nombre")
+        tabla.heading("apellidos", text="Apellidos")
+        tabla.heading("semestre", text="Semestre")
+        tabla.heading("jornada", text="Jornada")
+        tabla.heading("id programa", text="Programa")
+        tabla.heading("id tipousuario", text="Tipo de Usuario")
         # Agregar datos a la tabla
         # Puedes reemplazar esto con tus propios datos
         for data_usuario in listado_usuario():
