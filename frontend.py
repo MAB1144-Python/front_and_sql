@@ -256,12 +256,13 @@ def Buscar_usuario():
     print(documento_usuario)
     Usuario_recibido = buscar_usuario_sql(documento_usuario)
     print(Usuario_recibido)
-    Usuario_recibido = Usuario_recibido[0]  
     print(Usuario_recibido)
     if len(Usuario_recibido) ==0:
         print("usuario no existente")
+        tipo_usuario.insert(INSERT, "invitado") 
         messagebox.showerror("Error", "Usuario no existente, complete el formulario y de Click en el boton 'Agregar Usuario' ")
     else: 
+        Usuario_recibido = Usuario_recibido[0]  
         IDUSUARIO_GLOBAL = Usuario_recibido[0]
         entrada_IDusuario.insert(INSERT, str(IDUSUARIO_GLOBAL))
         print("este es idusuario global",IDUSUARIO_GLOBAL)
@@ -273,6 +274,7 @@ def Buscar_usuario():
         entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[7]))
         entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))  
         entrada_documento_registro.insert(INSERT, str(Usuario_recibido[1]))  
+        tipo_usuario.insert(INSERT, "invitado") 
 
 def Registrar_en_sala():
     print("registrar en sala") 

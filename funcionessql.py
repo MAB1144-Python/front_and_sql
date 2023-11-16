@@ -123,6 +123,21 @@ def listado_tipousuario():
     print(df)
     return df
 
+def buscar_tipo_usuario(idtipousuario):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+   
+    if True:# idtipousuario==0:
+        df = pd.read_sql_query("SELECT descripcion from tipousuario WHERE idtipousuario ="+idtipousuario+"'", conexion)
+        df = list(df["descripcion"].values)
+    print(df)
+    return df
+
+
+
+
+
+
+
 def listado_equipo():
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
