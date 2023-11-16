@@ -30,7 +30,7 @@ from datetime import datetime
 IDUSUARIO_GLOBAL = 0
 
 app = Tk()
-app.title("MODULOS SALAS")
+app.title("ASIGNATOR GTM")
 app.config(bg="white")
 app.geometry("1500x800")
 
@@ -911,6 +911,10 @@ DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold",
 DOCMID_text.grid(column=0, row=58, sticky=(N, W))
 entrada_descripcion= ttk.Combobox(Ventana_principal, values=["Entrada sala", "Salida de sala"], width=15)
 entrada_descripcion.grid(column=1, row=58, sticky="w")
+DOCMID_text = Label(Ventana_principal, text="Ubicacion:", font="arial 8 bold", bg="mint cream")
+DOCMID_text.grid(column=0, row=59, sticky=(N, W))
+entrada_ubicacion= ttk.Combobox(Ventana_principal, values=["Bibilioteca", "Area de T.I"], width=15)
+entrada_ubicacion.grid(column=1, row=59, sticky="w")
 
 
 
