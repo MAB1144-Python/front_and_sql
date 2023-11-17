@@ -30,7 +30,6 @@ from funcionessql import (
 from datetime import datetime
 
 IDUSUARIO_GLOBAL = 0
-
 app = Tk()
 app.title("ASIGNATOR GTM")
 app.config(bg="white")
@@ -122,6 +121,8 @@ def clean():
 
 
 def agregar_prestamo():
+    global IDUSUARIO_GLOBAL 
+    insert_estado_usuario(int(documento), estadousuario)
     app.geometry("1500x800")
     ventana_agregar_prestamos = Toplevel(app, bg="#00acc9")
     ventana_agregar_prestamos.title("Prestamos") 
@@ -278,6 +279,7 @@ def agregar_prestamo():
     #     print("se genero un error en agregrar_prestamo linea 98")
 
 def agregar_estudiante():
+    global IDUSUARIO_GLOBAL 
     nombre = entrada_NOM.get()
     apellido = entrada_APE.get()
     documento = entrada_DOCMID.get()
@@ -424,6 +426,7 @@ def Descargar_prestamos():
     descargar_prestamos(filename)
 
 def Buscar_usuario():
+    global IDUSUARIO_GLOBAL 
     print("Buscar Usuario") 
     documento_usuario = entrada_DOCMID.get()
     print(documento_usuario)
@@ -456,6 +459,7 @@ def Buscar_usuario():
         tipo_usuario.insert(INSERT,str(Usuario_recibido[7])) 
 
 def Registrar_en_sala():
+    global IDUSUARIO_GLOBAL 
     print("registrar en sala") 
     idusuario = IDUSUARIO_GLOBAL
     idauxiliar =  buscar_id_auxiliar(entrada_nombre_auxiliar.get())
