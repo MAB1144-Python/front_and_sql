@@ -980,7 +980,7 @@ etiqueta.grid(column=13, row=2, sticky=(W, E))
 
 
 btn_limpiar_formulario = Button(Ventana_principal, text="Limpiar Formulario", font="arial 8 bold", command=clean_formulario)
-btn_limpiar_formulario.grid(row=80, column=0, columnspan=1, pady=15)
+btn_limpiar_formulario.grid(row=95, column=1, columnspan=1, pady=15)
 
 
 app.mainloop()
