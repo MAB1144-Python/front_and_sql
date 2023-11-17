@@ -332,7 +332,7 @@ def mostrar_equipos():
         #()
         # Definir encabezados de columnas
         tabla.heading("id equipo", text="ID Equipo")
-        tabla.heading("descripcion", text="Descrpcion")
+        tabla.heading("descripcion", text="Descripcion")
         tabla.heading("sala", text="Sala")
         for data_equipo in listado_equipo():
             print(data_equipo)
@@ -845,7 +845,7 @@ btn_mostrar_registros = Button(Ventana_principal, text="Mostrar registros", font
 btn_mostrar_registros.grid(column=0, row=78, columnspan= 1, pady=15, sticky="w")
 
 btn_agregar_estudiante = Button(Ventana_principal, text="Agregar Usuario", font="arial 8 bold", command=agregar_estudiante)
-btn_agregar_estudiante.grid(row=69, column=0, columnspan=1, pady=15)
+btn_agregar_estudiante.grid(row=9, column=1, columnspan=1, pady=15)
 
 #btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
 #btn_agregar_sala.grid(row=9, column=0, columnspan=1, pady=15)
@@ -878,7 +878,7 @@ btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="aria
 btn_buscar_usuario.grid(row=9, column=0, columnspan=1, pady=15)
 
 btn_registrar_en_sala = Button(Ventana_principal, text="Registrar en sala", font="arial 8 bold", command=Registrar_en_sala)
-btn_registrar_en_sala.grid(row=69, column=2, columnspan=1, pady=15)
+btn_registrar_en_sala.grid(row=69, column=0, columnspan=1, pady=15)
 
 # Titulos
 titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="#132740", fg="white",  width=16)
@@ -901,7 +901,7 @@ titulo_informacion.grid(row=71, column=0, columnspan=1, sticky=(N, W))
 # entrada_IDusuario.grid(row=55, column=1, sticky="w")
 APE_text = Label(Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream")
 APE_text.grid(column=0, row=56, sticky=(N, W))
-entrada_IDequipo = Entry(Ventana_principal,width=15)
+entrada_IDequipo = ttk.Combobox(Ventana_principal,values=(), width=15)
 entrada_IDequipo.grid(row=56, column=1, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=57, sticky=(N, W))
@@ -938,7 +938,7 @@ etiqueta.grid(column=13, row=2, sticky=(W, E))
 
 
 btn_registrar_en_sala = Button(Ventana_principal, text="Limpiar Formulario", font="arial 8 bold", command=Buscar_usuario)
-btn_registrar_en_sala.grid(row=80, column=0, columnspan=1, pady=15)
+btn_registrar_en_sala.grid(row=95, column=1, columnspan=1, pady=15)
 
 
 app.mainloop()
