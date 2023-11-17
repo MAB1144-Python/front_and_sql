@@ -8,7 +8,7 @@ from funcionessql import (
     generar_idusuario,
     agregar_estudiante_sql,
     registrar_prestamo,
-    generar_idprestamo,
+    generar_idprestamo, 
     listado_sala,
     listado_auxiliares,
     listado_prestamos,
@@ -431,12 +431,25 @@ def mostrar_prestamos():
 def mostrar_salas():
     ventana_salas = Toplevel(app)
     ventana_salas.title("Salas registradas")
-    # Crear etiquetas para mostrar los detalles de cada sala
-    for idx, sala in enumerate(salas):
-        detalles_sala = f"Sala: {sala.numsala}\n"
-        detalles_sala += f"Equipos: {sala.numequipo}\n"
-
-        Label(ventana_salas, text=detalles_sala).grid(row=idx * 3, column=0, sticky="w")
+  
+ # Crear etiquetas para mostrar los detalles de cada sala
+    if True:
+    # Crear un Treeview con columnas
+        tabla = ttk.Treeview(ventana_salas, columns=("ID sala", "sala" ))
+        # Definir encabezados de columnas
+        tabla.heading("ID sala", text="idsala")
+        tabla.heading("sala", text="sala")
+        
+  # Agregar datos a la tabla
+        # Puedes reemplazar esto con tus propios datos
+        for data_prestamos in listado_prestamos("","",""):
+            print(data_prestamos)
+            data_prestamos = list(data_prestamos)
+            tabla.insert("", "end", text="1", values=(data_prestamos[0],data_prestamos[1]))
+        tabla.pack()
+        # Ejecutar el bucle principal
+        ventana_salas.mainloop()
+      
 
 
 def registrar_estudiante_en_sala():
@@ -491,7 +504,6 @@ def mostrar_registros():
     for idx, registro_str in enumerate(registros_str):
         Label(ventana_registros, text=registro_str).grid(row=idx, column=0, sticky="w")
 
-
 # Combobox para seleccionar una sala
 
 
@@ -509,6 +521,13 @@ tipo_usuario_text.grid(column=0, row=8, sticky=(N, W))
 tipo_usuario = ttk.Combobox(Ventana_principal, values=listado_tipousuario(), width=20)
    
 tipo_usuario.grid(column=1, row=8, sticky="w")
+
+
+estado_usuario_text= Label(Ventana_principal, text="Estado:", font="arial 8 bold", bg="mint cream")
+estado_usuario_text.grid(column=0, row=9, sticky=(N, W))
+estado_usuario = ttk.Combobox(Ventana_principal, values=["Habilitado", "Deshabilitado"], width=20)  
+estado_usuario.grid(column=1, row=9, sticky="w")
+
 
 # nombre_registro_text = Label(
 #     Ventana_principal,
@@ -820,6 +839,10 @@ salida_Minuto = ttk.Combobox(
 )
 salida_Minuto.grid(column=11, row=10, sticky="w")
 
+def informe_documento():()
+def informe_fechas():()
+def informe_programa():()
+
 
 # Widgets de texto
 NOM_text = Label(
@@ -884,43 +907,54 @@ entrada_ingrese_jornada.grid(column=1, row=7, sticky="w")
 
 # Botones de registro
 btn_mostrar_registros = Button(Ventana_principal, text="Mostrar registros", font="arial 8 bold", command=mostrar_registros)
-btn_mostrar_registros.grid(column=0, row=78, columnspan= 1, pady=15, sticky="w")
+btn_mostrar_registros.grid(column=4, row=11, columnspan= 1, pady=0, sticky="w")
 
 btn_agregar_estudiante = Button(Ventana_principal, text="Agregar Usuario", font="arial 8 bold", command=agregar_estudiante)
-btn_agregar_estudiante.grid(row=9, column=1, columnspan=1, pady=15)
+btn_agregar_estudiante.grid(row=10, column=1, columnspan=1, pady=15)
 
 #btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
 #btn_agregar_sala.grid(row=9, column=0, columnspan=1, pady=15)
 
 btn_ver_estudiantes = Button(Ventana_principal, text="Ver Usuarios", font="arial 8 bold", command=mostrar_estudiantes)
-btn_ver_estudiantes.grid(row=78, column=1, columnspan=1, pady=15)
+btn_ver_estudiantes.grid(row=3, column=4, columnspan=1, pady=0)
 
 btn_ver_equipos = Button(Ventana_principal, text="Ver Equipos", font="arial 8 bold", command=mostrar_equipos)
-btn_ver_equipos.grid(row=80, column=1, columnspan=1, pady=15)
+btn_ver_equipos.grid(row=5, column=4, columnspan=1, pady=0)
 
 btn_ver_salas = Button(Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas)
-btn_ver_salas.grid(row=78, column=2, columnspan=1, pady=15)
+btn_ver_salas.grid(row=7, column=4, columnspan=1, pady=0)
 
 btn_ver_prestamos = Button(Ventana_principal, text="Ver Prestamos", font="arial 8 bold", command=mostrar_prestamos)
-btn_ver_prestamos.grid(row=80, column=2, columnspan=1, pady=15)
+btn_ver_prestamos.grid(row=9, column=4, columnspan=1, pady=0)
 
 btn_agregar_prestamos = Button(Ventana_principal, text="Agregar Prestamo", font="arial 8 bold", command=agregar_prestamo)
-btn_agregar_prestamos.grid(row=69, column=1, columnspan=1, pady=15)
+btn_agregar_prestamos.grid(row=19, column=1, columnspan=1, pady=15)
 
 btn_descargar_usuarios = Button(Ventana_principal, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
-btn_descargar_usuarios.grid(row=90, column=0, columnspan=1, pady=15)
+btn_descargar_usuarios.grid(row=13, column=4, columnspan=1, pady=0)
 
 btn_descargar_equipos = Button(Ventana_principal, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
-btn_descargar_equipos.grid(row=90, column=1, columnspan=1, pady=15)
+btn_descargar_equipos.grid(row=15, column=4, columnspan=1, pady=0)
 
 btn_descargar_prestamos = Button(Ventana_principal, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
-btn_descargar_prestamos.grid(row=90, column=2, columnspan=1, pady=15)
+btn_descargar_prestamos.grid(row=19, column=4, columnspan=1, pady=0)
 
 btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="arial 8 bold", command=Buscar_usuario)
-btn_buscar_usuario.grid(row=9, column=0, columnspan=1, pady=15)
+btn_buscar_usuario.grid(row=10, column=0, columnspan=1, pady=2)
 
 btn_registrar_en_sala = Button(Ventana_principal, text="Registrar en sala", font="arial 8 bold", command=Registrar_en_sala)
-btn_registrar_en_sala.grid(row=69, column=0, columnspan=1, pady=15)
+btn_registrar_en_sala.grid(row=19, column=0, columnspan=1, pady=0)
+
+#Checkout 
+
+cck_informe_documento = Checkbutton(Ventana_principal, text="Informe por documento", font="arial 8 bold", command=informe_documento)
+cck_informe_documento.grid(row=24, column=0, columnspan=1, pady=0)
+
+cck_informe_fechas = Checkbutton(Ventana_principal, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
+cck_informe_fechas.grid(row=24, column=1, columnspan=1, pady=0)
+
+cck_informe_programa= Checkbutton(Ventana_principal, text="Informe por programa", font="arial 8 bold", command=informe_programa)
+cck_informe_programa.grid(row=24, column=2, columnspan=1, pady=0)
 
 # Titulos
 titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="#132740", fg="white",  width=16)
@@ -934,7 +968,7 @@ titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 #titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
 
 titulo_informacion = Label(Ventana_principal, text="Información", font="arial 10 bold", bg="#132740", fg="white",  width=10)
-titulo_informacion.grid(row=71, column=0, columnspan=1, sticky=(N, W))
+titulo_informacion.grid(row=21, column=0, columnspan=1, sticky=(N, W))
 
 #label de prestamos
 # NOM_text = Label(Ventana_principal, text="ID Usuario:", font="arial 8 bold", bg="mint cream")
@@ -942,25 +976,25 @@ titulo_informacion.grid(row=71, column=0, columnspan=1, sticky=(N, W))
 # entrada_IDusuario = Entry(Ventana_principal,width=15)
 # entrada_IDusuario.grid(row=55, column=1, sticky="w")
 APE_text = Label(Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream")
-APE_text.grid(column=0, row=56, sticky=(N, W))
+APE_text.grid(column=0, row=12, sticky=(N, W))
 entrada_IDequipo = ttk.Combobox(Ventana_principal,values=(), width=15)
-entrada_IDequipo.grid(row=56, column=1, sticky="w")
+entrada_IDequipo.grid(row=12, column=1, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg="mint cream")
-DOCMID_text.grid(column=0, row=57, sticky=(N, W))
+DOCMID_text.grid(column=0, row=13, sticky=(N, W))
 entrada_nombre_auxiliar = ttk.Combobox(Ventana_principal, values=listado_auxiliares(), width=15)
-entrada_nombre_auxiliar.grid(column=1, row=57, sticky="w")
+entrada_nombre_auxiliar.grid(column=1, row=13, sticky="w")
 NOM_text = Label(Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream")
-NOM_text.grid(column=2, row=57, sticky=(N, W))
+NOM_text.grid(column=2, row=13, sticky=(N, W))
 entrada_idauxiliar= Entry(Ventana_principal,width=20)
-entrada_idauxiliar.grid(row=58, column=2, sticky="w")
+entrada_idauxiliar.grid(row=14, column=2, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream")
-DOCMID_text.grid(column=0, row=58, sticky=(N, W))
+DOCMID_text.grid(column=0, row=14, sticky=(N, W))
 entrada_descripcion= ttk.Combobox(Ventana_principal, values=["Entrada sala", "Salida de sala"], width=15)
-entrada_descripcion.grid(column=1, row=58, sticky="w")
+entrada_descripcion.grid(column=1, row=14, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Ubicacion:", font="arial 8 bold", bg="mint cream")
-DOCMID_text.grid(column=0, row=59, sticky=(N, W))
+DOCMID_text.grid(column=0, row=15, sticky=(N, W))
 entrada_ubicacion= ttk.Combobox(Ventana_principal, values=["Bibilioteca", "Area de T.I"], width=15)
-entrada_ubicacion.grid(column=1, row=59, sticky="w")
+entrada_ubicacion.grid(column=1, row=15, sticky="w")
 
 
 
@@ -980,7 +1014,7 @@ etiqueta.grid(column=13, row=2, sticky=(W, E))
 
 
 btn_limpiar_formulario = Button(Ventana_principal, text="Limpiar Formulario", font="arial 8 bold", command=clean_formulario)
-btn_limpiar_formulario.grid(row=95, column=1, columnspan=1, pady=15)
+btn_limpiar_formulario.grid(row=21, column=4, columnspan=1, pady=0)
 
 
 app.mainloop()
