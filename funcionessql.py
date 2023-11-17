@@ -58,7 +58,7 @@ def generar_idprestamo():
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df = pd.read_sql_query("SELECT * from prestamo", conexion)
     print("++++++++++++++++++",len(df))
-    idprestamo=0
+    idprestamo=1
     if len(df["idprestamo"])==0:
         idprestamo=1
     else:
@@ -197,13 +197,13 @@ def registrar_prestamo(descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,f
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     df = pd.read_sql_query("SELECT  * from prestamo", conexion)
     print(df)
-    idprestamo = 1
-    try:
-        idprestamo = df["idprestamo"].max()+1
-    except:
-        idprestamo = 1
-    print(int(idprestamo),descripcion,int(idusuario),int(idequipo),int(idauxiliar),"2023-01-01 T4:00:00","2023-01-01 T4:00:00",carrera)
-    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,fecha_salida,carrera) values (?,?,?,?,?,?,?,?)", (int(idprestamo),descripcion,int(idusuario),int(idequipo),int(idauxiliar),"2023-01-01 T4:00:00","2023-01-01 T4:00:00",carrera))#idprestamo,descripcion,3,4,int(idauxiliar),fecha_entrada,fecha_salida))
+    print(generar_idprestamo())
+    print(descripcion)
+    print(int(idusuario))
+    print(int(idequipo))
+    print(int(idauxiliar))
+    print(carrera)
+    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,fecha_salida,carrera) values (?,?,?,?,?,?,?,?)", (generar_idprestamo(),descripcion,int(idusuario),int(idequipo),int(idauxiliar),"2023-01-01 T4:00:00","2023-01-01 T4:00:00",carrera))#idprestamo,descripcion,3,4,int(idauxiliar),fecha_entrada,fecha_salida))
     conexion.commit()
     conexion.close()
 
@@ -255,6 +255,34 @@ def filtro_prestamo(fecha_start, fecha_end, documento, carrera):
 
 
     return df_filtro_prestamo
+
+def buscar_estado_usuario(documento_usuario):
+    #verifica si el usuario esta bloqueado
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    df = pd.read_sql_query("SELECT  estado from registro_bloqueados WHERE documento='"+str(documento_usuario)+"'", conexion)
+    df =list(df.values)
+    #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
+    print(df)
+    return df
+
+def insert_estado_usuario(documento, estado):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    cursor=conexion.execute("insert into registro_bloqueados  (documento, estado) values (?,?)", (documento, estado))
+    conexion.commit()
+    conexion.close()
+    
+def update_estado_usuario(documento, estado):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    cursor=conexion.execute("UPDATE registro_bloqueados set estado='"+estado+"' WHERE documento='"+str(documento)+"'")
+    conexion.commit()
+    conexion.close()
+
+tabla10= """CREATE TABLE registro_bloqueados (
+ documento integer auto_increment PRIMARY KEY,
+ estado text NOT NULL
+)"""
 #print("muchos por",filtro_prestamo("2023-01-01 4:00:00","2023-01-01 4:00:00","1064427622"))
+print("6+879+/-*",update_estado_usuario(323165423,"Deshabilitado"))
 
 

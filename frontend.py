@@ -23,6 +23,7 @@ from funcionessql import (
     buscar_usuario_sql,
     agregar_registro_sala,
     buscar_tipo_usuario,
+    insert_estado_usuario
     
 
 )
@@ -210,33 +211,8 @@ def agregar_prestamo():
     )
     fecha_entrada_text.grid(column=10, row=6, sticky=(N, W))
     entrada_Hora = ttk.Combobox(
-        ventana_agregar_prestamos,
-        values=[
-            00,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            22,
-            23,
-        ],
+        ventana_prestamos,
+        values=range(24),
         width=5,
     )
     entrada_Hora.grid(column=10, row=7, sticky="w")
@@ -246,33 +222,8 @@ def agregar_prestamo():
     )
     fecha_salida_text.grid(column=10, row=9, sticky=(N, W))
     salida_Hora = ttk.Combobox(
-        ventana_agregar_prestamos,
-        values=[
-            00,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            22,
-            23,
-        ],
+        ventana_prestamos,
+        values=range(24),
         width=5,
     )
     salida_Hora.grid(column=10, row=10, sticky="w")
@@ -282,69 +233,8 @@ def agregar_prestamo():
     )
     fecha_entrada_text.grid(column=11, row=6, sticky=(N, W))
     entrada_Minuto = ttk.Combobox(
-        ventana_agregar_prestamos,
-        values=[
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            22,
-            23,
-            24,
-            25,
-            26,
-            27,
-            28,
-            29,
-            30,
-            31,
-            32,
-            33,
-            34,
-            35,
-            36,
-            37,
-            38,
-            39,
-            40,
-            41,
-            42,
-            43,
-            44,
-            45,
-            46,
-            47,
-            48,
-            49,
-            50,
-            51,
-            52,
-            53,
-            54,
-            55,
-            56,
-            57,
-            58,
-            59,
-            60,
-        ],
+        ventana_prestamos,
+        values=range(60),
         width=5,
     )
     entrada_Minuto.grid(column=11, row=7, sticky="w")
@@ -354,69 +244,8 @@ def agregar_prestamo():
     )
     fecha_salida_text.grid(column=11, row=9, sticky=(N, W))
     salida_Minuto = ttk.Combobox(
-        ventana_agregar_prestamos,
-        values=[
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10,
-            11,
-            12,
-            13,
-            14,
-            15,
-            16,
-            17,
-            18,
-            19,
-            20,
-            21,
-            22,
-            23,
-            24,
-            25,
-            26,
-            27,
-            28,
-            29,
-            30,
-            31,
-            32,
-            33,
-            34,
-            35,
-            36,
-            37,
-            38,
-            39,
-            40,
-            41,
-            42,
-            43,
-            44,
-            45,
-            46,
-            47,
-            48,
-            49,
-            50,
-            51,
-            52,
-            53,
-            54,
-            55,
-            56,
-            57,
-            58,
-            59,
-            60,
-        ],
+        ventana_prestamos,
+        values=range(60),
         width=5,
     )
     salida_Minuto.grid(column=11, row=10, sticky="w")
@@ -456,6 +285,7 @@ def agregar_estudiante():
     semestre = entrada_ingrese_semestre.get()
     jornada = entrada_ingrese_jornada.get()
     tipodeusuario = tipo_usuario.get()
+    estadousuario = estado_usuario.get()
     print(nombre,apellido,documento,programa,semestre,jornada,tipodeusuario)
     habilitar_clean = False
     if tipodeusuario=="invitado" and nombre != "" and apellido != "" and documento != "" and programa != "":
@@ -488,10 +318,9 @@ def agregar_estudiante():
                 programa,
                 tipodeusuario,
             )  # idprograma,idtipousuario
-
-       
-    
+            insert_estado_usuario(int(documento), estadousuario)
     elif (
+        tipodeusuario!="invitado" and 
         nombre != ""
         and apellido != ""
         and documento != ""
@@ -515,6 +344,7 @@ def agregar_estudiante():
                 1,
                 tipodeusuario,
             )  # idprograma,idtipousuario
+            insert_estado_usuario(int(documento), estadousuario)
         data_usuarios = buscar_estudiante_documento(documento)
         data_usuarios = list(data_usuarios[0])
         entrada_NOM.delete(0, "end")
