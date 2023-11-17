@@ -345,13 +345,13 @@ def mostrar_estudiantes():
         #("idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario")
         # Definir encabezados de columnas
         tabla.heading("id usuario", text="ID")
-        tabla.heading("documento", text="Nombre")
-        tabla.heading("nombres", text="Edad")
-        tabla.heading("apellidos", text="Ciudad")
-        tabla.heading("semestre", text="ID")
-        tabla.heading("jornada", text="Nombre")
-        tabla.heading("id programa", text="Edad")
-        tabla.heading("id tipousuario", text="Ciudad")
+        tabla.heading("documento", text="Documento")
+        tabla.heading("nombres", text="Nombre")
+        tabla.heading("apellidos", text="Apellidos")
+        tabla.heading("semestre", text="Semestre")
+        tabla.heading("jornada", text="Jornada")
+        tabla.heading("id programa", text="Programa")
+        tabla.heading("id tipousuario", text="Tipo de Usuario")
         # Agregar datos a la tabla
         # Puedes reemplazar esto con tus propios datos
         for data_usuario in listado_usuario():
@@ -510,27 +510,27 @@ tipo_usuario = ttk.Combobox(Ventana_principal, values=listado_tipousuario(), wid
    
 tipo_usuario.grid(column=1, row=8, sticky="w")
 
-nombre_registro_text = Label(
-    Ventana_principal,
-    text="Nombre del Usuario:",
-    font="arial 8 bold",
-    bg="mint cream",
-)
-nombre_registro_text.grid(column=0, row=27, sticky=(N, W))
-entrada_nombre_registro = Entry(Ventana_principal, width=15)
-entrada_nombre_registro.grid(column=1, row=27, sticky="w")
+# nombre_registro_text = Label(
+#     Ventana_principal,
+#     text="Nombre del Usuario:",
+#     font="arial 8 bold",
+#     bg="mint cream",
+# )
+# nombre_registro_text.grid(column=0, row=27, sticky=(N, W))
+# entrada_nombre_registro = Entry(Ventana_principal, width=15)
+# entrada_nombre_registro.grid(column=1, row=27, sticky="w")
 
 #salida_dia = Entry(Ventana_principal, width=5)
 
-documento_registro_text = Label(
-    Ventana_principal,
-    text="Documento del Usuario:",
-    font="arial 8 bold",
-    bg="mint cream",
-)
-documento_registro_text.grid(column=0, row=28, sticky=(N, W))
-entrada_documento_registro = Entry(Ventana_principal, width=15)
-entrada_documento_registro.grid(column=1, row=28, sticky="w")
+# documento_registro_text = Label(
+#     Ventana_principal,
+#     text="Documento del Usuario:",
+#     font="arial 8 bold",
+#     bg="mint cream",
+# )
+# documento_registro_text.grid(column=0, row=28, sticky=(N, W))
+# entrada_documento_registro = Entry(Ventana_principal, width=15)
+# entrada_documento_registro.grid(column=1, row=28, sticky="w")
 
 # Llamar a la función para actualizar las opciones iniciales
 # actualizar_dropdown_salas()
@@ -887,7 +887,7 @@ btn_mostrar_registros = Button(Ventana_principal, text="Mostrar registros", font
 btn_mostrar_registros.grid(column=0, row=78, columnspan= 1, pady=15, sticky="w")
 
 btn_agregar_estudiante = Button(Ventana_principal, text="Agregar Usuario", font="arial 8 bold", command=agregar_estudiante)
-btn_agregar_estudiante.grid(row=9, column=1, columnspan=1, pady=15)
+btn_agregar_estudiante.grid(row=69, column=0, columnspan=1, pady=15)
 
 #btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
 #btn_agregar_sala.grid(row=9, column=0, columnspan=1, pady=15)
@@ -920,27 +920,27 @@ btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="aria
 btn_buscar_usuario.grid(row=9, column=0, columnspan=1, pady=15)
 
 btn_registrar_en_sala = Button(Ventana_principal, text="Registrar en sala", font="arial 8 bold", command=Registrar_en_sala)
-btn_registrar_en_sala.grid(row=54, column=1, columnspan=1, pady=15)
+btn_registrar_en_sala.grid(row=69, column=2, columnspan=1, pady=15)
 
 # Titulos
 titulo_sala = Label(Ventana_principal, text="Datos Estudiantes", font="arial 10 bold", bg="#132740", fg="white",  width=16)
 titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
 
 
-titulo_sala = Label(Ventana_principal, text="Crear registros", font="arial 10 bold", bg="#132740", fg="white",  width=14)
+titulo_sala = Label(Ventana_principal, text="Crear registros o Prestamos", font="arial 10 bold", bg="#132740", fg="white",  width=24)
 titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 
-titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 10 bold", bg="#132740", fg="white",  width=10)
-titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
+#titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 10 bold", bg="#132740", fg="white",  width=10)
+#titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
 
 titulo_informacion = Label(Ventana_principal, text="Información", font="arial 10 bold", bg="#132740", fg="white",  width=10)
 titulo_informacion.grid(row=71, column=0, columnspan=1, sticky=(N, W))
 
 #label de prestamos
-NOM_text = Label(Ventana_principal, text="ID Usuario:", font="arial 8 bold", bg="mint cream")
-NOM_text.grid(column=0, row=55, sticky=(N, W))
-entrada_IDusuario = Entry(Ventana_principal,width=15)
-entrada_IDusuario.grid(row=55, column=1, sticky="w")
+# NOM_text = Label(Ventana_principal, text="ID Usuario:", font="arial 8 bold", bg="mint cream")
+# NOM_text.grid(column=0, row=55, sticky=(N, W))
+# entrada_IDusuario = Entry(Ventana_principal,width=15)
+# entrada_IDusuario.grid(row=55, column=1, sticky="w")
 APE_text = Label(Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream")
 APE_text.grid(column=0, row=56, sticky=(N, W))
 entrada_IDequipo = Entry(Ventana_principal,width=15)
@@ -949,8 +949,10 @@ DOCMID_text = Label(Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg
 DOCMID_text.grid(column=0, row=57, sticky=(N, W))
 entrada_nombre_auxiliar = ttk.Combobox(Ventana_principal, values=listado_auxiliares(), width=15)
 entrada_nombre_auxiliar.grid(column=1, row=57, sticky="w")
+NOM_text = Label(Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream")
+NOM_text.grid(column=2, row=57, sticky=(N, W))
 entrada_idauxiliar= Entry(Ventana_principal,width=20)
-entrada_idauxiliar.grid(row=57, column=2, sticky="w")
+entrada_idauxiliar.grid(row=58, column=2, sticky="w")
 DOCMID_text = Label(Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream")
 DOCMID_text.grid(column=0, row=58, sticky=(N, W))
 entrada_descripcion= ttk.Combobox(Ventana_principal, values=["Entrada sala", "Salida de sala"], width=15)
