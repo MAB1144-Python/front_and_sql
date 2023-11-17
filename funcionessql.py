@@ -202,7 +202,7 @@ def registrar_prestamo(descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,f
         idprestamo = df["idprestamo"].max()+1
     except:
         idprestamo = 1
-    print(int(idprestamo),descripcion,int(idusuario),int(idequipo),int(idauxiliar),"2023-01-01 T4:00:00","2023-01-01 T4:00:00",carrera) aqui se esta presentando el error ojp identificart quien viene vacio 
+    print(int(idprestamo),descripcion,int(idusuario),int(idequipo),int(idauxiliar),"2023-01-01 T4:00:00","2023-01-01 T4:00:00",carrera)
     cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,fecha_salida,carrera) values (?,?,?,?,?,?,?,?)", (int(idprestamo),descripcion,int(idusuario),int(idequipo),int(idauxiliar),"2023-01-01 T4:00:00","2023-01-01 T4:00:00",carrera))#idprestamo,descripcion,3,4,int(idauxiliar),fecha_entrada,fecha_salida))
     conexion.commit()
     conexion.close()
