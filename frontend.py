@@ -22,7 +22,9 @@ from funcionessql import (
     descargar_equipos,
     descargar_prestamos,
     buscar_usuario_sql,
-    agregar_registro_sala
+    agregar_registro_sala,
+    buscar_tipo_usuario,
+    
 
 )
 from datetime import datetime
@@ -116,6 +118,7 @@ def clean():
         entrada_PROG.delete(0, "end")
         entrada_ingrese_semestre.delete(0, "end")
         entrada_ingrese_jornada.delete(0, "end")
+        entrada_documento_registro.delete(0, "end")
 
 
 def agregar_prestamo():
@@ -147,7 +150,41 @@ def agregar_estudiante():
     jornada = entrada_ingrese_jornada.get()
     tipodeusuario = tipo_usuario.get()
     print(nombre,apellido,documento,programa,semestre,jornada,tipodeusuario)
-    if (
+    habilitar_clean = False
+    if tipodeusuario=="invitado" and nombre != "" and apellido != "" and documento != "" and programa != "":
+        habilitar_clean = True
+        data_usuarios = buscar_estudiante_documento(documento)
+        if len(data_usuarios) == 0:
+            idusuario = generar_idusuario()
+            print(idusuario)
+            agregar_estudiante_sql(
+                int(idusuario),
+                int(documento),
+                nombre,
+                apellido,
+                "-",
+                "-",
+                programa,
+                tipodeusuario,
+            )  # idprograma,idtipousuario
+            data_usuarios = buscar_estudiante_documento(documento)
+        if len(data_usuarios) == 0:
+            idusuario = generar_idusuario()
+            print(idusuario)
+            agregar_estudiante_sql(
+                int(idusuario),
+                int(documento),
+                nombre,
+                apellido,
+                semestre,
+                jornada,
+                programa,
+                tipodeusuario,
+            )  # idprograma,idtipousuario
+
+       
+    
+    elif (
         nombre != ""
         and apellido != ""
         and documento != ""
@@ -155,7 +192,8 @@ def agregar_estudiante():
         and semestre != ""
         and jornada != ""
         and tipodeusuario != ""
-    ):  # en la 81
+    ):
+        habilitar_clean = True
         data_usuarios = buscar_estudiante_documento(documento)
         if len(data_usuarios) == 0:
             idusuario = generar_idusuario()
@@ -200,32 +238,31 @@ def agregar_estudiante():
     )
 
 #deletes de todas las entradas 
-
-    entrada_NOM.delete(0, "end")
-    entrada_APE.delete(0, "end")
-    entrada_DOCMID.delete(0, "end")
-    entrada_PROG.delete(0, "end")
-    entrada_ingrese_semestre.delete(0, "end")
-    entrada_ingrese_jornada.delete(0, "end")
-    entrada_nombre_registro.delete(0, "end")
-    entrada_nombre_auxiliar.delete(0, "end")
-    entrada_Año.delete(0, "end")
-    entrada_Descripcion.delete(0, "end")
-    entrada_dia.delete(0, "end")
-    entrada_documento_registro.delete(0, "end")
-    entrada_Hora.delete(0, "end")
-    entrada_idauxiliar.delete(0, "end")
-    entrada_IDequipo.delete(0, "end")
-    entrada_IDusuario.delete(0, "end")
-    entrada_ingrese_jornada.delete(0, "end")
-    entrada_ingrese_programa.delete(0, "end")
-    entrada_ingrese_semestre.delete(0, "end")
-    entrada_Mes.delete(0, "end")
-    entrada_Minuto.delete(0, "end")
-    entrada_nombre_registro.delete(0, "end")
-    entrada_Sala.delete(0, "end")
-    tipo_usuario.delete(0, "end")
-    
+def clean_formulario():
+        entrada_NOM.delete(0, "end")
+        entrada_APE.delete(0, "end")
+        entrada_DOCMID.delete(0, "end")
+        entrada_PROG.delete(0, "end")
+        entrada_ingrese_semestre.delete(0, "end")
+        entrada_ingrese_jornada.delete(0, "end")
+        entrada_nombre_registro.delete(0, "end")
+        entrada_nombre_auxiliar.delete(0, "end")
+        entrada_Año.delete(0, "end")
+        entrada_dia.delete(0, "end")
+        entrada_documento_registro.delete(0, "end")
+        entrada_Hora.delete(0, "end")
+        entrada_idauxiliar.delete(0, "end")
+        entrada_IDequipo.delete(0, "end")
+        entrada_IDusuario.delete(0, "end")
+        entrada_ingrese_jornada.delete(0, "end")
+        entrada_ingrese_programa.delete(0, "end")
+        entrada_ingrese_semestre.delete(0, "end")
+        entrada_Mes.delete(0, "end")
+        entrada_Minuto.delete(0, "end")
+        entrada_nombre_registro.delete(0, "end")
+        entrada_Sala.delete(0, "end")
+        tipo_usuario.delete(0, "end")
+        
     
 
 
@@ -257,11 +294,16 @@ def Buscar_usuario():
     Usuario_recibido = buscar_usuario_sql(documento_usuario)
     print(Usuario_recibido)
     print(Usuario_recibido)
+
     if len(Usuario_recibido) ==0:
         print("usuario no existente")
         tipo_usuario.insert(INSERT, "invitado") 
-        messagebox.showerror("Error", "Usuario no existente, complete el formulario y de Click en el boton 'Agregar Usuario' ")
+        messagebox.showerror(
+                            message="Usuario no existente, si se va a registrar como invitado solo ingrese nombre, apellido y programa de interés, si se va a registrar como estudiante o profesor debe llenar todos los datos' ",
+                            title="informacion"
+                            )
     else: 
+        clean()
         Usuario_recibido = Usuario_recibido[0]  
         IDUSUARIO_GLOBAL = Usuario_recibido[0]
         entrada_IDusuario.insert(INSERT, str(IDUSUARIO_GLOBAL))
@@ -271,10 +313,10 @@ def Buscar_usuario():
         entrada_DOCMID.insert(INSERT, str(Usuario_recibido[1]))
         entrada_ingrese_programa.insert(INSERT, str(Usuario_recibido[4]))
         entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[6]))
-        entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[7]))
+        entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[5]))
         entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))  
         entrada_documento_registro.insert(INSERT, str(Usuario_recibido[1]))  
-        tipo_usuario.insert(INSERT, "invitado") 
+        tipo_usuario.insert(INSERT,str(Usuario_recibido[7])) 
 
 def Registrar_en_sala():
     print("registrar en sala") 
@@ -935,8 +977,8 @@ etiqueta.grid(column=13, row=2, sticky=(W, E))
 
 
 
-btn_registrar_en_sala = Button(Ventana_principal, text="Limpiar Formulario", font="arial 8 bold", command=Buscar_usuario)
-btn_registrar_en_sala.grid(row=80, column=0, columnspan=1, pady=15)
+btn_limpiar_formulario = Button(Ventana_principal, text="Limpiar Formulario", font="arial 8 bold", command=clean_formulario)
+btn_limpiar_formulario.grid(row=80, column=0, columnspan=1, pady=15)
 
 
 app.mainloop()
