@@ -15,7 +15,6 @@ from funcionessql import (
     listado_tipousuario,
     listado_usuario,
     listado_equipo,
-    registrar_prestamo,
     generar_idprestamo,
     buscar_id_auxiliar,
     descargar_usuarios,
@@ -118,18 +117,19 @@ def clean():
         entrada_PROG.delete(0, "end")
         entrada_ingrese_semestre.delete(0, "end")
         entrada_ingrese_jornada.delete(0, "end")
-        entrada_documento_registro.delete(0, "end")
+        
 
 
 def agregar_prestamo():
     descripcion = entrada_descripcion.get() 
-    idusuario = entrada_IDusuario
+    IDUSUARIO_GLOBAL = buscar_estudiante_documento(entrada_DOCMID.get())[0][0]
+    print("-/+/-/+/-/+/-/+/-/+/-/+/-/",IDUSUARIO_GLOBAL)
     idequipo = entrada_IDequipo.get() 
     idauxiliar =  buscar_id_auxiliar(entrada_nombre_auxiliar.get())
     entrada_idauxiliar.insert(INSERT, str(idauxiliar))
     FechaEntrada = fecha_entrada()
     FechaSalida = fecha_salida() 
-    print(descripcion,idusuario,idequipo,idauxiliar,FechaEntrada,FechaSalida)
+    print("*/*/*/*/**/*/*/*/*/*/*/*/*/*",IDUSUARIO_GLOBAL,descripcion,idequipo,idauxiliar,FechaEntrada,FechaSalida)
     registrar_prestamo(
             descripcion,
             IDUSUARIO_GLOBAL,
@@ -137,6 +137,7 @@ def agregar_prestamo():
             idauxiliar,
             FechaEntrada,
             FechaSalida,
+            buscar_estudiante_documento(entrada_DOCMID.get())[0][6]
         )
     # except:
     #     print("se genero un error en agregrar_prestamo linea 98")
@@ -245,7 +246,6 @@ def clean_formulario():
         entrada_PROG.delete(0, "end")
         entrada_ingrese_semestre.delete(0, "end")
         entrada_ingrese_jornada.delete(0, "end")
-        entrada_nombre_registro.delete(0, "end")
         entrada_nombre_auxiliar.delete(0, "end")
         entrada_Año.delete(0, "end")
         entrada_dia.delete(0, "end")
@@ -306,7 +306,8 @@ def Buscar_usuario():
         clean()
         Usuario_recibido = Usuario_recibido[0]  
         IDUSUARIO_GLOBAL = Usuario_recibido[0]
-        entrada_IDusuario.insert(INSERT, str(IDUSUARIO_GLOBAL))
+        print("***************************************",IDUSUARIO_GLOBAL)
+        # entrada_IDusuario.insert(INSERT, str(IDUSUARIO_GLOBAL))
         print("este es idusuario global",IDUSUARIO_GLOBAL)
         entrada_NOM.insert(INSERT, str(Usuario_recibido[2]))
         entrada_APE.insert(INSERT, str(Usuario_recibido[3]))
@@ -314,8 +315,8 @@ def Buscar_usuario():
         entrada_ingrese_programa.insert(INSERT, str(Usuario_recibido[4]))
         entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[6]))
         entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[5]))
-        entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))  
-        entrada_documento_registro.insert(INSERT, str(Usuario_recibido[1]))  
+        # entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))  
+        # entrada_documento_registro.insert(INSERT, str(Usuario_recibido[1]))  
         tipo_usuario.insert(INSERT,str(Usuario_recibido[7])) 
 
 def Registrar_en_sala():
@@ -389,9 +390,10 @@ def mostrar_prestamos():
     ventana_prestamos.title("Prestamos")    
     
     # Crear etiquetas para mostrar los detalles de cada equipo
+    print(listado_prestamos("","",""))
     if True:
     # Crear un Treeview con columnas
-        tabla = ttk.Treeview(ventana_prestamos, columns=("ID prestamo", "Descripcion", "ID usuario", "ID equipo", "ID auxiliar", "Fecha prestamo"))
+        tabla = ttk.Treeview(ventana_prestamos, columns=("ID prestamo", "Descripcion", "ID usuario", "ID equipo", "ID auxiliar", "Fecha prestamo", "Fecha prestamo2"))
         #()
         # Definir encabezados de columnas
         tabla.heading("ID equipo", text="ID Equipo")
@@ -399,14 +401,15 @@ def mostrar_prestamos():
         tabla.heading("ID usuario", text="ID usuario")
         tabla.heading("ID equipo", text="ID equipo")
         tabla.heading("ID auxiliar", text="ID auxiliar")
-        tabla.heading("fecha prestamo", text="Fecha prestamo")
+        tabla.heading("Fecha prestamo", text="Fecha prestamo")
+        tabla.heading("Fecha prestamo2", text="Fecha prestamo2")
         
         # Agregar datos a la tabla
         # Puedes reemplazar esto con tus propios datos
-        for data_prestamos in listado_prestamos():
+        for data_prestamos in listado_prestamos("","",""):
             print(data_prestamos)
             data_prestamos = list(data_prestamos)
-            tabla.insert("", "end", text="1", values=(data_prestamos[0],data_prestamos[1],data_prestamos[2], data_prestamos[3], data_prestamos[4], data_prestamos[5]))
+            tabla.insert("", "end", text="1", values=(data_prestamos[0],data_prestamos[1],data_prestamos[2], data_prestamos[3], data_prestamos[4], data_prestamos[5], data_prestamos[6]))
         tabla.pack()
         # Ejecutar el bucle principal
         ventana_prestamos.mainloop()
@@ -432,7 +435,7 @@ def mostrar_salas():
     ventana_salas = Toplevel(app)
     ventana_salas.title("Salas registradas")
     # Crear etiquetas para mostrar los detalles de cada sala
-    for idx, sala in enumerate(salas):
+    for idx, sala in listado_sala():
         detalles_sala = f"Sala: {sala.numsala}\n"
         detalles_sala += f"Equipos: {sala.numequipo}\n"
 
