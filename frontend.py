@@ -212,8 +212,8 @@ def agregar_prestamo():
     )
     fecha_entrada_text.grid(column=10, row=6, sticky=(N, W))
     entrada_Hora = ttk.Combobox(
-        ventana_prestamos,
-        values=range(24),
+        ventana_agregar_prestamos,
+        values = list(range(24)),
         width=5,
     )
     entrada_Hora.grid(column=10, row=7, sticky="w")
@@ -223,8 +223,8 @@ def agregar_prestamo():
     )
     fecha_salida_text.grid(column=10, row=9, sticky=(N, W))
     salida_Hora = ttk.Combobox(
-        ventana_prestamos,
-        values=range(24),
+        ventana_agregar_prestamos,
+        values=list(range(24)),
         width=5,
     )
     salida_Hora.grid(column=10, row=10, sticky="w")
@@ -234,8 +234,8 @@ def agregar_prestamo():
     )
     fecha_entrada_text.grid(column=11, row=6, sticky=(N, W))
     entrada_Minuto = ttk.Combobox(
-        ventana_prestamos,
-        values=range(60),
+        ventana_agregar_prestamos,
+        values=list(range(60)),
         width=5,
     )
     entrada_Minuto.grid(column=11, row=7, sticky="w")
@@ -245,8 +245,8 @@ def agregar_prestamo():
     )
     fecha_salida_text.grid(column=11, row=9, sticky=(N, W))
     salida_Minuto = ttk.Combobox(
-        ventana_prestamos,
-        values=range(60),
+        ventana_agregar_prestamos,
+        values=list(range(60)),
         width=5,
     )
     salida_Minuto.grid(column=11, row=10, sticky="w")
@@ -254,9 +254,7 @@ def agregar_prestamo():
     btn_guardar_fecha = Button(ventana_agregar_prestamos, text="Guardar Fecha", font="arial 8 bold", command=guardar_fecha)
     btn_guardar_fecha.grid(column=12, row=10,  pady=5, sticky="w")
 
-    def guardar_fecha():(
-    )
-
+def guardar_fecha():
     descripcion = entrada_descripcion.get() 
     IDUSUARIO_GLOBAL = buscar_estudiante_documento(entrada_DOCMID.get())[0][0]
     print("-/+/-/+/-/+/-/+/-/+/-/+/-/",IDUSUARIO_GLOBAL)
@@ -277,6 +275,8 @@ def agregar_prestamo():
         )
     # except:
     #     print("se genero un error en agregrar_prestamo linea 98")
+
+def cambiar_estado():()    
 
 def agregar_estudiante():
     global IDUSUARIO_GLOBAL 
@@ -401,12 +401,6 @@ def clean_formulario():
         entrada_Sala.delete(0, "end")
         tipo_usuario.delete(0, "end")
         
-    
-
-
-
-
-
 def Descargar_usuarios():
     print("descargar usuarios")
     filename = fd.askdirectory()
@@ -1041,6 +1035,9 @@ btn_mostrar_registros.grid(column=4, row=11, columnspan= 1, pady=0, sticky="w")
 
 btn_agregar_estudiante = Button(Ventana_principal, text="Agregar Usuario", font="arial 8 bold", command=agregar_estudiante)
 btn_agregar_estudiante.grid(row=10, column=1, columnspan=1, pady=15)
+
+btn_cambiar_estado = Button(Ventana_principal, text="Agregar Usuario", font="arial 8 bold", command=cambiar_estado)
+btn_cambiar_estado.grid(row=10, column=2, columnspan=1, pady=15)
 
 #btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
 #btn_agregar_sala.grid(row=9, column=0, columnspan=1, pady=15)
