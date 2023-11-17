@@ -122,6 +122,19 @@ def clean():
 
 
 def agregar_prestamo():
+    ventana_prestamos = Toplevel(app)
+    ventana_prestamos.title("Prestamos") 
+    cck_informe_documento = Checkbutton(ventana_prestamos, text="Informe por documento", font="arial 8 bold", command=informe_documento)
+    cck_informe_documento.grid(row=24, column=0, columnspan=1, pady=0)
+
+    cck_informe_fechas = Checkbutton(ventana_prestamos, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
+    cck_informe_fechas.grid(row=24, column=1, columnspan=1, pady=0)
+
+    cck_informe_programa= Checkbutton(ventana_prestamos, text="Informe por programa", font="arial 8 bold", command=informe_programa)
+    cck_informe_programa.grid(row=24, column=2, columnspan=1, pady=0)
+
+
+
     descripcion = entrada_descripcion.get() 
     idusuario = entrada_IDusuario
     idequipo = entrada_IDequipo.get() 
