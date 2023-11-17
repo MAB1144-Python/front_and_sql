@@ -265,10 +265,24 @@ def buscar_estado_usuario(documento_usuario):
     #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
     print(df)
     return df
+
+def insert_estado_usuario(documento, estado):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    cursor=conexion.execute("insert into registro_bloqueados  (documento, estado) values (?,?)", (documento, estado))
+    conexion.commit()
+    conexion.close()
+    
+def update_estado_usuario(documento, estado):
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    cursor=conexion.execute("UPDATE registro_bloqueados set estado='"+estado+"' WHERE documento='"+str(documento)+"'")
+    conexion.commit()
+    conexion.close()
+
 tabla10= """CREATE TABLE registro_bloqueados (
  documento integer auto_increment PRIMARY KEY,
  estado text NOT NULL
 )"""
 #print("muchos por",filtro_prestamo("2023-01-01 4:00:00","2023-01-01 4:00:00","1064427622"))
+print("6+879+/-*",update_estado_usuario(323165423,"Deshabilitado"))
 
 

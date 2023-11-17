@@ -23,6 +23,7 @@ from funcionessql import (
     buscar_usuario_sql,
     agregar_registro_sala,
     buscar_tipo_usuario,
+    insert_estado_usuario
     
 
 )
@@ -242,7 +243,7 @@ def agregar_prestamo():
     )
     fecha_salida_text.grid(column=11, row=9, sticky=(N, W))
     salida_Minuto = ttk.Combobox(
-        ventana_prestamos
+        ventana_prestamos,
         values=range(60),
         width=5,
     )
@@ -279,6 +280,7 @@ def agregar_estudiante():
     semestre = entrada_ingrese_semestre.get()
     jornada = entrada_ingrese_jornada.get()
     tipodeusuario = tipo_usuario.get()
+    estadousuario = estado_usuario.get()
     print(nombre,apellido,documento,programa,semestre,jornada,tipodeusuario)
     habilitar_clean = False
     if tipodeusuario=="invitado" and nombre != "" and apellido != "" and documento != "" and programa != "":
@@ -311,10 +313,9 @@ def agregar_estudiante():
                 programa,
                 tipodeusuario,
             )  # idprograma,idtipousuario
-
-       
-    
+            insert_estado_usuario(int(documento), estadousuario)
     elif (
+        tipodeusuario!="invitado" and 
         nombre != ""
         and apellido != ""
         and documento != ""
@@ -338,6 +339,7 @@ def agregar_estudiante():
                 1,
                 tipodeusuario,
             )  # idprograma,idtipousuario
+            insert_estado_usuario(int(documento), estadousuario)
         data_usuarios = buscar_estudiante_documento(documento)
         data_usuarios = list(data_usuarios[0])
         entrada_NOM.delete(0, "end")
