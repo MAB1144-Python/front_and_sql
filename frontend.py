@@ -1032,7 +1032,7 @@ btn_mostrar_registros.grid(column=4, row=11, columnspan= 1, pady=0, sticky="w")
 btn_agregar_estudiante = Button(Ventana_principal, text="Agregar Usuario", font="arial 8 bold", command=agregar_estudiante)
 btn_agregar_estudiante.grid(row=10, column=1, columnspan=1, pady=15)
 
-btn_cambiar_estado = Button(Ventana_principal, text="Agregar Usuario", font="arial 8 bold", command=cambiar_estado)
+btn_cambiar_estado = Button(Ventana_principal, text="Cambiar Estado", font="arial 8 bold", command=cambiar_estado)
 btn_cambiar_estado.grid(row=10, column=2, columnspan=1, pady=15)
 
 #btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
