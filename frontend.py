@@ -121,23 +121,24 @@ def clean():
 
 
 def agregar_prestamo():
-    ventana_prestamos = Toplevel(app)
-    ventana_prestamos.title("Prestamos") 
+    app.geometry("1500x800")
+    ventana_agregar_prestamos = Toplevel(app, bg="#00acc9")
+    ventana_agregar_prestamos.title("Prestamos") 
     
-    titulo_informacion = Label(ventana_prestamos, text="Información", font="arial 10 bold", bg="#132740", fg="white",  width=10)
+    titulo_informacion = Label(ventana_agregar_prestamos, text="Información", font="arial 10 bold", bg="#132740", fg="white",  width=10)
     titulo_informacion.grid(row=0, column=0, columnspan=1, sticky=(N, W))
 
-    cck_informe_documento = Checkbutton(ventana_prestamos, text="Informe por documento", font="arial 8 bold", command=informe_documento)
+    cck_informe_documento = Checkbutton(ventana_agregar_prestamos, text="Informe por documento", font="arial 8 bold", command=informe_documento)
     cck_informe_documento.grid(row=8, column=0, columnspan=1, pady=0)
 
-    cck_informe_fechas = Checkbutton(ventana_prestamos, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
+    cck_informe_fechas = Checkbutton(ventana_agregar_prestamos, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
     cck_informe_fechas.grid(row=8, column=1, columnspan=1, pady=0)
 
-    cck_informe_programa= Checkbutton(ventana_prestamos, text="Informe por programa", font="arial 8 bold", command=informe_programa)
+    cck_informe_programa= Checkbutton(ventana_agregar_prestamos, text="Informe por programa", font="arial 8 bold", command=informe_programa)
     cck_informe_programa.grid(row=8, column=2, columnspan=1, pady=0)
 
     fecha_entrada_text = Label(
-        ventana_prestamos,
+        ventana_agregar_prestamos,
         text="Fecha y Hora de Entrada:",
         font="arial 8 bold",
         bg="mint cream",
@@ -145,7 +146,7 @@ def agregar_prestamo():
     fecha_entrada_text.grid(column=6, row=6, sticky=(N, W))
 
     fecha_salida_text = Label(
-        ventana_prestamos,
+        ventana_agregar_prestamos,
         text="Fecha y Hora de Salida:",
         font="arial 8 bold",
         bg="mint cream",
@@ -153,63 +154,63 @@ def agregar_prestamo():
     fecha_salida_text.grid(column=6, row=9, sticky=(N, W))
 
     fecha_entrada_text = Label(
-        ventana_prestamos, text="Dia:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Dia:", font="arial 8 bold", bg="mint cream"
     )
     fecha_entrada_text.grid(column=9, row=6, sticky=(N, W))
-    entrada_dia = Entry(ventana_prestamos, width=5)
+    entrada_dia = Entry(ventana_agregar_prestamos, width=5)
     entrada_dia.grid(column=9, row=7, sticky="w")
 
     fecha_salida_text = Label(
-        ventana_prestamos, text="Dia:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Dia:", font="arial 8 bold", bg="mint cream"
     )
     fecha_salida_text.grid(column=9, row=9, sticky=(N, W))
-    salida_dia = Entry(ventana_prestamos, width=5)
+    salida_dia = Entry(ventana_agregar_prestamos, width=5)
     salida_dia.grid(column=9, row=10, sticky="w")
 
 
     fecha_entrada_text = Label(
-        ventana_prestamos, text="Mes:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Mes:", font="arial 8 bold", bg="mint cream"
     )
     fecha_entrada_text.grid(column=8, row=6, sticky=(N, W))
     entrada_Mes = ttk.Combobox(
-        ventana_prestamos, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
+        ventana_agregar_prestamos, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
     )
     entrada_Mes.grid(column=8, row=7, sticky="w")
 
     fecha_salida_text = Label(
-        ventana_prestamos, text="Mes:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Mes:", font="arial 8 bold", bg="mint cream"
     )
     fecha_salida_text.grid(column=8, row=9, sticky=(N, W))
     salida_Mes = ttk.Combobox(
-        ventana_prestamos, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
+        ventana_agregar_prestamos, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
     )
     salida_Mes.grid(column=8, row=10, sticky="w")
 
 
     fecha_entrada_text = Label(
-        ventana_prestamos, text="Año:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Año:", font="arial 8 bold", bg="mint cream"
     )
     fecha_entrada_text.grid(column=7, row=6, sticky=(N, W))
     entrada_Año = ttk.Combobox(
-        ventana_prestamos, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
+        ventana_agregar_prestamos, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
     )
     entrada_Año.grid(column=7, row=7, sticky="w")
 
     fecha_salida_text = Label(
-        ventana_prestamos, text="Año:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Año:", font="arial 8 bold", bg="mint cream"
     )
     fecha_salida_text.grid(column=7, row=9, sticky=(N, W))
     salida_Año = ttk.Combobox(
-        ventana_prestamos, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
+        ventana_agregar_prestamos, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
     )
     salida_Año.grid(column=7, row=10, sticky="w")
 
     fecha_entrada_text = Label(
-        ventana_prestamos, text="Hora:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Hora:", font="arial 8 bold", bg="mint cream"
     )
     fecha_entrada_text.grid(column=10, row=6, sticky=(N, W))
     entrada_Hora = ttk.Combobox(
-        ventana_prestamos,
+        ventana_agregar_prestamos,
         values=[
             00,
             1,
@@ -241,11 +242,11 @@ def agregar_prestamo():
     entrada_Hora.grid(column=10, row=7, sticky="w")
 
     fecha_salida_text = Label(
-        ventana_prestamos, text="Hora:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Hora:", font="arial 8 bold", bg="mint cream"
     )
     fecha_salida_text.grid(column=10, row=9, sticky=(N, W))
     salida_Hora = ttk.Combobox(
-        ventana_prestamos,
+        ventana_agregar_prestamos,
         values=[
             00,
             1,
@@ -277,11 +278,11 @@ def agregar_prestamo():
     salida_Hora.grid(column=10, row=10, sticky="w")
 
     fecha_entrada_text = Label(
-        ventana_prestamos, text="Minuto:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Minuto:", font="arial 8 bold", bg="mint cream"
     )
     fecha_entrada_text.grid(column=11, row=6, sticky=(N, W))
     entrada_Minuto = ttk.Combobox(
-        ventana_prestamos,
+        ventana_agregar_prestamos,
         values=[
             1,
             2,
@@ -349,11 +350,11 @@ def agregar_prestamo():
     entrada_Minuto.grid(column=11, row=7, sticky="w")
 
     fecha_salida_text = Label(
-        ventana_prestamos, text="Minuto:", font="arial 8 bold", bg="mint cream"
+        ventana_agregar_prestamos, text="Minuto:", font="arial 8 bold", bg="mint cream"
     )
     fecha_salida_text.grid(column=11, row=9, sticky=(N, W))
     salida_Minuto = ttk.Combobox(
-        ventana_prestamos,
+        ventana_agregar_prestamos,
         values=[
             1,
             2,
@@ -420,7 +421,11 @@ def agregar_prestamo():
     )
     salida_Minuto.grid(column=11, row=10, sticky="w")
 
+    btn_guardar_fecha = Button(ventana_agregar_prestamos, text="Guardar Fecha", font="arial 8 bold", command=guardar_fecha)
+    btn_guardar_fecha.grid(column=12, row=10,  pady=5, sticky="w")
 
+    def guardar_fecha():(
+    )
 
     descripcion = entrada_descripcion.get() 
     IDUSUARIO_GLOBAL = buscar_estudiante_documento(entrada_DOCMID.get())[0][0]
