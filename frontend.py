@@ -95,6 +95,7 @@ def clean():
     entrada_ingrese_jornada.delete(0, "end")
     entrada_ingrese_programa.delete(0, "end")
     estado_usuario.delete(0, "end")
+    entrada_telefono.delete(0, "end")
 
 
 def agregar_prestamo():
@@ -111,7 +112,7 @@ def agregar_prestamo():
                 + entrada_Mes.get()
                 + "-"
                 + entrada_dia.get()
-                + "T"
+                + " "
                 + entrada_Hora.get()
                 + ":"
                 + entrada_Minuto.get()
@@ -126,7 +127,7 @@ def agregar_prestamo():
                 + salida_Mes.get()
                 + "-"
                 + salida_dia.get()
-                + "T"
+                + " "
                 + salida_Hora.get()
                 + ":"
                 + salida_Minuto.get()
@@ -153,11 +154,12 @@ def agregar_prestamo():
                 messagebox.showerror("Error", "Debe ingresar una de las fechas")
 
         def registro(fecha_registro,descripcion_registro):
+            print(entrada_ingrese_programa.get())
             if descripcion_registro == "Entrega equipo":
-                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,"-",entrada_ingrese_programa.get())  
+                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,entrada_ingrese_programa.get(),entrada_Sala.get(),entrada_ubicacion.get())  
                 #update_estado_usuario(entrada_DOCMID.get(), "Deshabilitado")
             else:
-                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),"-",fecha_registro,entrada_ingrese_programa.get())
+                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,entrada_ingrese_programa.get(),entrada_Sala.get(),entrada_ubicacion.get())
                 #update_estado_usuario(entrada_DOCMID.get(), "Habilitado")
 
         if estadousuario != "Deshabilitado":
@@ -254,34 +256,6 @@ def agregar_prestamo():
                 "Error", "Debe ingresar el idequipo el ausxiliar, documento, sala, "
             )
 
-def guardar_fecha():
-    descripcion = entrada_descripcion.get()
-    IDUSUARIO_GLOBAL = buscar_estudiante_documento(entrada_DOCMID.get())[0][0]
-    print("-/+/-/+/-/+/-/+/-/+/-/+/-/", IDUSUARIO_GLOBAL)
-    idequipo = entrada_IDequipo.get()
-    idauxiliar = buscar_id_auxiliar(entrada_nombre_auxiliar.get())
-    entrada_idauxiliar.insert(INSERT, str(idauxiliar))
-    FechaEntrada = fecha_entrada()
-    FechaSalida = fecha_salida()
-    print(
-        "*/*/*/*/**/*/*/*/*/*/*/*/*/*",
-        IDUSUARIO_GLOBAL,
-        descripcion,
-        idequipo,
-        idauxiliar,
-        FechaEntrada,
-        FechaSalida,
-    )
-    registrar_prestamo(
-        descripcion,
-        IDUSUARIO_GLOBAL,
-        idequipo,
-        idauxiliar,
-        FechaEntrada,
-        FechaSalida,
-        buscar_estudiante_documento(entrada_DOCMID.get())[0][6],
-    )
-
 def cambiar_estado():
     documento = entrada_DOCMID.get()
     if estado_usuario.get() != "" and documento != "":
@@ -294,7 +268,6 @@ def cambiar_estado():
             message="Agrege la identificación y seleccione el estado que desea registrar",
             title="Flatan datos",
         )
-
 
 def agregar_estudiante():
     global IDUSUARIO_GLOBAL
@@ -371,7 +344,7 @@ def agregar_estudiante():
                 apellido,
                 semestre,
                 jornada,
-                1,
+                programa,
                 tipodeusuario,
                 celular
             )  # idprograma,idtipousuario
@@ -400,7 +373,6 @@ def agregar_estudiante():
         entrada_telefono.insert(INSERT, str(data_usuarios[8]))
     else:
         messagebox.showinfo(message="faltan datos", title="Selección")
-
 
 # deletes de todas las entradas
 def clean_formulario():
@@ -475,11 +447,12 @@ def Buscar_usuario():
         entrada_NOM.insert(INSERT, str(Usuario_recibido[2]))
         entrada_APE.insert(INSERT, str(Usuario_recibido[3]))
         entrada_DOCMID.insert(INSERT, str(Usuario_recibido[1]))
-        entrada_ingrese_programa.insert(INSERT, str(Usuario_recibido[4]))
-        entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[6]))
+        entrada_ingrese_programa.insert(INSERT, str(Usuario_recibido[6]))
+        entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[4]))
         entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[5]))
         estado_usuario.insert(INSERT, buscar_estado_usuario(Usuario_recibido[1]))
         tipo_usuario.insert(INSERT, str(Usuario_recibido[7]))
+        entrada_telefono.insert(INSERT, str(Usuario_recibido[8]))
 
 def Registrar_en_sala():
     global IDUSUARIO_GLOBAL
@@ -641,9 +614,39 @@ def mostrar_registros():
 
 def informacion():
 
+    def fecha_entrada_l():
+            fecha_entrada2 = (
+                entrada2_ano.get()
+                + "-"
+                + entrada2_Mes.get()
+                + "-"
+                + entrada2_dia.get()
+                + " "
+                + entrada2_Hora.get()
+                + ":"
+                + entrada2_Minuto.get()
+                + ":00"
+            )
+            return fecha_entrada2
+
+    def fecha_salida_l():
+            fecha_salida = (
+                salida_Año.get()
+                + "-"
+                + salida_Mes.get()
+                + "-"
+                + salida_dia.get()
+                + " "
+                + salida_Hora.get()
+                + ":"
+                + salida_Minuto.get()
+                + ":00"
+            )
+            return fecha_salida
+
     def filtrar_prestamo():
         print(documento_informes)
-        fecha_start, fecha_end,  carrera = "","",""
+        fecha_start, fecha_end = fecha_entrada_l(), fecha_salida_l()
         filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), carrera)
 
     def mostrar_prestamos():
@@ -678,9 +681,8 @@ def informacion():
 
             # Agregar datos a la tabla
             # Puedes reemplazar esto con tus propios datos
-            fecha_start, fecha_end,  carrera = "","",""
-            for data_prestamos in filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), carrera):
-                print(data_prestamos)
+            fecha_start, fecha_end = fecha_entrada_l(), fecha_salida_l()
+            for data_prestamos in filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), programa_informes.get()):
                 data_prestamos = list(data_prestamos)
                 tabla.insert(
                     "",
@@ -716,13 +718,13 @@ def informacion():
     cck_informe_programa= Checkbutton(ventana_informes, text="Informe por programa", font="arial 8 bold", command=informe_programa)
     cck_informe_programa.grid(row=19, column=3, columnspan=1, pady=0)
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes,
-        text="Fecha y Hora de Entrada:",
+        text="Fecha y Hora de entrada2:",
         font="arial 8 bold",
         bg="mint cream",
     )
-    fecha_entrada_text.grid(column=0, row=6, sticky=(N, W))
+    fecha_entrada2_text.grid(column=0, row=6, sticky=(N, W))
 
     fecha_salida_text = Label(
        ventana_informes,
@@ -732,12 +734,12 @@ def informacion():
     )
     fecha_salida_text.grid(column=0, row=9, sticky=(N, W))
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Dia:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=3, row=6, sticky=(N, W))
-    entrada_dia = Entry(ventana_informes, width=5)
-    entrada_dia.grid(column=3, row=7, sticky="w")
+    fecha_entrada2_text.grid(column=3, row=6, sticky=(N, W))
+    entrada2_dia = Entry(ventana_informes, width=5)
+    entrada2_dia.grid(column=3, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Dia:", font="arial 8 bold", bg="mint cream"
@@ -747,14 +749,14 @@ def informacion():
     salida_dia.grid(column=3, row=10, sticky="w")
 
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Mes:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=2, row=6, sticky=(N, W))
-    entrada_Mes = ttk.Combobox(
+    fecha_entrada2_text.grid(column=2, row=6, sticky=(N, W))
+    entrada2_Mes = ttk.Combobox(
        ventana_informes, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
     )
-    entrada_Mes.grid(column=2, row=7, sticky="w")
+    entrada2_Mes.grid(column=2, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Mes:", font="arial 8 bold", bg="mint cream"
@@ -766,14 +768,14 @@ def informacion():
     salida_Mes.grid(column=2, row=10, sticky="w")
 
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Año:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=1, row=6, sticky=(N, W))
-    entrada_Año = ttk.Combobox(
+    fecha_entrada2_text.grid(column=1, row=6, sticky=(N, W))
+    entrada2_ano = ttk.Combobox(
        ventana_informes, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
     )
-    entrada_Año.grid(column=1, row=7, sticky="w")
+    entrada2_ano.grid(column=1, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Año:", font="arial 8 bold", bg="mint cream"
@@ -784,16 +786,16 @@ def informacion():
     )
     salida_Año.grid(column=1, row=10, sticky="w")
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Hora:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=4, row=6, sticky=(N, W))
-    entrada_Hora = ttk.Combobox(
+    fecha_entrada2_text.grid(column=4, row=6, sticky=(N, W))
+    entrada2_Hora = ttk.Combobox(
        ventana_informes,
         values = list(range(24)),
         width=5,
     )
-    entrada_Hora.grid(column=4, row=7, sticky="w")
+    entrada2_Hora.grid(column=4, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Hora:", font="arial 8 bold", bg="mint cream"
@@ -806,16 +808,16 @@ def informacion():
     )
     salida_Hora.grid(column=4, row=10, sticky="w")
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Minuto:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=5, row=6, sticky=(N, W))
-    entrada_Minuto = ttk.Combobox(
+    fecha_entrada2_text.grid(column=5, row=6, sticky=(N, W))
+    entrada2_Minuto = ttk.Combobox(
        ventana_informes,
         values=list(range(60)),
         width=5,
     )
-    entrada_Minuto.grid(column=5, row=7, sticky="w")
+    entrada2_Minuto.grid(column=5, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Minuto:", font="arial 8 bold", bg="mint cream"

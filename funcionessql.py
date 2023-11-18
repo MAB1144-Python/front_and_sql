@@ -1,5 +1,6 @@
 import sqlite3
 import pandas as pd
+import numpy as np
 from openpyxl import Workbook
 from datetime import datetime
 
@@ -34,11 +35,15 @@ def generar_idusuario():
 
     #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
     print(df["idusuario"].max()+ 1)
-    return df["idusuario"].max()+ 1
+    try:
+        idusuario = int(df["idusuario"].max()+ 1)
+    except:
+        idusuario = 1  
+    return idusuario
 
-def agregar_estudiante_sql(idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,idtipousuario,celuar):
+def agregar_estudiante_sql(idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,tipousuario,celular):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
-    cursor=conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,idtipousuario, celular) values (?,?,?,?,?,?,?,?,?)", (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,idtipousuario, celular))
+    cursor=conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,tipousuario, celular) values (?,?,?,?,?,?,?,?,?)", (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,tipousuario, celular))
     conexion.commit()
     conexion.close()
 #conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario) values (?,?,?,?,?,?,?,?)", (1,147,'jhon','cano',None,None,1,1))
@@ -201,20 +206,20 @@ def agregar_registro_sala(idusuario,idauxiliar,fecha,descripcion):
     conexion.close()
 #conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario) values (?,?,?,?,?,?,?,?)", (1,147,'jhon','cano',None,None,1,1))
 #print(buscar_elementos())
-def registrar_prestamo(descripcion,documento,idequipo,auxiliar,fecha_entrada,fecha_salida,carrera):
+def registrar_prestamo(descripcion,documento,idequipo,auxiliar,fecha,carrera,sala,ubicacion):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
-    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,documento,idequipo,auxiliar,fecha_entrada,fecha_salida,carrera) values (?,?,?,?,?,?,?,?)", (int(generar_idprestamo()),descripcion,int(documento),int(idequipo),auxiliar,fecha_entrada,fecha_salida,carrera))#idprestamo,descripcion,3,4,int(idauxiliar),fecha_entrada,fecha_salida))
+    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,documento,idequipo,auxiliar,fecha,carrera,sala,ubicacion) values (?,?,?,?,?,?,?,?,?)", (int(generar_idprestamo()),descripcion,int(documento),int(idequipo),auxiliar,fecha,carrera,sala,ubicacion))#idprestamo,descripcion,3,4,int(idauxiliar),fecha_entrada,fecha_salida))
     conexion.commit()
     conexion.close()
 
 def dato_inicial_datatime(ini_Date, end_Date):
     print(ini_Date,end_Date)
-    if ini_Date != None and ini_Date != "":
+    if ini_Date != None and ini_Date != "" and ini_Date !='-- ::00':
         ini_Date = datetime.strptime(str(ini_Date), "%Y-%m-%d %H:%M:%S")
     else:
         ini_Date = datetime.strptime("1900-01-01 00:00:00", "%Y-%m-%d %H:%M:%S")
         
-    if end_Date != None and end_Date != "":
+    if end_Date != None and end_Date != "" and end_Date !='-- ::00':
         end_Date = datetime.strptime(str(end_Date), "%Y-%m-%d %H:%M:%S")
     else:
         end_Date = datetime.now()
@@ -231,9 +236,7 @@ def clean_T(A):
 
 def filtro_prestamo(fecha_start, fecha_end, documento, carrera):
     fecha_start, fecha_end = dato_inicial_datatime(fecha_start, fecha_end)
-    print("/*-+-*/*-+-*/*-+-*/",fecha_start, fecha_end, documento, carrera)
     conexion=sqlite3.connect("control_de_modulo_salas.db")
-    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df_filtro_prestamo = pd.read_sql_query("SELECT * from prestamo", conexion)
     #df_filtro_prestamo =list(df_filtro_prestamo.values)
     #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
@@ -250,17 +253,14 @@ def filtro_prestamo(fecha_start, fecha_end, documento, carrera):
     #     df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["fecha_salida"] <= fecha_end]
 
     if documento != "":
-        idusuario = list(buscar_estudiante_documento(documento))
         df_filtro_prestamo["documento"] = df_filtro_prestamo["documento"].astype("string")
-        print(df_filtro_prestamo,idusuario[0])
-        df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["documento"] == idusuario[0][0]]
+        df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["documento"] == documento]
 
     if carrera != "":
-        idusuario = list(buscar_estudiante_documento(carrera))
-        df_filtro_prestamo["idusuario"] = df_filtro_prestamo["idusuario"].astype("string")
-        print(df_filtro_prestamo,idusuario[0])
-        df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["idusuario"] == idusuario[0][0]]
-    return df_filtro_prestamo
+        df_filtro_prestamo["carrera"] = df_filtro_prestamo["carrera"].astype("string")
+        df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["carrera"] == carrera]
+    print("115599",df_filtro_prestamo)    
+    return df_filtro_prestamo.values
 
 def buscar_estado_usuario(documento_usuario):
     #verifica si el usuario esta bloqueado
