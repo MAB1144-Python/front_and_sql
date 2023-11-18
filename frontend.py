@@ -1331,7 +1331,7 @@ btn_agregar_estudiante.grid(row=10, column=1, columnspan=1, pady=15)
 
 btn_cambiar_estado = Button(
     Ventana_principal,
-    text="Agregar Usuario",
+    text="Cambiar Estado",
     font="arial 8 bold",
     command=cambiar_estado,
 )
@@ -1447,17 +1447,17 @@ titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 APE_text = Label(
     Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream"
 )
-APE_text.grid(column=0, row=12, sticky=(N, W))
+APE_text.grid(column=0, row=13, sticky=(N, W))
 entrada_IDequipo = ttk.Combobox(Ventana_principal, values=(), width=15)
-entrada_IDequipo.grid(row=12, column=1, sticky="w")
+entrada_IDequipo.grid(row=13, column=1, sticky="w")
 DOCMID_text = Label(
     Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg="mint cream"
 )
-DOCMID_text.grid(column=0, row=13, sticky=(N, W))
+DOCMID_text.grid(column=0, row=14, sticky=(N, W))
 entrada_nombre_auxiliar = ttk.Combobox(
     Ventana_principal, values=listado_auxiliares(), width=15
 )
-entrada_nombre_auxiliar.grid(column=1, row=13, sticky="w")
+entrada_nombre_auxiliar.grid(column=1, row=14, sticky="w")
 NOM_text = Label(
     Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream"
 )
