@@ -851,19 +851,61 @@ def informacion():
     )
     salida_Minuto.grid(column=5, row=10, sticky="w")
 
-    
+    documento_informes = Label(ventana_informes, text="Documento:", font="arial 8 bold", bg="mint cream")
+    documento_informes.grid(column=0, row=12, sticky=(N, W))
+    documento_informes = Entry(ventana_informes, width=20)
+    documento_informes.grid(row=12, column=1, sticky="w")
 
-    titulo_sala = Label(ventana_informes, text="Descargas", font="arial 10 bold", bg="#132740", fg="white",  width=24)
-    titulo_sala.grid(row=12, column=0, columnspan=1, sticky=(N, W))
+    programa_informes = Label(ventana_informes, text="Seleccione el programa:", font="arial 8 bold", bg="mint cream",)
+    programa_informes.grid(column=0, row=13, sticky=(N, W))
+    programa_informes = ttk.Combobox(
+    ventana_informes,
+    values=[
+        "Administracion de empresas",
+        "Derecho",
+        "Psicologia",
+        "Comercio Internacional",
+        "Contaduria Publica",
+        "Ingenieria Ambiental",
+        "Ingenieria Industrial",
+        "Ingenieria de Sistemas",
+    ],
+    width=23,
+    )
+    programa_informes.grid(column=1, row=13, sticky="w")
+
+    titulo_sala = Label(ventana_informes, text="Descargas y visualización", font="arial 10 bold", bg="#132740", fg="white",  width=24)
+    titulo_sala.grid(row=16, column=0, columnspan=1, sticky=(N, W))
+
+    btn_ver_estudiantes = Button(
+    ventana_informes,
+    text="Ver Usuarios",
+    font="arial 8 bold",
+    command=mostrar_estudiantes,
+    )
+    btn_ver_estudiantes.grid(row=17, column=1, columnspan=1, pady=0)
+
+    btn_ver_equipos = Button(
+    ventana_informes, text="Ver Equipos", font="arial 8 bold", command=mostrar_equipos
+    )   
+    btn_ver_equipos.grid(row=17, column=2, columnspan=1, pady=0)
+
+    btn_ver_prestamos = Button(
+    ventana_informes,
+    text="Ver Prestamos",
+    font="arial 8 bold",
+    command=mostrar_prestamos,
+    )
+    btn_ver_prestamos.grid(row=17, column=3, columnspan=1, pady=0)
 
     btn_descargar_usuarios = Button(ventana_informes, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
-    btn_descargar_usuarios.grid(row=14, column=1, columnspan=1, pady=0)
+    btn_descargar_usuarios.grid(row=18, column=1, columnspan=1, pady=0)
 
     btn_descargar_equipos = Button(ventana_informes, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
-    btn_descargar_equipos.grid(row=14, column=2, columnspan=1, pady=0)
+    btn_descargar_equipos.grid(row=18, column=2, columnspan=1, pady=0)
 
     btn_descargar_prestamos = Button(ventana_informes, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
-    btn_descargar_prestamos.grid(row=14, column=3, columnspan=1, pady=0)
+    btn_descargar_prestamos.grid(row=18, column=3, columnspan=1, pady=0)
 
 
 
@@ -1343,31 +1385,31 @@ btn_cambiar_estado.grid(row=10, column=2, columnspan=1, pady=15)
 # btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
 # btn_agregar_sala.grid(row=9, column=0, columnspan=1, pady=15)
 
-btn_ver_estudiantes = Button(
-    Ventana_principal,
-    text="Ver Usuarios",
-    font="arial 8 bold",
-    command=mostrar_estudiantes,
-)
-btn_ver_estudiantes.grid(row=3, column=4, columnspan=1, pady=0)
+# btn_ver_estudiantes = Button(
+#     Ventana_principal,
+#     text="Ver Usuarios",
+#     font="arial 8 bold",
+#     command=mostrar_estudiantes,
+# )
+# btn_ver_estudiantes.grid(row=3, column=4, columnspan=1, pady=0)
 
-btn_ver_equipos = Button(
-    Ventana_principal, text="Ver Equipos", font="arial 8 bold", command=mostrar_equipos
-)
-btn_ver_equipos.grid(row=5, column=4, columnspan=1, pady=0)
+# btn_ver_equipos = Button(
+#     Ventana_principal, text="Ver Equipos", font="arial 8 bold", command=mostrar_equipos
+# )
+# btn_ver_equipos.grid(row=5, column=4, columnspan=1, pady=0)
 
 #btn_ver_salas = Button(
 #    Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas
 #)
 #btn_ver_salas.grid(row=7, column=4, columnspan=1, pady=0)
 
-btn_ver_prestamos = Button(
-    Ventana_principal,
-    text="Ver Prestamos",
-    font="arial 8 bold",
-    command=mostrar_prestamos,
-)
-btn_ver_prestamos.grid(row=9, column=4, columnspan=1, pady=0)
+# btn_ver_prestamos = Button(
+#     Ventana_principal,
+#     text="Ver Prestamos",
+#     font="arial 8 bold",
+#     command=mostrar_prestamos,
+# )
+# btn_ver_prestamos.grid(row=9, column=4, columnspan=1, pady=0)
 
 btn_agregar_prestamos = Button(
     Ventana_principal,
