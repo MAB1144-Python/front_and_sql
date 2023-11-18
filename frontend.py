@@ -761,7 +761,6 @@ def mostrar_registros():
     for idx, registro_str in enumerate(registros_str):
         Label(ventana_registros, text=registro_str).grid(row=idx, column=0, sticky="w")
 
-
 # Combobox para seleccionar una sala
 
 
@@ -1275,28 +1274,13 @@ btn_agregar_prestamos = Button(
 )
 btn_agregar_prestamos.grid(row=19, column=1, columnspan=1, pady=15)
 
-btn_descargar_usuarios = Button(
-    Ventana_principal,
-    text="Descargar Usuarios",
-    font="arial 8 bold",
-    command=Descargar_usuarios,
-)
+btn_descargar_usuarios = Button(Ventana_principal, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
 btn_descargar_usuarios.grid(row=13, column=4, columnspan=1, pady=0)
 
-btn_descargar_equipos = Button(
-    Ventana_principal,
-    text="Descargar Equipos",
-    font="arial 8 bold",
-    command=Descargar_equipos,
-)
+btn_descargar_equipos = Button(Ventana_principal, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
 btn_descargar_equipos.grid(row=15, column=4, columnspan=1, pady=0)
 
-btn_descargar_prestamos = Button(
-    Ventana_principal,
-    text="Descargar Prestamos",
-    font="arial 8 bold",
-    command=Descargar_equipos,
-)
+btn_descargar_prestamos = Button(Ventana_principal, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
 btn_descargar_prestamos.grid(row=19, column=4, columnspan=1, pady=0)
 
 btn_buscar_usuario = Button(
@@ -1314,6 +1298,9 @@ btn_registrar_en_sala = Button(
     command=Registrar_en_sala,
 )
 btn_registrar_en_sala.grid(row=19, column=0, columnspan=1, pady=0)
+
+btn_informes = Button(Ventana_principal, text="Informes", font="arial 8 bold", command=informacion)
+btn_informes.grid(row=13, column=4, columnspan=1, pady=0)
 
 # cck_informe_documento = Checkbutton(Ventana_principal, text="Informe por documento", font="arial 8 bold", command=informe_documento)
 # cck_informe_documento.grid(row=24, column=0, columnspan=1, pady=0)
