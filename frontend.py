@@ -697,17 +697,17 @@ def informacion():
     ventana_informes = Toplevel(app, bg="#00acc9")
     ventana_informes.title("Informes y descargas") 
     
-    titulo_sala = Label(ventana_informes, text="Filtros", font="arial 10 bold", bg="#132740", fg="white",  width=24)
+    titulo_sala = Label(ventana_informes, text="Filtros para prestamo", font="arial 10 bold", bg="#132740", fg="white",  width=24)
     titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
 
     cck_informe_documento = Checkbutton(ventana_informes, text="Informe por documento", font="arial 8 bold", command=informe_documento)
-    cck_informe_documento.grid(row=3, column=1, columnspan=1, pady=0)
+    cck_informe_documento.grid(row=19, column=1, columnspan=1, pady=0)
 
     cck_informe_fechas = Checkbutton(ventana_informes, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
-    cck_informe_fechas.grid(row=3, column=2, columnspan=1, pady=0)
+    cck_informe_fechas.grid(row=19, column=2, columnspan=1, pady=0)
 
     cck_informe_programa= Checkbutton(ventana_informes, text="Informe por programa", font="arial 8 bold", command=informe_programa)
-    cck_informe_programa.grid(row=3, column=3, columnspan=1, pady=0)
+    cck_informe_programa.grid(row=19, column=3, columnspan=1, pady=0)
 
     fecha_entrada_text = Label(
        ventana_informes,
@@ -853,12 +853,12 @@ def informacion():
     font="arial 8 bold",
     command=mostrar_estudiantes,
     )
-    btn_ver_estudiantes.grid(row=17, column=1, columnspan=1, pady=0)
+    btn_ver_estudiantes.grid(row=1, column=1, columnspan=1, pady=0)
 
     btn_ver_equipos = Button(
     ventana_informes, text="Ver Equipos", font="arial 8 bold", command=mostrar_equipos
     )   
-    btn_ver_equipos.grid(row=17, column=2, columnspan=1, pady=0)
+    btn_ver_equipos.grid(row=1, column=2, columnspan=1, pady=0)
 
     btn_ver_prestamos = Button(
     ventana_informes,
@@ -866,15 +866,15 @@ def informacion():
     font="arial 8 bold",
     command=mostrar_prestamos,
     )
-    btn_ver_prestamos.grid(row=17, column=3, columnspan=1, pady=0)
+    btn_ver_prestamos.grid(row=18, column=2, columnspan=1, pady=0)
 
     btn_descargar_usuarios = Button(ventana_informes, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
-    btn_descargar_usuarios.grid(row=18, column=1, columnspan=1, pady=0)
+    btn_descargar_usuarios.grid(row=2, column=1, columnspan=1, pady=0)
 
     btn_descargar_equipos = Button(ventana_informes, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
-    btn_descargar_equipos.grid(row=18, column=2, columnspan=1, pady=0)
+    btn_descargar_equipos.grid(row=2, column=2, columnspan=1, pady=0)
 
-    btn_descargar_prestamos = Button(ventana_informes, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
+    btn_descargar_prestamos = Button(ventana_informes, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_prestamos)
     btn_descargar_prestamos.grid(row=18, column=3, columnspan=1, pady=0)
 
 
@@ -987,13 +987,13 @@ entrada_ingrese_jornada = ttk.Combobox(
 )
 entrada_ingrese_jornada.grid(column=1, row=7, sticky="w")
 
-btn_mostrar_registros = Button(
-    Ventana_principal,
-    text="Mostrar registros",
-    font="arial 8 bold",
-    command=mostrar_registros,
-)
-btn_mostrar_registros.grid(column=4, row=11, columnspan=1, pady=0, sticky="w")
+# btn_mostrar_registros = Button(
+#     Ventana_principal,
+#     text="Mostrar registros",
+#     font="arial 8 bold",
+#     command=mostrar_registros,
+# )
+# btn_mostrar_registros.grid(column=2, row=19, columnspan=1, pady=0, sticky="w")
 
 btn_agregar_estudiante = Button(
     Ventana_principal,
@@ -1036,7 +1036,7 @@ btn_registrar_en_sala = Button(
 btn_registrar_en_sala.grid(row=19, column=0, columnspan=1, pady=0)
 
 btn_informes = Button(Ventana_principal, text="Informes", font="arial 8 bold", command=informacion)
-btn_informes.grid(row=13, column=4, columnspan=1, pady=0)
+btn_informes.grid(row=21, column=1, columnspan=1, pady=0)
 
 titulo_sala = Label(
     Ventana_principal,
@@ -1106,7 +1106,7 @@ btn_limpiar_formulario = Button(
     font="arial 8 bold",
     command=clean_formulario,
 )
-btn_limpiar_formulario.grid(row=21, column=4, columnspan=1, pady=0)
+btn_limpiar_formulario.grid(row=19, column=2, columnspan=1, pady=0)
 
 
 app.mainloop()
