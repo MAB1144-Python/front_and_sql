@@ -852,6 +852,8 @@ def informacion():
     )
     salida_Minuto.grid(column=5, row=10, sticky="w")
 
+    
+
     titulo_sala = Label(ventana_informes, text="Descargas", font="arial 10 bold", bg="#132740", fg="white",  width=24)
     titulo_sala.grid(row=12, column=0, columnspan=1, sticky=(N, W))
 
