@@ -285,12 +285,21 @@ def agregar_prestamo():
             font="arial 8 bold",
             command=guardar_fecha,
         )
-        btn_guardar_fecha.grid(column=5, row=11, pady=5, sticky="w")
+        btn_guardar_fecha.grid(column=6, row=12, pady=5, sticky="w")
 
         exit_button = Button(
             ventana_agregar_prestamos, text="Exit", command=cerrar_ventana
         )
-        exit_button.grid(column=5, row=12, pady=5, sticky="w")
+        exit_button.grid(column=6, row=13, pady=5, sticky="w")
+
+        DOCMID_text = Label(
+        ventana_agregar_prestamos, text="Descripcion:", font="arial 8 bold", bg="mint cream"
+        )
+        DOCMID_text.grid(column=6, row=11, sticky=(N, W))
+        entrada_descripcion = ttk.Combobox(
+        ventana_agregar_prestamos, values=["Entrada sala", "Salida de sala"], width=15
+        )
+        entrada_descripcion.grid(column=7, row=11, sticky="w")
     else:
         messagebox.showerror(
             "Error", "Usuario no habilitado para realizar nuevos prestamos"
@@ -1505,14 +1514,14 @@ NOM_text = Label(
 NOM_text.grid(column=2, row=13, sticky=(N, W))
 entrada_idauxiliar = Entry(Ventana_principal, width=20)
 entrada_idauxiliar.grid(row=14, column=2, sticky="w")
-DOCMID_text = Label(
-    Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream"
-)
-DOCMID_text.grid(column=0, row=14, sticky=(N, W))
-entrada_descripcion = ttk.Combobox(
-    Ventana_principal, values=["Entrada sala", "Salida de sala"], width=15
-)
-entrada_descripcion.grid(column=1, row=14, sticky="w")
+# DOCMID_text = Label(
+#     Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream"
+# )
+# DOCMID_text.grid(column=0, row=14, sticky=(N, W))
+# entrada_descripcion = ttk.Combobox(
+#     Ventana_principal, values=["Entrada sala", "Salida de sala"], width=15
+# )
+#entrada_descripcion.grid(column=1, row=14, sticky="w")
 DOCMID_text = Label(
     Ventana_principal, text="Ubicacion:", font="arial 8 bold", bg="mint cream"
 )
