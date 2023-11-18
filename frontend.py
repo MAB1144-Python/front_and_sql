@@ -667,6 +667,8 @@ def informacion():
                     "ID auxiliar",
                     "Fecha prestamo",
                     "Fecha prestamo2",
+                    "Ubicacion", 
+                    "Sala",
                 ),
             )
             # ()
@@ -678,6 +680,8 @@ def informacion():
             tabla.heading("ID auxiliar", text="ID auxiliar")
             tabla.heading("Fecha prestamo", text="Fecha prestamo")
             tabla.heading("Fecha prestamo2", text="Fecha prestamo2")
+            tabla.heading("Ubicacion", text="Ubicacion")
+            tabla.heading("Sala", text="Sala")
 
             # Agregar datos a la tabla
             # Puedes reemplazar esto con tus propios datos
