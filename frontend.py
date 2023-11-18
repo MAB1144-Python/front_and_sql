@@ -26,7 +26,8 @@ from funcionessql import (
     insert_estado_usuario,
     update_estado_usuario,
     buscar_estado_usuario,
-    listado_idequipos
+    listado_idequipos,
+    filtro_prestamo
 )
 from datetime import datetime
 
@@ -574,59 +575,6 @@ def mostrar_equipos():
         ventana_equipos.mainloop()
 
 
-def mostrar_prestamos():
-    ventana_prestamos = Toplevel(app)
-    ventana_prestamos.title("Prestamos")
-
-    # Crear etiquetas para mostrar los detalles de cada equipo
-    print(listado_prestamos("", "", ""))
-    if True:
-        # Crear un Treeview con columnas
-        tabla = ttk.Treeview(
-            ventana_prestamos,
-            columns=(
-                "ID prestamo",
-                "Descripcion",
-                "ID usuario",
-                "ID equipo",
-                "ID auxiliar",
-                "Fecha prestamo",
-                "Fecha prestamo2",
-            ),
-        )
-        # ()
-        # Definir encabezados de columnas
-        tabla.heading("ID equipo", text="ID Equipo")
-        tabla.heading("Descripcion", text="Descripcion")
-        tabla.heading("ID usuario", text="ID usuario")
-        tabla.heading("ID equipo", text="ID equipo")
-        tabla.heading("ID auxiliar", text="ID auxiliar")
-        tabla.heading("Fecha prestamo", text="Fecha prestamo")
-        tabla.heading("Fecha prestamo2", text="Fecha prestamo2")
-
-        # Agregar datos a la tabla
-        # Puedes reemplazar esto con tus propios datos
-        for data_prestamos in listado_prestamos("", "", ""):
-            print(data_prestamos)
-            data_prestamos = list(data_prestamos)
-            tabla.insert(
-                "",
-                "end",
-                text="1",
-                values=(
-                    data_prestamos[0],
-                    data_prestamos[1],
-                    data_prestamos[2],
-                    data_prestamos[3],
-                    data_prestamos[4],
-                    data_prestamos[5],
-                    data_prestamos[6],
-                ),
-            )
-        tabla.pack()
-        # Ejecutar el bucle principal
-        ventana_prestamos.mainloop()
-
 def registrar_estudiante_en_sala():
     # Obtener la sala seleccionada del Combobox
     nombre_registro = entrada_nombre_registro.get()
@@ -685,6 +633,67 @@ def mostrar_registros():
 # Combobox para seleccionar una sala
 
 def informacion():
+
+    def filtrar_prestamo():
+        print(documento_informes)
+        fecha_start, fecha_end,  carrera = "","",""
+        filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), carrera)
+
+    def mostrar_prestamos():
+        ventana_prestamos = Toplevel(app)
+        ventana_prestamos.title("Prestamos")
+
+        # Crear etiquetas para mostrar los detalles de cada equipo
+        print(listado_prestamos("", "", ""))
+        if True:
+            # Crear un Treeview con columnas
+            tabla = ttk.Treeview(
+                ventana_prestamos,
+                columns=(
+                    "ID prestamo",
+                    "Descripcion",
+                    "ID usuario",
+                    "ID equipo",
+                    "ID auxiliar",
+                    "Fecha prestamo",
+                    "Fecha prestamo2",
+                ),
+            )
+            # ()
+            # Definir encabezados de columnas
+            tabla.heading("ID equipo", text="ID Equipo")
+            tabla.heading("Descripcion", text="Descripcion")
+            tabla.heading("ID usuario", text="ID usuario")
+            tabla.heading("ID equipo", text="ID equipo")
+            tabla.heading("ID auxiliar", text="ID auxiliar")
+            tabla.heading("Fecha prestamo", text="Fecha prestamo")
+            tabla.heading("Fecha prestamo2", text="Fecha prestamo2")
+
+            # Agregar datos a la tabla
+            # Puedes reemplazar esto con tus propios datos
+            fecha_start, fecha_end,  carrera = "","",""
+            for data_prestamos in filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), carrera):
+                print(data_prestamos)
+                data_prestamos = list(data_prestamos)
+                tabla.insert(
+                    "",
+                    "end",
+                    text="1",
+                    values=(
+                        data_prestamos[0],
+                        data_prestamos[1],
+                        data_prestamos[2],
+                        data_prestamos[3],
+                        data_prestamos[4],
+                        data_prestamos[5],
+                        data_prestamos[6],
+                    ),
+                )
+            tabla.pack()
+            # Ejecutar el bucle principal
+            ventana_prestamos.mainloop()
+
+
     ventana_informes = Toplevel(app, bg="#00acc9")
     ventana_informes.title("Informes y descargas") 
     
@@ -812,13 +821,13 @@ def informacion():
     )
     salida_Minuto.grid(column=5, row=10, sticky="w")
 
-    documento_informes = Label(ventana_informes, text="Documento:", font="arial 8 bold", bg="mint cream")
-    documento_informes.grid(column=0, row=12, sticky=(N, W))
+    documento_informes_text = Label(ventana_informes, text="Documento:", font="arial 8 bold", bg="mint cream")
+    documento_informes_text.grid(column=0, row=12, sticky=(N, W))
     documento_informes = Entry(ventana_informes, width=20)
     documento_informes.grid(row=12, column=1, sticky="w")
 
-    programa_informes = Label(ventana_informes, text="Seleccione el programa:", font="arial 8 bold", bg="mint cream",)
-    programa_informes.grid(column=0, row=13, sticky=(N, W))
+    programa_informes_text = Label(ventana_informes, text="Seleccione el programa:", font="arial 8 bold", bg="mint cream",)
+    programa_informes_text.grid(column=0, row=13, sticky=(N, W))
     programa_informes = ttk.Combobox(
     ventana_informes,
     values=[

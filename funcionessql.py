@@ -78,8 +78,6 @@ def generar_idprestamo():
     
     return idprestamo
 
-
-
 def listado_prestamos(idusuario="",fecha="",programa=""):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
@@ -214,7 +212,7 @@ def dato_inicial_datatime(ini_Date, end_Date):
     if ini_Date != None and ini_Date != "":
         ini_Date = datetime.strptime(str(ini_Date), "%Y-%m-%d %H:%M:%S")
     else:
-        ini_Date = datetime.strptime("1900-01-01", "%Y-%m-%d %H:%M:%S")
+        ini_Date = datetime.strptime("1900-01-01 00:00:00", "%Y-%m-%d %H:%M:%S")
         
     if end_Date != None and end_Date != "":
         end_Date = datetime.strptime(str(end_Date), "%Y-%m-%d %H:%M:%S")
@@ -223,39 +221,45 @@ def dato_inicial_datatime(ini_Date, end_Date):
     return ini_Date,end_Date
     
 def clean_T(A):
-    a_l = A.split("T")
-    A = a_l[0]+a_l[1]
-    return A
+    try:
+        a_l = A.split("T")
+        print("/*-*/*-*/-*/-*/-*/-*",a_l)
+        A = a_l[0]+a_l[1]
+        return A
+    except:
+        return A
 
 def filtro_prestamo(fecha_start, fecha_end, documento, carrera):
     fecha_start, fecha_end = dato_inicial_datatime(fecha_start, fecha_end)
-    print(fecha_start, fecha_end)
+    print("/*-+-*/*-+-*/*-+-*/",fecha_start, fecha_end, documento, carrera)
     conexion=sqlite3.connect("control_de_modulo_salas.db")
     # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
     df_filtro_prestamo = pd.read_sql_query("SELECT * from prestamo", conexion)
     #df_filtro_prestamo =list(df_filtro_prestamo.values)
     #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
-    df_filtro_prestamo["fecha_salida"] = df_filtro_prestamo["fecha_salida"].apply(clean_T)
-    df_filtro_prestamo["fecha_salida"] = pd.to_datetime(df_filtro_prestamo["fecha_salida"])
-    df_filtro_prestamo["fecha_entrada"] = df_filtro_prestamo["fecha_entrada"].apply(clean_T)
-    df_filtro_prestamo["fecha_entrada"] = pd.to_datetime(df_filtro_prestamo["fecha_entrada"])
-    filtro_cl1_ini, filtro_cl1_end = dato_inicial_datatime(fecha_start, fecha_end)
-    df_filtro_prestamo = df_filtro_prestamo[((df_filtro_prestamo["fecha_salida"] <= fecha_end)& (df_filtro_prestamo["fecha_entrada"] >= fecha_start))]
+    # if fecha_start != "-":
+    #     df_filtro_prestamo["fecha_entrada"] = df_filtro_prestamo["fecha_entrada"].apply(clean_T)
+    #     df_filtro_prestamo["fecha_entrada"] = pd.to_datetime(df_filtro_prestamo["fecha_entrada"])
+    #     filtro_cl1_ini, filtro_cl1_end = dato_inicial_datatime(fecha_start, fecha_end)
+    #     df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["fecha_entrada"] >= fecha_start]
+
+    # if fecha_end != "-":
+    #     df_filtro_prestamo["fecha_salida"] = df_filtro_prestamo["fecha_salida"].apply(clean_T)
+    #     df_filtro_prestamo["fecha_salida"] = pd.to_datetime(df_filtro_prestamo["fecha_salida"])
+    #     filtro_cl1_ini, filtro_cl1_end = dato_inicial_datatime(fecha_start, fecha_end)
+    #     df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["fecha_salida"] <= fecha_end]
 
     if documento != "":
         idusuario = list(buscar_estudiante_documento(documento))
-        df_filtro_prestamo["idusuario"] = df_filtro_prestamo["idusuario"].astype("string")
+        df_filtro_prestamo["documento"] = df_filtro_prestamo["documento"].astype("string")
         print(df_filtro_prestamo,idusuario[0])
-        df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["idusuario"] == idusuario[0][0]]
+        df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["documento"] == idusuario[0][0]]
 
     if carrera != "":
         idusuario = list(buscar_estudiante_documento(carrera))
         df_filtro_prestamo["idusuario"] = df_filtro_prestamo["idusuario"].astype("string")
         print(df_filtro_prestamo,idusuario[0])
         df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["idusuario"] == idusuario[0][0]]
-
-
-
     return df_filtro_prestamo
 
 def buscar_estado_usuario(documento_usuario):
