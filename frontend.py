@@ -1381,7 +1381,7 @@ btn_agregar_estudiante.grid(row=10, column=1, columnspan=1, pady=15)
 
 btn_cambiar_estado = Button(
     Ventana_principal,
-    text="Agregar Usuario",
+    text="Cambiar Estado",
     font="arial 8 bold",
     command=cambiar_estado,
 )
