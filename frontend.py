@@ -704,15 +704,15 @@ def mostrar_prestamos():
 #     lista_salas_registrar["values"] = [str(s) for s in salas]
 
 
-def mostrar_salas():
-    ventana_salas = Toplevel(app)
-    ventana_salas.title("Salas registradas")
-    # Crear etiquetas para mostrar los detalles de cada sala
-    for idx, sala in listado_sala():
-        detalles_sala = f"Sala: {sala.numsala}\n"
-        detalles_sala += f"Equipos: {sala.numequipo}\n"
+# def mostrar_salas():
+#     ventana_salas = Toplevel(app)
+#     ventana_salas.title("Salas registradas")
+#     # Crear etiquetas para mostrar los detalles de cada sala
+#     for idx, sala in listado_sala():
+#         detalles_sala = f"Sala: {sala.numsala}\n"
+#         detalles_sala += f"Equipos: {sala.numequipo}\n"
 
-        Label(ventana_salas, text=detalles_sala).grid(row=idx * 3, column=0, sticky="w")
+#         Label(ventana_salas, text=detalles_sala).grid(row=idx * 3, column=0, sticky="w")
 
 
 def registrar_estudiante_en_sala():
@@ -1403,10 +1403,10 @@ btn_ver_equipos = Button(
 )
 btn_ver_equipos.grid(row=5, column=4, columnspan=1, pady=0)
 
-btn_ver_salas = Button(
-    Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas
-)
-btn_ver_salas.grid(row=7, column=4, columnspan=1, pady=0)
+#btn_ver_salas = Button(
+#    Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas
+#)
+#btn_ver_salas.grid(row=7, column=4, columnspan=1, pady=0)
 
 btn_ver_prestamos = Button(
     Ventana_principal,
