@@ -306,6 +306,7 @@ def agregar_estudiante():
     jornada = entrada_ingrese_jornada.get()
     tipodeusuario = tipo_usuario.get()
     estadousuario = estado_usuario.get()
+    celular = telefono.get()
     print(nombre, apellido, documento, programa, semestre, jornada, tipodeusuario)
     habilitar_clean = False
     if (
@@ -329,6 +330,7 @@ def agregar_estudiante():
                 "-",
                 programa,
                 tipodeusuario,
+                "-"
             )  # idprograma,idtipousuario
             data_usuarios = buscar_estudiante_documento(documento)
         if len(data_usuarios) == 0:
@@ -343,6 +345,7 @@ def agregar_estudiante():
                 jornada,
                 programa,
                 tipodeusuario,
+                celular
             )  # idprograma,idtipousuario
             insert_estado_usuario(int(documento), estadousuario)
     elif (
@@ -354,6 +357,7 @@ def agregar_estudiante():
         and semestre != ""
         and jornada != ""
         and tipodeusuario != ""
+        and celular != ""
     ):
         habilitar_clean = True
         data_usuarios = buscar_estudiante_documento(documento)
@@ -369,6 +373,7 @@ def agregar_estudiante():
                 jornada,
                 1,
                 tipodeusuario,
+                celular
             )  # idprograma,idtipousuario
             insert_estado_usuario(int(documento), estadousuario)
         data_usuarios = buscar_estudiante_documento(documento)
@@ -379,6 +384,7 @@ def agregar_estudiante():
         entrada_PROG.delete(0, "end")
         entrada_ingrese_semestre.delete(0, "end")
         entrada_ingrese_jornada.delete(0, "end")
+        telefono.delete(0, "end")
 
         print(data_usuarios)
         IDUSUARIO_GLOBAL = data_usuarios[0]
@@ -391,6 +397,7 @@ def agregar_estudiante():
         entrada_ingrese_semestre.insert(INSERT, str(data_usuarios[6]))
         entrada_ingrese_jornada.insert(INSERT, str(data_usuarios[7]))
         entrada_nombre_registro.insert(INSERT, str(data_usuarios[2]))
+        telefono.insert(INSERT, str(data_usuarios[8]))
     else:
         messagebox.showinfo(message="faltan datos", title="Selección")
 

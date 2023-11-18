@@ -36,9 +36,9 @@ def generar_idusuario():
     print(df["idusuario"].max()+ 1)
     return df["idusuario"].max()+ 1
 
-def agregar_estudiante_sql(idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario):
+def agregar_estudiante_sql(idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,idtipousuario,celuar):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
-    cursor=conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario) values (?,?,?,?,?,?,?,?)", (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario))
+    cursor=conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,idtipousuario, celular) values (?,?,?,?,?,?,?,?,?)", (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, programa,idtipousuario, celular))
     conexion.commit()
     conexion.close()
 #conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario) values (?,?,?,?,?,?,?,?)", (1,147,'jhon','cano',None,None,1,1))
