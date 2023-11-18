@@ -95,6 +95,7 @@ def clean():
     entrada_ingrese_jornada.delete(0, "end")
     entrada_ingrese_programa.delete(0, "end")
     estado_usuario.delete(0, "end")
+    entrada_telefono.delete(0, "end")
 
 
 def agregar_prestamo():
@@ -111,7 +112,7 @@ def agregar_prestamo():
                 + entrada_Mes.get()
                 + "-"
                 + entrada_dia.get()
-                + "T"
+                + " "
                 + entrada_Hora.get()
                 + ":"
                 + entrada_Minuto.get()
@@ -126,7 +127,7 @@ def agregar_prestamo():
                 + salida_Mes.get()
                 + "-"
                 + salida_dia.get()
-                + "T"
+                + " "
                 + salida_Hora.get()
                 + ":"
                 + salida_Minuto.get()
@@ -153,11 +154,12 @@ def agregar_prestamo():
                 messagebox.showerror("Error", "Debe ingresar una de las fechas")
 
         def registro(fecha_registro,descripcion_registro):
+            print(entrada_ingrese_programa.get())
             if descripcion_registro == "Entrega equipo":
-                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,"-",entrada_ingrese_programa.get())  
+                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,entrada_ingrese_programa.get(),entrada_Sala.get(),entrada_ubicacion.get())  
                 #update_estado_usuario(entrada_DOCMID.get(), "Deshabilitado")
             else:
-                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),"-",fecha_registro,entrada_ingrese_programa.get())
+                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,entrada_ingrese_programa.get(),entrada_Sala.get(),entrada_ubicacion.get())
                 #update_estado_usuario(entrada_DOCMID.get(), "Habilitado")
 
         if estadousuario != "Deshabilitado":
@@ -254,34 +256,6 @@ def agregar_prestamo():
                 "Error", "Debe ingresar el idequipo el ausxiliar, documento, sala, "
             )
 
-def guardar_fecha():
-    descripcion = entrada_descripcion.get()
-    IDUSUARIO_GLOBAL = buscar_estudiante_documento(entrada_DOCMID.get())[0][0]
-    print("-/+/-/+/-/+/-/+/-/+/-/+/-/", IDUSUARIO_GLOBAL)
-    idequipo = entrada_IDequipo.get()
-    idauxiliar = buscar_id_auxiliar(entrada_nombre_auxiliar.get())
-    entrada_idauxiliar.insert(INSERT, str(idauxiliar))
-    FechaEntrada = fecha_entrada()
-    FechaSalida = fecha_salida()
-    print(
-        "*/*/*/*/**/*/*/*/*/*/*/*/*/*",
-        IDUSUARIO_GLOBAL,
-        descripcion,
-        idequipo,
-        idauxiliar,
-        FechaEntrada,
-        FechaSalida,
-    )
-    registrar_prestamo(
-        descripcion,
-        IDUSUARIO_GLOBAL,
-        idequipo,
-        idauxiliar,
-        FechaEntrada,
-        FechaSalida,
-        buscar_estudiante_documento(entrada_DOCMID.get())[0][6],
-    )
-
 def cambiar_estado():
     documento = entrada_DOCMID.get()
     if estado_usuario.get() != "" and documento != "":
@@ -295,7 +269,6 @@ def cambiar_estado():
             title="Flatan datos",
         )
 
-
 def agregar_estudiante():
     global IDUSUARIO_GLOBAL
     nombre = entrada_NOM.get()
@@ -306,6 +279,7 @@ def agregar_estudiante():
     jornada = entrada_ingrese_jornada.get()
     tipodeusuario = tipo_usuario.get()
     estadousuario = estado_usuario.get()
+    celular = entrada_telefono.get()
     print(nombre, apellido, documento, programa, semestre, jornada, tipodeusuario)
     habilitar_clean = False
     if (
@@ -329,6 +303,7 @@ def agregar_estudiante():
                 "-",
                 programa,
                 tipodeusuario,
+                "-"
             )  # idprograma,idtipousuario
             data_usuarios = buscar_estudiante_documento(documento)
         if len(data_usuarios) == 0:
@@ -343,6 +318,7 @@ def agregar_estudiante():
                 jornada,
                 programa,
                 tipodeusuario,
+                celular
             )  # idprograma,idtipousuario
             insert_estado_usuario(int(documento), estadousuario)
     elif (
@@ -354,6 +330,7 @@ def agregar_estudiante():
         and semestre != ""
         and jornada != ""
         and tipodeusuario != ""
+        and celular != ""
     ):
         habilitar_clean = True
         data_usuarios = buscar_estudiante_documento(documento)
@@ -367,8 +344,9 @@ def agregar_estudiante():
                 apellido,
                 semestre,
                 jornada,
-                1,
+                programa,
                 tipodeusuario,
+                celular
             )  # idprograma,idtipousuario
             insert_estado_usuario(int(documento), estadousuario)
         data_usuarios = buscar_estudiante_documento(documento)
@@ -379,6 +357,7 @@ def agregar_estudiante():
         entrada_PROG.delete(0, "end")
         entrada_ingrese_semestre.delete(0, "end")
         entrada_ingrese_jornada.delete(0, "end")
+        entrada_telefono.delete(0, "end")
 
         print(data_usuarios)
         IDUSUARIO_GLOBAL = data_usuarios[0]
@@ -391,9 +370,9 @@ def agregar_estudiante():
         entrada_ingrese_semestre.insert(INSERT, str(data_usuarios[6]))
         entrada_ingrese_jornada.insert(INSERT, str(data_usuarios[7]))
         entrada_nombre_registro.insert(INSERT, str(data_usuarios[2]))
+        entrada_telefono.insert(INSERT, str(data_usuarios[8]))
     else:
         messagebox.showinfo(message="faltan datos", title="Selección")
-
 
 # deletes de todas las entradas
 def clean_formulario():
@@ -468,11 +447,12 @@ def Buscar_usuario():
         entrada_NOM.insert(INSERT, str(Usuario_recibido[2]))
         entrada_APE.insert(INSERT, str(Usuario_recibido[3]))
         entrada_DOCMID.insert(INSERT, str(Usuario_recibido[1]))
-        entrada_ingrese_programa.insert(INSERT, str(Usuario_recibido[4]))
-        entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[6]))
+        entrada_ingrese_programa.insert(INSERT, str(Usuario_recibido[6]))
+        entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[4]))
         entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[5]))
         estado_usuario.insert(INSERT, buscar_estado_usuario(Usuario_recibido[1]))
         tipo_usuario.insert(INSERT, str(Usuario_recibido[7]))
+        entrada_telefono.insert(INSERT, str(Usuario_recibido[8]))
 
 def Registrar_en_sala():
     global IDUSUARIO_GLOBAL
@@ -634,9 +614,39 @@ def mostrar_registros():
 
 def informacion():
 
+    def fecha_entrada_l():
+            fecha_entrada2 = (
+                entrada2_ano.get()
+                + "-"
+                + entrada2_Mes.get()
+                + "-"
+                + entrada2_dia.get()
+                + " "
+                + entrada2_Hora.get()
+                + ":"
+                + entrada2_Minuto.get()
+                + ":00"
+            )
+            return fecha_entrada2
+
+    def fecha_salida_l():
+            fecha_salida = (
+                salida_Año.get()
+                + "-"
+                + salida_Mes.get()
+                + "-"
+                + salida_dia.get()
+                + " "
+                + salida_Hora.get()
+                + ":"
+                + salida_Minuto.get()
+                + ":00"
+            )
+            return fecha_salida
+
     def filtrar_prestamo():
         print(documento_informes)
-        fecha_start, fecha_end,  carrera = "","",""
+        fecha_start, fecha_end = fecha_entrada_l(), fecha_salida_l()
         filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), carrera)
 
     def mostrar_prestamos():
@@ -657,6 +667,8 @@ def informacion():
                     "ID auxiliar",
                     "Fecha prestamo",
                     "Fecha prestamo2",
+                    "Ubicacion", 
+                    "Sala",
                 ),
             )
             # ()
@@ -668,12 +680,13 @@ def informacion():
             tabla.heading("ID auxiliar", text="ID auxiliar")
             tabla.heading("Fecha prestamo", text="Fecha prestamo")
             tabla.heading("Fecha prestamo2", text="Fecha prestamo2")
+            tabla.heading("Ubicacion", text="Ubicacion")
+            tabla.heading("Sala", text="Sala")
 
             # Agregar datos a la tabla
             # Puedes reemplazar esto con tus propios datos
-            fecha_start, fecha_end,  carrera = "","",""
-            for data_prestamos in filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), carrera):
-                print(data_prestamos)
+            fecha_start, fecha_end = fecha_entrada_l(), fecha_salida_l()
+            for data_prestamos in filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), programa_informes.get()):
                 data_prestamos = list(data_prestamos)
                 tabla.insert(
                     "",
@@ -709,13 +722,13 @@ def informacion():
     cck_informe_programa= Checkbutton(ventana_informes, text="Informe por programa", font="arial 8 bold", command=informe_programa)
     cck_informe_programa.grid(row=19, column=3, columnspan=1, pady=0)
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes,
-        text="Fecha y Hora de Entrada:",
+        text="Fecha y Hora de entrada2:",
         font="arial 8 bold",
         bg="mint cream",
     )
-    fecha_entrada_text.grid(column=0, row=6, sticky=(N, W))
+    fecha_entrada2_text.grid(column=0, row=6, sticky=(N, W))
 
     fecha_salida_text = Label(
        ventana_informes,
@@ -725,12 +738,12 @@ def informacion():
     )
     fecha_salida_text.grid(column=0, row=9, sticky=(N, W))
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Dia:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=3, row=6, sticky=(N, W))
-    entrada_dia = Entry(ventana_informes, width=5)
-    entrada_dia.grid(column=3, row=7, sticky="w")
+    fecha_entrada2_text.grid(column=3, row=6, sticky=(N, W))
+    entrada2_dia = Entry(ventana_informes, width=5)
+    entrada2_dia.grid(column=3, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Dia:", font="arial 8 bold", bg="mint cream"
@@ -740,14 +753,14 @@ def informacion():
     salida_dia.grid(column=3, row=10, sticky="w")
 
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Mes:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=2, row=6, sticky=(N, W))
-    entrada_Mes = ttk.Combobox(
+    fecha_entrada2_text.grid(column=2, row=6, sticky=(N, W))
+    entrada2_Mes = ttk.Combobox(
        ventana_informes, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
     )
-    entrada_Mes.grid(column=2, row=7, sticky="w")
+    entrada2_Mes.grid(column=2, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Mes:", font="arial 8 bold", bg="mint cream"
@@ -759,14 +772,14 @@ def informacion():
     salida_Mes.grid(column=2, row=10, sticky="w")
 
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Año:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=1, row=6, sticky=(N, W))
-    entrada_Año = ttk.Combobox(
+    fecha_entrada2_text.grid(column=1, row=6, sticky=(N, W))
+    entrada2_ano = ttk.Combobox(
        ventana_informes, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
     )
-    entrada_Año.grid(column=1, row=7, sticky="w")
+    entrada2_ano.grid(column=1, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Año:", font="arial 8 bold", bg="mint cream"
@@ -777,16 +790,16 @@ def informacion():
     )
     salida_Año.grid(column=1, row=10, sticky="w")
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Hora:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=4, row=6, sticky=(N, W))
-    entrada_Hora = ttk.Combobox(
+    fecha_entrada2_text.grid(column=4, row=6, sticky=(N, W))
+    entrada2_Hora = ttk.Combobox(
        ventana_informes,
         values = list(range(24)),
         width=5,
     )
-    entrada_Hora.grid(column=4, row=7, sticky="w")
+    entrada2_Hora.grid(column=4, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Hora:", font="arial 8 bold", bg="mint cream"
@@ -799,16 +812,16 @@ def informacion():
     )
     salida_Hora.grid(column=4, row=10, sticky="w")
 
-    fecha_entrada_text = Label(
+    fecha_entrada2_text = Label(
        ventana_informes, text="Minuto:", font="arial 8 bold", bg="mint cream"
     )
-    fecha_entrada_text.grid(column=5, row=6, sticky=(N, W))
-    entrada_Minuto = ttk.Combobox(
+    fecha_entrada2_text.grid(column=5, row=6, sticky=(N, W))
+    entrada2_Minuto = ttk.Combobox(
        ventana_informes,
         values=list(range(60)),
         width=5,
     )
-    entrada_Minuto.grid(column=5, row=7, sticky="w")
+    entrada2_Minuto.grid(column=5, row=7, sticky="w")
 
     fecha_salida_text = Label(
        ventana_informes, text="Minuto:", font="arial 8 bold", bg="mint cream"
@@ -882,9 +895,9 @@ def informacion():
 numsala_text = Label(
     Ventana_principal, text="Salas:", font="arial 8 bold", bg="mint cream"
 )
-numsala_text.grid(row=12, column=0, sticky=(N, W))
+numsala_text.grid(row=17, column=0, sticky=(N, W))
 entrada_Sala = ttk.Combobox(Ventana_principal, values=listado_sala(), width=15)
-entrada_Sala.grid(column=1, row=12, sticky="w")
+entrada_Sala.grid(column=1, row=17, sticky="w")
 
 tipo_usuario_text = Label(
     Ventana_principal, text="Tipo de usuario:", font="arial 8 bold", bg="mint cream"
@@ -894,15 +907,21 @@ tipo_usuario = ttk.Combobox(Ventana_principal, values=listado_tipousuario(), wid
 
 tipo_usuario.grid(column=1, row=8, sticky="w")
 
+telefono_text = Label(
+    Ventana_principal, text="Telefono:", font="arial 8 bold", bg="mint cream"
+)
+telefono_text.grid(column=0, row=10, sticky=(N, W))
+entrada_telefono = Entry(Ventana_principal, width=15)
+entrada_telefono.grid(column=1, row=10, sticky="w")
 
 estado_usuario_text = Label(
     Ventana_principal, text="Estado:", font="arial 8 bold", bg="mint cream"
 )
-estado_usuario_text.grid(column=0, row=9, sticky=(N, W))
+estado_usuario_text.grid(column=0, row=11, sticky=(N, W))
 estado_usuario = ttk.Combobox(
     Ventana_principal, values=["Habilitado", "Deshabilitado"], width=20
 )
-estado_usuario.grid(column=1, row=9, sticky="w")
+estado_usuario.grid(column=1, row=11, sticky="w")
 
 
 def informe_documento():
@@ -1001,7 +1020,7 @@ btn_agregar_estudiante = Button(
     font="arial 8 bold",
     command=agregar_estudiante,
 )
-btn_agregar_estudiante.grid(row=10, column=1, columnspan=1, pady=15)
+btn_agregar_estudiante.grid(row=15, column=1, columnspan=1, pady=15)
 
 btn_cambiar_estado = Button(
     Ventana_principal,
@@ -1009,7 +1028,7 @@ btn_cambiar_estado = Button(
     font="arial 8 bold",
     command=cambiar_estado,
 )
-btn_cambiar_estado.grid(row=10, column=2, columnspan=1, pady=15)
+btn_cambiar_estado.grid(row=15, column=2, columnspan=1, pady=15)
 
 btn_agregar_prestamos = Button(
     Ventana_principal,
@@ -1017,7 +1036,7 @@ btn_agregar_prestamos = Button(
     font="arial 8 bold",
     command=agregar_prestamo,
 )
-btn_agregar_prestamos.grid(row=19, column=1, columnspan=1, pady=15)
+btn_agregar_prestamos.grid(row=22, column=1, columnspan=1, pady=15)
 
 btn_buscar_usuario = Button(
     Ventana_principal,
@@ -1025,7 +1044,7 @@ btn_buscar_usuario = Button(
     font="arial 8 bold",
     command=Buscar_usuario,
 )
-btn_buscar_usuario.grid(row=10, column=0, columnspan=1, pady=2)
+btn_buscar_usuario.grid(row=15, column=0, columnspan=1, pady=2)
 
 btn_registrar_en_sala = Button(
     Ventana_principal,
@@ -1033,10 +1052,10 @@ btn_registrar_en_sala = Button(
     font="arial 8 bold",
     command=Registrar_en_sala,
 )
-btn_registrar_en_sala.grid(row=19, column=0, columnspan=1, pady=0)
+btn_registrar_en_sala.grid(row=22, column=0, columnspan=1, pady=0)
 
 btn_informes = Button(Ventana_principal, text="Informes", font="arial 8 bold", command=informacion)
-btn_informes.grid(row=21, column=1, columnspan=1, pady=0)
+btn_informes.grid(row=24, column=1, columnspan=1, pady=0)
 
 titulo_sala = Label(
     Ventana_principal,
@@ -1057,37 +1076,37 @@ titulo_sala = Label(
     fg="white",
     width=24,
 )
-titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
+titulo_sala.grid(row=16, column=0, columnspan=1, sticky=(N, W))
 
 APE_text = Label(
     Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream"
 )
-APE_text.grid(column=0, row=13, sticky=(N, W))
+APE_text.grid(column=0, row=18, sticky=(N, W))
 entrada_IDequipo = ttk.Combobox(Ventana_principal, values=list(listado_idequipos()), width=15)
-entrada_IDequipo.grid(row=13, column=1, sticky="w")
+entrada_IDequipo.grid(row=18, column=1, sticky="w")
 DOCMID_text = Label(
     Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg="mint cream"
 )
-DOCMID_text.grid(column=0, row=14, sticky=(N, W))
+DOCMID_text.grid(column=0, row=19, sticky=(N, W))
 entrada_nombre_auxiliar = ttk.Combobox(
     Ventana_principal, values=listado_auxiliares(), width=15
 )
-entrada_nombre_auxiliar.grid(column=1, row=14, sticky="w")
+entrada_nombre_auxiliar.grid(column=1, row=19, sticky="w")
 NOM_text = Label(
     Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream"
 )
-NOM_text.grid(column=2, row=13, sticky=(N, W))
+NOM_text.grid(column=2, row=19, sticky=(N, W))
 entrada_idauxiliar = Entry(Ventana_principal, width=20)
-entrada_idauxiliar.grid(row=14, column=2, sticky="w")
+entrada_idauxiliar.grid(row=20, column=2, sticky="w")
 
 DOCMID_text = Label(
     Ventana_principal, text="Ubicacion:", font="arial 8 bold", bg="mint cream"
 )
-DOCMID_text.grid(column=0, row=15, sticky=(N, W))
+DOCMID_text.grid(column=0, row=20, sticky=(N, W))
 entrada_ubicacion = ttk.Combobox(
     Ventana_principal, values=["Bibilioteca", "Area de T.I"], width=15
 )
-entrada_ubicacion.grid(column=1, row=15, sticky="w")
+entrada_ubicacion.grid(column=1, row=20, sticky="w")
 
 img = PhotoImage(file="UCC.png")
 imagen_redimensionada = img.subsample(10)
@@ -1106,7 +1125,7 @@ btn_limpiar_formulario = Button(
     font="arial 8 bold",
     command=clean_formulario,
 )
-btn_limpiar_formulario.grid(row=19, column=2, columnspan=1, pady=0)
+btn_limpiar_formulario.grid(row=22, column=2, columnspan=1, pady=0)
 
 
 app.mainloop()
