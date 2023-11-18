@@ -85,12 +85,6 @@ def actualizar_dropdown_estudiantes():
     entrada_nombre_registro["values"] = nombres
     entrada_documento_registro["values"] = documentos
 
-
-
-
-# registrar_prestamo(idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha):
-
-
 def clean():
     entrada_NOM.delete(0, "end")
     entrada_APE.delete(0, "end")
@@ -286,9 +280,6 @@ def guardar_fecha():
         FechaSalida,
         buscar_estudiante_documento(entrada_DOCMID.get())[0][6],
     )
-    # except:
-    #     print("se genero un error en agregrar_prestamo linea 98")
-
 
 def cambiar_estado():
     documento = entrada_DOCMID.get()
@@ -480,8 +471,6 @@ def Buscar_usuario():
         entrada_ingrese_semestre.insert(INSERT, str(Usuario_recibido[6]))
         entrada_ingrese_jornada.insert(INSERT, str(Usuario_recibido[5]))
         estado_usuario.insert(INSERT, buscar_estado_usuario(Usuario_recibido[1]))
-        # entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))
-        # entrada_documento_registro.insert(INSERT, str(Usuario_recibido[1]))
         tipo_usuario.insert(INSERT, str(Usuario_recibido[7]))
 
 def Registrar_en_sala():
@@ -637,35 +626,6 @@ def mostrar_prestamos():
         tabla.pack()
         # Ejecutar el bucle principal
         ventana_prestamos.mainloop()
-
-
-# def agregar_sala():  # 142
-# numsala = entrada_numsala.get()
-# numequipo = entrada_numequipo.get()
-
-# sala = Sala(numsala, numequipo)
-# salas.append(sala)
-
-# actualizar_dropdown_salas()
-
-# entrada_numsala.delete(0, "end")
-# entrada_numequipo.delete(0, "end")
-
-
-# def actualizar_dropdown_salas():
-#     lista_salas_registrar["values"] = [str(s) for s in salas]
-
-
-# def mostrar_salas():
-#     ventana_salas = Toplevel(app)
-#     ventana_salas.title("Salas registradas")
-#     # Crear etiquetas para mostrar los detalles de cada sala
-#     for idx, sala in listado_sala():
-#         detalles_sala = f"Sala: {sala.numsala}\n"
-#         detalles_sala += f"Equipos: {sala.numequipo}\n"
-
-#         Label(ventana_salas, text=detalles_sala).grid(row=idx * 3, column=0, sticky="w")
-
 
 def registrar_estudiante_en_sala():
     # Obtener la sala seleccionada del Combobox
@@ -936,317 +896,6 @@ estado_usuario = ttk.Combobox(
 estado_usuario.grid(column=1, row=9, sticky="w")
 
 
-# nombre_registro_text = Label(
-#     Ventana_principal,
-#     text="Nombre del Usuario:",
-#     font="arial 8 bold",
-#     bg="mint cream",
-# )
-# nombre_registro_text.grid(column=0, row=27, sticky=(N, W))
-# entrada_nombre_registro = Entry(Ventana_principal, width=15)
-# entrada_nombre_registro.grid(column=1, row=27, sticky="w")
-
-# salida_dia = Entry(Ventana_principal, width=5)
-
-# documento_registro_text = Label(
-#     Ventana_principal,
-#     text="Documento del Usuario:",
-#     font="arial 8 bold",
-#     bg="mint cream",
-# )
-# documento_registro_text.grid(column=0, row=28, sticky=(N, W))
-# entrada_documento_registro = Entry(Ventana_principal, width=15)
-# entrada_documento_registro.grid(column=1, row=28, sticky="w")
-
-# Llamar a la función para actualizar las opciones iniciales
-# actualizar_dropdown_salas()
-
-# Agregar las etiquetas y entradas para la fecha y hora al registrar un estudiante en una sala
-# fecha_entrada_text = Label(
-#     Ventana_principal,
-#     text="Fecha y Hora de Entrada:",
-#     font="arial 8 bold",
-#     bg="mint cream",
-# )
-# fecha_entrada_text.grid(column=6, row=6, sticky=(N, W))
-
-# fecha_salida_text = Label(
-#     Ventana_principal,
-#     text="Fecha y Hora de Salida:",
-#     font="arial 8 bold",
-#     bg="mint cream",
-# )
-# fecha_salida_text.grid(column=6, row=9, sticky=(N, W))
-
-# fecha_entrada_text = Label(
-#     Ventana_principal, text="Dia:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_entrada_text.grid(column=9, row=6, sticky=(N, W))
-# entrada_dia = Entry(Ventana_principal, width=5)
-# entrada_dia.grid(column=9, row=7, sticky="w")
-
-# fecha_salida_text = Label(
-#     Ventana_principal, text="Dia:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_salida_text.grid(column=9, row=9, sticky=(N, W))
-# salida_dia = Entry(Ventana_principal, width=5)
-# salida_dia.grid(column=9, row=10, sticky="w")
-
-
-# fecha_entrada_text = Label(
-#     Ventana_principal, text="Mes:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_entrada_text.grid(column=8, row=6, sticky=(N, W))
-# entrada_Mes = ttk.Combobox(
-#     Ventana_principal, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
-# )
-# entrada_Mes.grid(column=8, row=7, sticky="w")
-
-# fecha_salida_text = Label(
-#     Ventana_principal, text="Mes:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_salida_text.grid(column=8, row=9, sticky=(N, W))
-# salida_Mes = ttk.Combobox(
-#     Ventana_principal, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
-# )
-# salida_Mes.grid(column=8, row=10, sticky="w")
-
-
-# fecha_entrada_text = Label(
-#     Ventana_principal, text="Año:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_entrada_text.grid(column=7, row=6, sticky=(N, W))
-# entrada_Año = ttk.Combobox(
-#     Ventana_principal, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
-# )
-# entrada_Año.grid(column=7, row=7, sticky="w")
-
-# fecha_salida_text = Label(
-#     Ventana_principal, text="Año:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_salida_text.grid(column=7, row=9, sticky=(N, W))
-# salida_Año = ttk.Combobox(
-#     Ventana_principal, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
-# )
-# salida_Año.grid(column=7, row=10, sticky="w")
-
-# fecha_entrada_text = Label(
-#     Ventana_principal, text="Hora:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_entrada_text.grid(column=10, row=6, sticky=(N, W))
-# entrada_Hora = ttk.Combobox(
-#     Ventana_principal,
-#     values=[
-#         00,
-#         1,
-#         2,
-#         3,
-#         4,
-#         5,
-#         6,
-#         7,
-#         8,
-#         9,
-#         10,
-#         11,
-#         12,
-#         13,
-#         14,
-#         15,
-#         16,
-#         17,
-#         18,
-#         19,
-#         20,
-#         21,
-#         22,
-#         23,
-#     ],
-#     width=5,
-# )
-# entrada_Hora.grid(column=10, row=7, sticky="w")
-
-# fecha_salida_text = Label(
-#     Ventana_principal, text="Hora:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_salida_text.grid(column=10, row=9, sticky=(N, W))
-# salida_Hora = ttk.Combobox(
-#     Ventana_principal,
-#     values=[
-#         00,
-#         1,
-#         2,
-#         3,
-#         4,
-#         5,
-#         6,
-#         7,
-#         8,
-#         9,
-#         10,
-#         11,
-#         12,
-#         13,
-#         14,
-#         15,
-#         16,
-#         17,
-#         18,
-#         19,
-#         20,
-#         21,
-#         22,
-#         23,
-#     ],
-#     width=5,
-# )
-# salida_Hora.grid(column=10, row=10, sticky="w")
-
-# fecha_entrada_text = Label(
-#     Ventana_principal, text="Minuto:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_entrada_text.grid(column=11, row=6, sticky=(N, W))
-# entrada_Minuto = ttk.Combobox(
-#     Ventana_principal,
-#     values=[
-#         1,
-#         2,
-#         3,
-#         4,
-#         5,
-#         6,
-#         7,
-#         8,
-#         9,
-#         10,
-#         11,
-#         12,
-#         13,
-#         14,
-#         15,
-#         16,
-#         17,
-#         18,
-#         19,
-#         20,
-#         21,
-#         22,
-#         23,
-#         24,
-#         25,
-#         26,
-#         27,
-#         28,
-#         29,
-#         30,
-#         31,
-#         32,
-#         33,
-#         34,
-#         35,
-#         36,
-#         37,
-#         38,
-#         39,
-#         40,
-#         41,
-#         42,
-#         43,
-#         44,
-#         45,
-#         46,
-#         47,
-#         48,
-#         49,
-#         50,
-#         51,
-#         52,
-#         53,
-#         54,
-#         55,
-#         56,
-#         57,
-#         58,
-#         59,
-#         60,
-#     ],
-#     width=5,
-# )
-# entrada_Minuto.grid(column=11, row=7, sticky="w")
-
-# fecha_salida_text = Label(
-#     Ventana_principal, text="Minuto:", font="arial 8 bold", bg="mint cream"
-# )
-# fecha_salida_text.grid(column=11, row=9, sticky=(N, W))
-# salida_Minuto = ttk.Combobox(
-#     Ventana_principal,
-#     values=[
-#         1,
-#         2,
-#         3,
-#         4,
-#         5,
-#         6,
-#         7,
-#         8,
-#         9,
-#         10,
-#         11,
-#         12,
-#         13,
-#         14,
-#         15,
-#         16,
-#         17,
-#         18,
-#         19,
-#         20,
-#         21,
-#         22,
-#         23,
-#         24,
-#         25,
-#         26,
-#         27,
-#         28,
-#         29,
-#         30,
-#         31,
-#         32,
-#         33,
-#         34,
-#         35,
-#         36,
-#         37,
-#         38,
-#         39,
-#         40,
-#         41,
-#         42,
-#         43,
-#         44,
-#         45,
-#         46,
-#         47,
-#         48,
-#         49,
-#         50,
-#         51,
-#         52,
-#         53,
-#         54,
-#         55,
-#         56,
-#         57,
-#         58,
-#         59,
-#         60,
-#     ],
-#     width=5,
-# )
-# salida_Minuto.grid(column=11, row=10, sticky="w")
-
-
 def informe_documento():
     ()
 
@@ -1296,10 +945,6 @@ JOR_text = Label(
     bg="mint cream",
 )
 JOR_text.grid(column=0, row=7, sticky=(N, W))
-# Etiquetas y entradas para salas
-
-
-# Entradas de texto
 entrada_NOM = Entry(Ventana_principal, width=15)
 entrada_NOM.grid(column=1, row=2, sticky="w")
 entrada_APE = Entry(Ventana_principal, width=15)
@@ -1324,18 +969,7 @@ entrada_ingrese_programa = ttk.Combobox(
 entrada_ingrese_programa.grid(column=1, row=5, sticky="w")
 entrada_ingrese_semestre = ttk.Combobox(
     Ventana_principal,
-    values=[
-        1,
-        2,
-        3,
-        4,
-        5,
-        6,
-        7,
-        8,
-        9,
-        10,
-    ],
+    values=list(range(1,10,1)),
     width=6,
 )
 entrada_ingrese_semestre.grid(column=1, row=6, sticky="w")
@@ -1344,21 +978,6 @@ entrada_ingrese_jornada = ttk.Combobox(
 )
 entrada_ingrese_jornada.grid(column=1, row=7, sticky="w")
 
-
-# Reemplace los Entry por ttk.Combobox
-# entrada_nombre_registro = ttk.Combobox(Ventana_principal, values=[], width=15)
-# entrada_nombre_registro.grid(column=1, row=19, sticky="w")
-
-# entrada_documento_registro = ttk.Combobox(Ventana_principal, values=[], width=15)
-# entrada_documento_registro.grid(column=1, row=18, sticky="w")
-
-# entrada_fecha_entrada = Entry(Ventana_principal, width=20)
-# entrada_fecha_entrada.grid(column=1, row=20, sticky="w")
-
-# entrada_fecha_salida = Entry(Ventana_principal, width=20)
-# entrada_fecha_salida.grid(column=1, row=21, sticky="w")
-
-# Botones de registro
 btn_mostrar_registros = Button(
     Ventana_principal,
     text="Mostrar registros",
@@ -1383,35 +1002,6 @@ btn_cambiar_estado = Button(
 )
 btn_cambiar_estado.grid(row=10, column=2, columnspan=1, pady=15)
 
-# btn_agregar_sala = Button(Ventana_principal, text="Agregar Sala", font="arial 8 bold", command=agregar_sala)
-# btn_agregar_sala.grid(row=9, column=0, columnspan=1, pady=15)
-
-# btn_ver_estudiantes = Button(
-#     Ventana_principal,
-#     text="Ver Usuarios",
-#     font="arial 8 bold",
-#     command=mostrar_estudiantes,
-# )
-# btn_ver_estudiantes.grid(row=3, column=4, columnspan=1, pady=0)
-
-# btn_ver_equipos = Button(
-#     Ventana_principal, text="Ver Equipos", font="arial 8 bold", command=mostrar_equipos
-# )
-# btn_ver_equipos.grid(row=5, column=4, columnspan=1, pady=0)
-
-#btn_ver_salas = Button(
-#    Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas
-#)
-#btn_ver_salas.grid(row=7, column=4, columnspan=1, pady=0)
-
-# btn_ver_prestamos = Button(
-#     Ventana_principal,
-#     text="Ver Prestamos",
-#     font="arial 8 bold",
-#     command=mostrar_prestamos,
-# )
-# btn_ver_prestamos.grid(row=9, column=4, columnspan=1, pady=0)
-
 btn_agregar_prestamos = Button(
     Ventana_principal,
     text="Agregar Prestamo",
@@ -1419,15 +1009,6 @@ btn_agregar_prestamos = Button(
     command=agregar_prestamo,
 )
 btn_agregar_prestamos.grid(row=19, column=1, columnspan=1, pady=15)
-
-# btn_descargar_usuarios = Button(Ventana_principal, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
-# btn_descargar_usuarios.grid(row=13, column=4, columnspan=1, pady=0)
-
-# btn_descargar_equipos = Button(Ventana_principal, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
-# btn_descargar_equipos.grid(row=15, column=4, columnspan=1, pady=0)
-
-# btn_descargar_prestamos = Button(Ventana_principal, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
-# btn_descargar_prestamos.grid(row=19, column=4, columnspan=1, pady=0)
 
 btn_buscar_usuario = Button(
     Ventana_principal,
@@ -1448,16 +1029,6 @@ btn_registrar_en_sala.grid(row=19, column=0, columnspan=1, pady=0)
 btn_informes = Button(Ventana_principal, text="Informes", font="arial 8 bold", command=informacion)
 btn_informes.grid(row=13, column=4, columnspan=1, pady=0)
 
-# cck_informe_documento = Checkbutton(Ventana_principal, text="Informe por documento", font="arial 8 bold", command=informe_documento)
-# cck_informe_documento.grid(row=24, column=0, columnspan=1, pady=0)
-
-# cck_informe_fechas = Checkbutton(Ventana_principal, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
-# cck_informe_fechas.grid(row=24, column=1, columnspan=1, pady=0)
-
-# cck_informe_programa= Checkbutton(Ventana_principal, text="Informe por programa", font="arial 8 bold", command=informe_programa)
-# cck_informe_programa.grid(row=24, column=2, columnspan=1, pady=0)
-
-# Titulos
 titulo_sala = Label(
     Ventana_principal,
     text="Datos Estudiantes",
@@ -1479,17 +1050,6 @@ titulo_sala = Label(
 )
 titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
 
-# titulo_sala = Label(Ventana_principal, text="Prestamos", font="arial 10 bold", bg="#132740", fg="white",  width=10)
-# titulo_sala.grid(row=54, column=0, columnspan=1, sticky=(N, W))
-
-# titulo_informacion = Label(Ventana_principal, text="Información", font="arial 10 bold", bg="#132740", fg="white",  width=10)
-# titulo_informacion.grid(row=21, column=0, columnspan=1, sticky=(N, W))
-
-# label de prestamos
-# NOM_text = Label(Ventana_principal, text="ID Usuario:", font="arial 8 bold", bg="mint cream")
-# NOM_text.grid(column=0, row=55, sticky=(N, W))
-# entrada_IDusuario = Entry(Ventana_principal,width=15)
-# entrada_IDusuario.grid(row=55, column=1, sticky="w")
 APE_text = Label(
     Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream"
 )
@@ -1510,14 +1070,7 @@ NOM_text = Label(
 NOM_text.grid(column=2, row=13, sticky=(N, W))
 entrada_idauxiliar = Entry(Ventana_principal, width=20)
 entrada_idauxiliar.grid(row=14, column=2, sticky="w")
-# DOCMID_text = Label(
-#     Ventana_principal, text="Descripcion:", font="arial 8 bold", bg="mint cream"
-# )
-# DOCMID_text.grid(column=0, row=14, sticky=(N, W))
-# entrada_descripcion = ttk.Combobox(
-#     Ventana_principal, values=["Entrada sala", "Salida de sala"], width=15
-# )
-#entrada_descripcion.grid(column=1, row=14, sticky="w")
+
 DOCMID_text = Label(
     Ventana_principal, text="Ubicacion:", font="arial 8 bold", bg="mint cream"
 )
@@ -1527,13 +1080,10 @@ entrada_ubicacion = ttk.Combobox(
 )
 entrada_ubicacion.grid(column=1, row=15, sticky="w")
 
-
-# Crear un widget Label para mostrar la imagen
 img = PhotoImage(file="UCC.png")
 imagen_redimensionada = img.subsample(10)
 label_imagen = Label(Ventana_principal, image=imagen_redimensionada)
 label_imagen.grid(column=13, row=1)
-
 
 etiqueta = Label(
     Ventana_principal, text="Developer Maria Jose Noreña, Alexandra Otero and Samuel."
