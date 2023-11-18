@@ -97,160 +97,166 @@ def clean():
     entrada_PROG.delete(0, "end")
     entrada_ingrese_semestre.delete(0, "end")
     entrada_ingrese_jornada.delete(0, "end")
+    entrada_ingrese_programa.delete(0, "end")
     estado_usuario.delete(0, "end")
 
 
 def agregar_prestamo():
-    global IDUSUARIO_GLOBAL
-    estadousuario = estado_usuario.get()
-    fecha_registro = "-"
-    descripcion_registro = ""
-    def fecha_entrada_l():
-        fecha_entrada = (
-            entrada_ano.get()
-            + "-"
-            + entrada_Mes.get()
-            + "-"
-            + entrada_dia.get()
-            + "T"
-            + entrada_Hora.get()
-            + ":"
-            + entrada_Minuto.get()
-            + ":00"
-        )
-        return fecha_entrada
+    if entrada_IDequipo.get() != "" and entrada_nombre_auxiliar.get() != "" and entrada_ingrese_programa.get() != "" and entrada_DOCMID.get() != "" and entrada_Sala.get() != "" and entrada_ubicacion.get() != "":
+        Buscar_usuario()
+        global IDUSUARIO_GLOBAL
+        estadousuario = estado_usuario.get()
+        fecha_registro = "-"
+        descripcion_registro = ""
+        def fecha_entrada_l():
+            fecha_entrada = (
+                entrada_ano.get()
+                + "-"
+                + entrada_Mes.get()
+                + "-"
+                + entrada_dia.get()
+                + "T"
+                + entrada_Hora.get()
+                + ":"
+                + entrada_Minuto.get()
+                + ":00"
+            )
+            return fecha_entrada
 
+        def fecha_salida_l():
+            fecha_salida = (
+                salida_Año.get()
+                + "-"
+                + salida_Mes.get()
+                + "-"
+                + salida_dia.get()
+                + "T"
+                + salida_Hora.get()
+                + ":"
+                + salida_Minuto.get()
+                + ":00"
+            )
+            return fecha_salida
 
-    def fecha_salida_l():
-        fecha_salida = (
-            salida_Año.get()
-            + "-"
-            + salida_Mes.get()
-            + "-"
-            + salida_dia.get()
-            + "T"
-            + salida_Hora.get()
-            + ":"
-            + salida_Minuto.get()
-            + ":00"
-        )
-        return fecha_salida
-
-    def cerrar_ventana():
-        # if salida_Año.get() != "" and salida_Mes.get() != "" and salida_dia.get() != "" and salida_Hora.get() != "" and  salida_Minuto.get() != "":
-        #     fecha_entrega_equipo = fecha_salida_l()
-        fecha_prestamo_equipo = "-"
-        if entrada_ano.get() != "" and entrada_Mes.get() != "" and entrada_dia.get() != "" and entrada_Hora.get() != "" and  entrada_Minuto.get() != "":
-            fecha_prestamo_equipo = fecha_entrada_l()
-        print(fecha_prestamo_equipo)
-        if fecha_prestamo_equipo != "-" and entrada_descripcion.get() != "":
-            fecha_registro = fecha_prestamo_equipo
-            descripcion_registro = entrada_descripcion.get()
-            if entrada_DOCMID.get() != "" and entrada_IDequipo.get() != "" and entrada_nombre_auxiliar.get() != "" and entrada_ingrese_programa.get()  != "":
-                registro(fecha_registro,descripcion_registro)
+        def cerrar_ventana():
+            # if salida_Año.get() != "" and salida_Mes.get() != "" and salida_dia.get() != "" and salida_Hora.get() != "" and  salida_Minuto.get() != "":
+            #     fecha_entrega_equipo = fecha_salida_l()
+            fecha_prestamo_equipo = "-"
+            if entrada_ano.get() != "" and entrada_Mes.get() != "" and entrada_dia.get() != "" and entrada_Hora.get() != "" and  entrada_Minuto.get() != "":
+                fecha_prestamo_equipo = fecha_entrada_l()
+            print(fecha_prestamo_equipo)
+            if fecha_prestamo_equipo != "-" and entrada_descripcion.get() != "":
+                fecha_registro = fecha_prestamo_equipo
+                descripcion_registro = entrada_descripcion.get()
+                if entrada_DOCMID.get() != "" and entrada_IDequipo.get() != "" and entrada_nombre_auxiliar.get() != "" and entrada_ingrese_programa.get()  != "":
+                    registro(fecha_registro,descripcion_registro)
+                else:
+                    messagebox.showerror("Error", "Debe ingresar todos los datos")
+                ventana_agregar_prestamos.destroy()
             else:
-                messagebox.showerror("Error", "Debe ingresar todos los datos")
-            ventana_agregar_prestamos.destroy()
+                messagebox.showerror("Error", "Debe ingresar una de las fechas")
+
+        def registro(fecha_registro,descripcion_registro):
+            if descripcion_registro == "Entrega equipo":
+                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,"-",entrada_ingrese_programa.get())  
+                #update_estado_usuario(entrada_DOCMID.get(), "Deshabilitado")
+            else:
+                registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),"-",fecha_registro,entrada_ingrese_programa.get())
+                #update_estado_usuario(entrada_DOCMID.get(), "Habilitado")
+
+        if estadousuario != "Deshabilitado":
+            fechaentregausuario = "-"
+            fechaentregasala = "-"
+            app.geometry("1500x800")
+            ventana_agregar_prestamos = Toplevel(app, bg="#00acc9")
+            ventana_agregar_prestamos.title("Prestamos")
+            fecha_entrada_text = Label(
+                ventana_agregar_prestamos,
+                text="Fecha y Hora de Entrada:",
+                font="arial 8 bold",
+                bg="mint cream",
+            )
+            fecha_entrada_text.grid(column=6, row=6, sticky=(N, W))
+
+            fecha_entrada_text = Label(
+                ventana_agregar_prestamos, text="Dia:", font="arial 8 bold", bg="mint cream"
+            )
+            fecha_entrada_text.grid(column=9, row=6, sticky=(N, W))
+            entrada_dia = Entry(ventana_agregar_prestamos, width=5)
+            entrada_dia.grid(column=9, row=7, sticky="w")
+            fecha_entrada_text = Label(
+                ventana_agregar_prestamos, text="Mes:", font="arial 8 bold", bg="mint cream"
+            )
+            fecha_entrada_text.grid(column=8, row=6, sticky=(N, W))
+            entrada_Mes = ttk.Combobox(
+                ventana_agregar_prestamos,
+                values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+                width=5,
+            )
+            entrada_Mes.grid(column=8, row=7, sticky="w")
+
+
+            fecha_entrada_text = Label(
+                ventana_agregar_prestamos, text="Año:", font="arial 8 bold", bg="mint cream"
+            )
+            fecha_entrada_text.grid(column=7, row=6, sticky=(N, W))
+            entrada_ano = ttk.Combobox(
+                ventana_agregar_prestamos,
+                values=[2023, 2024, 2025, 2026, 2027, 2028],
+                width=5,
+            )
+            entrada_ano.grid(column=7, row=7, sticky="w")
+
+            fecha_entrada_text = Label(
+                ventana_agregar_prestamos,
+                text="Hora:",
+                font="arial 8 bold",
+                bg="mint cream",
+            )
+            fecha_entrada_text.grid(column=10, row=6, sticky=(N, W))
+            entrada_Hora = ttk.Combobox(
+                ventana_agregar_prestamos,
+                values=list(range(24)),
+                width=5,
+            )
+            entrada_Hora.grid(column=10, row=7, sticky="w")
+
+
+            fecha_entrada_text = Label(
+                ventana_agregar_prestamos,
+                text="Minuto:",
+                font="arial 8 bold",
+                bg="mint cream",
+            )
+            fecha_entrada_text.grid(column=11, row=6, sticky=(N, W))
+            entrada_Minuto = ttk.Combobox(
+                ventana_agregar_prestamos,
+                values=list(range(60)),
+                width=5,
+            )
+            entrada_Minuto.grid(column=11, row=7, sticky="w")
+
+            exit_button = Button(
+                ventana_agregar_prestamos, text="Registrar", command=cerrar_ventana
+            )
+            exit_button.grid(column=6, row=13, pady=5, sticky="w")
+
+            DOCMID_text = Label(
+            ventana_agregar_prestamos, text="Descripcion:", font="arial 8 bold", bg="mint cream"
+            )
+            DOCMID_text.grid(column=6, row=11, sticky=(N, W))
+            entrada_descripcion = ttk.Combobox(
+            ventana_agregar_prestamos, values=["Entrega equipo", "Retorno equipo"], width=15
+            )
+            entrada_descripcion.grid(column=7, row=11, sticky="w")
         else:
-            messagebox.showerror("Error", "Debe ingresar una de las fechas")
-
-    def registro(fecha_registro,descripcion_registro):
-        if descripcion_registro == "Entrega equipo":
-            registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,"-",entrada_ingrese_programa.get())  
-            #update_estado_usuario(entrada_DOCMID.get(), "Deshabilitado")
-        else:
-            registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),"-",fecha_registro,entrada_ingrese_programa.get())
-            #update_estado_usuario(entrada_DOCMID.get(), "Habilitado")
-
-    if estadousuario != "Deshabilitado":
-        fechaentregausuario = "-"
-        fechaentregasala = "-"
-        app.geometry("1500x800")
-        ventana_agregar_prestamos = Toplevel(app, bg="#00acc9")
-        ventana_agregar_prestamos.title("Prestamos")
-        fecha_entrada_text = Label(
-            ventana_agregar_prestamos,
-            text="Fecha y Hora de Entrada:",
-            font="arial 8 bold",
-            bg="mint cream",
-        )
-        fecha_entrada_text.grid(column=6, row=6, sticky=(N, W))
-
-        fecha_entrada_text = Label(
-            ventana_agregar_prestamos, text="Dia:", font="arial 8 bold", bg="mint cream"
-        )
-        fecha_entrada_text.grid(column=9, row=6, sticky=(N, W))
-        entrada_dia = Entry(ventana_agregar_prestamos, width=5)
-        entrada_dia.grid(column=9, row=7, sticky="w")
-        fecha_entrada_text = Label(
-            ventana_agregar_prestamos, text="Mes:", font="arial 8 bold", bg="mint cream"
-        )
-        fecha_entrada_text.grid(column=8, row=6, sticky=(N, W))
-        entrada_Mes = ttk.Combobox(
-            ventana_agregar_prestamos,
-            values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            width=5,
-        )
-        entrada_Mes.grid(column=8, row=7, sticky="w")
-
-
-        fecha_entrada_text = Label(
-            ventana_agregar_prestamos, text="Año:", font="arial 8 bold", bg="mint cream"
-        )
-        fecha_entrada_text.grid(column=7, row=6, sticky=(N, W))
-        entrada_ano = ttk.Combobox(
-            ventana_agregar_prestamos,
-            values=[2023, 2024, 2025, 2026, 2027, 2028],
-            width=5,
-        )
-        entrada_ano.grid(column=7, row=7, sticky="w")
-
-        fecha_entrada_text = Label(
-            ventana_agregar_prestamos,
-            text="Hora:",
-            font="arial 8 bold",
-            bg="mint cream",
-        )
-        fecha_entrada_text.grid(column=10, row=6, sticky=(N, W))
-        entrada_Hora = ttk.Combobox(
-            ventana_agregar_prestamos,
-            values=list(range(24)),
-            width=5,
-        )
-        entrada_Hora.grid(column=10, row=7, sticky="w")
-
-
-        fecha_entrada_text = Label(
-            ventana_agregar_prestamos,
-            text="Minuto:",
-            font="arial 8 bold",
-            bg="mint cream",
-        )
-        fecha_entrada_text.grid(column=11, row=6, sticky=(N, W))
-        entrada_Minuto = ttk.Combobox(
-            ventana_agregar_prestamos,
-            values=list(range(60)),
-            width=5,
-        )
-        entrada_Minuto.grid(column=11, row=7, sticky="w")
-
-        exit_button = Button(
-            ventana_agregar_prestamos, text="Registrar", command=cerrar_ventana
-        )
-        exit_button.grid(column=6, row=13, pady=5, sticky="w")
-
-        DOCMID_text = Label(
-        ventana_agregar_prestamos, text="Descripcion:", font="arial 8 bold", bg="mint cream"
-        )
-        DOCMID_text.grid(column=6, row=11, sticky=(N, W))
-        entrada_descripcion = ttk.Combobox(
-        ventana_agregar_prestamos, values=["Entrega equipo", "Retorno equipo"], width=15
-        )
-        entrada_descripcion.grid(column=7, row=11, sticky="w")
+            messagebox.showerror(
+                "Error", "Usuario no habilitado para realizar nuevos prestamos"
+            )
     else:
-        messagebox.showerror(
-            "Error", "Usuario no habilitado para realizar nuevos prestamos"
-        )
+            messagebox.showerror(
+                "Error", "Debe ingresar el idequipo el ausxiliar, documento, sala, "
+            )
 
 def guardar_fecha():
     descripcion = entrada_descripcion.get()
@@ -405,20 +411,15 @@ def clean_formulario():
     entrada_ingrese_semestre.delete(0, "end")
     entrada_ingrese_jornada.delete(0, "end")
     entrada_nombre_auxiliar.delete(0, "end")
-    entrada_Año.delete(0, "end")
-    entrada_dia.delete(0, "end")
-    entrada_documento_registro.delete(0, "end")
-    entrada_Hora.delete(0, "end")
     entrada_idauxiliar.delete(0, "end")
     entrada_IDequipo.delete(0, "end")
-    entrada_IDusuario.delete(0, "end")
     entrada_ingrese_jornada.delete(0, "end")
     entrada_ingrese_programa.delete(0, "end")
     entrada_ingrese_semestre.delete(0, "end")
-    entrada_Mes.delete(0, "end")
-    entrada_Minuto.delete(0, "end")
-    entrada_nombre_registro.delete(0, "end")
     entrada_Sala.delete(0, "end")
+    tipo_usuario.delete(0, "end")
+    entrada_ingrese_programa.delete(0, "end")
+    estado_usuario.delete(0, "end")
     tipo_usuario.delete(0, "end")
 
 
