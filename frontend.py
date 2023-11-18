@@ -130,14 +130,14 @@ def agregar_prestamo():
     titulo_informacion = Label(ventana_agregar_prestamos, text="Información", font="arial 10 bold", bg="#132740", fg="white",  width=10)
     titulo_informacion.grid(row=0, column=0, columnspan=1, sticky=(N, W))
 
-    cck_informe_documento = Checkbutton(ventana_agregar_prestamos, text="Informe por documento", font="arial 8 bold", command=informe_documento)
-    cck_informe_documento.grid(row=8, column=0, columnspan=1, pady=0)
+    # cck_informe_documento = Checkbutton(ventana_agregar_prestamos, text="Informe por documento", font="arial 8 bold", command=informe_documento)
+    # cck_informe_documento.grid(row=8, column=0, columnspan=1, pady=0)
 
-    cck_informe_fechas = Checkbutton(ventana_agregar_prestamos, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
-    cck_informe_fechas.grid(row=8, column=1, columnspan=1, pady=0)
+    # cck_informe_fechas = Checkbutton(ventana_agregar_prestamos, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
+    # cck_informe_fechas.grid(row=8, column=1, columnspan=1, pady=0)
 
-    cck_informe_programa= Checkbutton(ventana_agregar_prestamos, text="Informe por programa", font="arial 8 bold", command=informe_programa)
-    cck_informe_programa.grid(row=8, column=2, columnspan=1, pady=0)
+    # cck_informe_programa= Checkbutton(ventana_agregar_prestamos, text="Informe por programa", font="arial 8 bold", command=informe_programa)
+    # cck_informe_programa.grid(row=8, column=2, columnspan=1, pady=0)
 
     fecha_entrada_text = Label(
         ventana_agregar_prestamos,
@@ -628,6 +628,149 @@ def mostrar_registros():
     for idx, registro_str in enumerate(registros_str):
         Label(ventana_registros, text=registro_str).grid(row=idx, column=0, sticky="w")
 
+def informacion():
+    ventana_informes = Toplevel(app, bg="#00acc9")
+    ventana_informes.title("Informes y descargas") 
+    
+    titulo_sala = Label(ventana_informes, text="Filtros", font="arial 10 bold", bg="#132740", fg="white",  width=24)
+    titulo_sala.grid(row=1, column=0, columnspan=1, sticky=(N, W))
+
+    cck_informe_documento = Checkbutton(ventana_informes, text="Informe por documento", font="arial 8 bold", command=informe_documento)
+    cck_informe_documento.grid(row=3, column=1, columnspan=1, pady=0)
+
+    cck_informe_fechas = Checkbutton(ventana_informes, text="Informe por fechas", font="arial 8 bold", command=informe_fechas)
+    cck_informe_fechas.grid(row=3, column=2, columnspan=1, pady=0)
+
+    cck_informe_programa= Checkbutton(ventana_informes, text="Informe por programa", font="arial 8 bold", command=informe_programa)
+    cck_informe_programa.grid(row=3, column=3, columnspan=1, pady=0)
+
+    fecha_entrada_text = Label(
+       ventana_informes,
+        text="Fecha y Hora de Entrada:",
+        font="arial 8 bold",
+        bg="mint cream",
+    )
+    fecha_entrada_text.grid(column=0, row=6, sticky=(N, W))
+
+    fecha_salida_text = Label(
+       ventana_informes,
+        text="Fecha y Hora de Salida:",
+        font="arial 8 bold",
+        bg="mint cream",
+    )
+    fecha_salida_text.grid(column=0, row=9, sticky=(N, W))
+
+    fecha_entrada_text = Label(
+       ventana_informes, text="Dia:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_entrada_text.grid(column=3, row=6, sticky=(N, W))
+    entrada_dia = Entry(ventana_informes, width=5)
+    entrada_dia.grid(column=3, row=7, sticky="w")
+
+    fecha_salida_text = Label(
+       ventana_informes, text="Dia:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_salida_text.grid(column=3, row=9, sticky=(N, W))
+    salida_dia = Entry(ventana_informes, width=5)
+    salida_dia.grid(column=3, row=10, sticky="w")
+
+
+    fecha_entrada_text = Label(
+       ventana_informes, text="Mes:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_entrada_text.grid(column=2, row=6, sticky=(N, W))
+    entrada_Mes = ttk.Combobox(
+       ventana_informes, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
+    )
+    entrada_Mes.grid(column=2, row=7, sticky="w")
+
+    fecha_salida_text = Label(
+       ventana_informes, text="Mes:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_salida_text.grid(column=2, row=9, sticky=(N, W))
+    salida_Mes = ttk.Combobox(
+       ventana_informes, values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12], width=5
+    )
+    salida_Mes.grid(column=2, row=10, sticky="w")
+
+
+    fecha_entrada_text = Label(
+       ventana_informes, text="Año:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_entrada_text.grid(column=1, row=6, sticky=(N, W))
+    entrada_Año = ttk.Combobox(
+       ventana_informes, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
+    )
+    entrada_Año.grid(column=1, row=7, sticky="w")
+
+    fecha_salida_text = Label(
+       ventana_informes, text="Año:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_salida_text.grid(column=1, row=9, sticky=(N, W))
+    salida_Año = ttk.Combobox(
+       ventana_informes, values=[2023, 2024, 2025, 2026, 2027, 2028], width=5
+    )
+    salida_Año.grid(column=1, row=10, sticky="w")
+
+    fecha_entrada_text = Label(
+       ventana_informes, text="Hora:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_entrada_text.grid(column=4, row=6, sticky=(N, W))
+    entrada_Hora = ttk.Combobox(
+       ventana_informes,
+        values = list(range(24)),
+        width=5,
+    )
+    entrada_Hora.grid(column=4, row=7, sticky="w")
+
+    fecha_salida_text = Label(
+       ventana_informes, text="Hora:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_salida_text.grid(column=4, row=9, sticky=(N, W))
+    salida_Hora = ttk.Combobox(
+       ventana_informes,
+        values=list(range(24)),
+        width=5,
+    )
+    salida_Hora.grid(column=4, row=10, sticky="w")
+
+    fecha_entrada_text = Label(
+       ventana_informes, text="Minuto:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_entrada_text.grid(column=5, row=6, sticky=(N, W))
+    entrada_Minuto = ttk.Combobox(
+       ventana_informes,
+        values=list(range(60)),
+        width=5,
+    )
+    entrada_Minuto.grid(column=5, row=7, sticky="w")
+
+    fecha_salida_text = Label(
+       ventana_informes, text="Minuto:", font="arial 8 bold", bg="mint cream"
+    )
+    fecha_salida_text.grid(column=5, row=9, sticky=(N, W))
+    salida_Minuto = ttk.Combobox(
+       ventana_informes,
+        values=list(range(60)),
+        width=5,
+    )
+    salida_Minuto.grid(column=5, row=10, sticky="w")
+
+    titulo_sala = Label(ventana_informes, text="Descargas", font="arial 10 bold", bg="#132740", fg="white",  width=24)
+    titulo_sala.grid(row=12, column=0, columnspan=1, sticky=(N, W))
+
+    btn_descargar_usuarios = Button(ventana_informes, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
+    btn_descargar_usuarios.grid(row=14, column=1, columnspan=1, pady=0)
+
+    btn_descargar_equipos = Button(ventana_informes, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
+    btn_descargar_equipos.grid(row=14, column=2, columnspan=1, pady=0)
+
+    btn_descargar_prestamos = Button(ventana_informes, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
+    btn_descargar_prestamos.grid(row=14, column=3, columnspan=1, pady=0)
+
+
+            
+
 # Combobox para seleccionar una sala
 
 
@@ -1057,20 +1200,23 @@ btn_ver_prestamos.grid(row=9, column=4, columnspan=1, pady=0)
 btn_agregar_prestamos = Button(Ventana_principal, text="Agregar Prestamo", font="arial 8 bold", command=agregar_prestamo)
 btn_agregar_prestamos.grid(row=19, column=1, columnspan=1, pady=15)
 
-btn_descargar_usuarios = Button(Ventana_principal, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
-btn_descargar_usuarios.grid(row=13, column=4, columnspan=1, pady=0)
+# btn_descargar_usuarios = Button(Ventana_principal, text="Descargar Usuarios", font="arial 8 bold", command=Descargar_usuarios)
+# btn_descargar_usuarios.grid(row=13, column=4, columnspan=1, pady=0)
 
-btn_descargar_equipos = Button(Ventana_principal, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
-btn_descargar_equipos.grid(row=15, column=4, columnspan=1, pady=0)
+# btn_descargar_equipos = Button(Ventana_principal, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
+# btn_descargar_equipos.grid(row=15, column=4, columnspan=1, pady=0)
 
-btn_descargar_prestamos = Button(Ventana_principal, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
-btn_descargar_prestamos.grid(row=19, column=4, columnspan=1, pady=0)
+# btn_descargar_prestamos = Button(Ventana_principal, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
+# btn_descargar_prestamos.grid(row=19, column=4, columnspan=1, pady=0)
 
 btn_buscar_usuario = Button(Ventana_principal, text="Buscar Usuario", font="arial 8 bold", command=Buscar_usuario)
 btn_buscar_usuario.grid(row=10, column=0, columnspan=1, pady=2)
 
 btn_registrar_en_sala = Button(Ventana_principal, text="Registrar en sala", font="arial 8 bold", command=Registrar_en_sala)
 btn_registrar_en_sala.grid(row=19, column=0, columnspan=1, pady=0)
+
+btn_informes = Button(Ventana_principal, text="Informes", font="arial 8 bold", command=informacion)
+btn_informes.grid(row=13, column=4, columnspan=1, pady=0)
 
 # cck_informe_documento = Checkbutton(Ventana_principal, text="Informe por documento", font="arial 8 bold", command=informe_documento)
 # cck_informe_documento.grid(row=24, column=0, columnspan=1, pady=0)
