@@ -103,42 +103,42 @@ def clean():
 def agregar_prestamo():
     global IDUSUARIO_GLOBAL
     estadousuario = estado_usuario.get()
-def fecha_entrada():
-    fecha_entrada = (
-        entrada_Año.get()
-        + "-"
-        + entrada_Mes.get()
-        + "-"
-        + entrada_dia.get()
-        + "T"
-        + entrada_Hora.get()
-        + ":"
-        + entrada_Minuto.get()
-        + ":00"
-    )
-    return fecha_entrada
+    def fecha_entrada_l():
+        fecha_entrada = (
+            entrada_Año.get()
+            + "-"
+            + entrada_Mes.get()
+            + "-"
+            + entrada_dia.get()
+            + "T"
+            + entrada_Hora.get()
+            + ":"
+            + entrada_Minuto.get()
+            + ":00"
+        )
+        return fecha_entrada
 
 
-def fecha_salida():
-    fecha_salida = (
-        salida_Año.get()
-        + "-"
-        + salida_Mes.get()
-        + "-"
-        + salida_dia.get()
-        + "T"
-        + salida_Hora.get()
-        + ":"
-        + salida_Minuto.get()
-        + ":00"
-    )
-    return fecha_salida
+    def fecha_salida_l():
+        fecha_salida = (
+            salida_Año.get()
+            + "-"
+            + salida_Mes.get()
+            + "-"
+            + salida_dia.get()
+            + "T"
+            + salida_Hora.get()
+            + ":"
+            + salida_Minuto.get()
+            + ":00"
+        )
+        return fecha_salida
 
     def cerrar_ventana():
-        fecha_prestamo = fecha_entrada()
-        fecha_entrega = fecha_salida()
-        print(fecha_entrada, fecha_prestamo)
-        if fecha_prestamo != "-" or fecha_entrega != "-":
+        fecha_prestamo_equipo = fecha_entrada_l()
+        fecha_entrega_equipo = fecha_salida_l()
+        print(fecha_entrada_equipo, fecha_prestamo_equipo)
+        if fecha_prestamo_equipo != "-" or fecha_entrega_equipo != "-":
             ventana_agregar_prestamos.destroy()
         else:
             messagebox.showerror("Error", "Debe ingresar una de las fechas")
