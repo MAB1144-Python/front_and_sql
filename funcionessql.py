@@ -177,11 +177,11 @@ def descargar_equipos(filename):
     df.to_excel(filename+"/datos_equipos.xlsx",sheet_name="equipos")
     #convierte el data frame a archivo de excel
 
-def descargar_prestamos(filename):
-    conexion=sqlite3.connect("control_de_modulo_salas.db")
-    # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
-    df = pd.read_sql_query("SELECT * from prestamo", conexion)
-    df.to_excel(filename+"/datos_prestamos.xlsx",sheet_name="prestamos")
+def descargar_prestamos(filename, df_prestamos ):
+    # conexion=sqlite3.connect("control_de_modulo_salas.db")
+    # # cursor=conexion.execute("select * from usuario WHERE numerodocumento= "+ str(documento))
+    # df = pd.read_sql_query("SELECT * from prestamo", conexion)
+    df_prestamos.to_excel(filename+"/datos_prestamos.xlsx",sheet_name="prestamos")
     #convierte el data frame a archivo de excel
 
 def buscar_usuario_sql(documento_usuario):
@@ -213,7 +213,7 @@ def registrar_prestamo(descripcion,documento,idequipo,auxiliar,fecha,carrera,sal
     conexion.close()
 
 def dato_inicial_datatime(ini_Date, end_Date):
-    print(ini_Date,end_Date)
+    print("sdfasdfsaf",ini_Date,end_Date)
     if ini_Date != None and ini_Date != "" and ini_Date !='-- ::00':
         ini_Date = datetime.strptime(str(ini_Date), "%Y-%m-%d %H:%M:%S")
     else:
@@ -223,6 +223,7 @@ def dato_inicial_datatime(ini_Date, end_Date):
         end_Date = datetime.strptime(str(end_Date), "%Y-%m-%d %H:%M:%S")
     else:
         end_Date = datetime.now()
+    print("sdfasdfsaf159159159",ini_Date,end_Date)    
     return ini_Date,end_Date
     
 def clean_T(A):
@@ -240,17 +241,17 @@ def filtro_prestamo(fecha_start, fecha_end, documento, carrera):
     df_filtro_prestamo = pd.read_sql_query("SELECT * from prestamo", conexion)
     #df_filtro_prestamo =list(df_filtro_prestamo.values)
     #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
-    # if fecha_start != "-":
-    #     df_filtro_prestamo["fecha_entrada"] = df_filtro_prestamo["fecha_entrada"].apply(clean_T)
-    #     df_filtro_prestamo["fecha_entrada"] = pd.to_datetime(df_filtro_prestamo["fecha_entrada"])
-    #     filtro_cl1_ini, filtro_cl1_end = dato_inicial_datatime(fecha_start, fecha_end)
-    #     df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["fecha_entrada"] >= fecha_start]
+    if fecha_start != "-":
+        df_filtro_prestamo["fecha"] = df_filtro_prestamo["fecha"].apply(clean_T)
+        df_filtro_prestamo["fecha"] = pd.to_datetime(df_filtro_prestamo["fecha"], format="%Y-%m-%d %H:%M:%S")
+        #data_df_selecion_columnas[clm_2] = pd.to_datetime(data_df_selecion_columnas[clm_2], format="%Y-%m-%d")
+        df_filtro_prestamo = df_filtro_prestamo[((df_filtro_prestamo["fecha"] >= fecha_start) & (df_filtro_prestamo["fecha"] <= fecha_end))]
 
     # if fecha_end != "-":
-    #     df_filtro_prestamo["fecha_salida"] = df_filtro_prestamo["fecha_salida"].apply(clean_T)
-    #     df_filtro_prestamo["fecha_salida"] = pd.to_datetime(df_filtro_prestamo["fecha_salida"])
+    #     df_filtro_prestamo["fecha"] = df_filtro_prestamo["fecha"].apply(clean_T)
+    #     df_filtro_prestamo["fecha"] = pd.to_datetime(df_filtro_prestamo["fecha"])
     #     filtro_cl1_ini, filtro_cl1_end = dato_inicial_datatime(fecha_start, fecha_end)
-    #     df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["fecha_salida"] <= fecha_end]
+    #     df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["fecha"] <= fecha_end]
 
     if documento != "":
         df_filtro_prestamo["documento"] = df_filtro_prestamo["documento"].astype("string")
@@ -260,7 +261,7 @@ def filtro_prestamo(fecha_start, fecha_end, documento, carrera):
         df_filtro_prestamo["carrera"] = df_filtro_prestamo["carrera"].astype("string")
         df_filtro_prestamo = df_filtro_prestamo[df_filtro_prestamo["carrera"] == carrera]
     print("115599",df_filtro_prestamo)    
-    return df_filtro_prestamo.values
+    return df_filtro_prestamo
 
 def buscar_estado_usuario(documento_usuario):
     #verifica si el usuario esta bloqueado

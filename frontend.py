@@ -409,13 +409,6 @@ def Descargar_equipos():
     descargar_equipos(filename)
 
 
-def Descargar_prestamos():
-    print("descargar prestamos")
-    filename = fd.askdirectory()
-    print(filename)
-    descargar_prestamos(filename)
-
-
 def Buscar_usuario():
     global IDUSUARIO_GLOBAL
     tipo_usuario.delete(0, "end")
@@ -466,7 +459,6 @@ def Registrar_en_sala():
         agregar_registro_sala(idusuario, idauxiliar, fecha, descripcion_sala)
     else:
         messagebox.showerror("Error", "Por favor, ingrese los datos")
-
 
 def mostrar_estudiantes():
     print("entro linea 105")
@@ -644,10 +636,15 @@ def informacion():
             )
             return fecha_salida
 
-    def filtrar_prestamo():
-        print(documento_informes)
+
+    def Descargar_prestamos():
+        print("descargar prestamos")
+        filename = fd.askdirectory()
+        print(filename)
         fecha_start, fecha_end = fecha_entrada_l(), fecha_salida_l()
-        filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), carrera)
+        df_prestamos = filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), programa_informes.get())
+        descargar_prestamos(filename,df_prestamos )
+
 
     def mostrar_prestamos():
         ventana_prestamos = Toplevel(app)
@@ -686,7 +683,7 @@ def informacion():
             # Agregar datos a la tabla
             # Puedes reemplazar esto con tus propios datos
             fecha_start, fecha_end = fecha_entrada_l(), fecha_salida_l()
-            for data_prestamos in filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), programa_informes.get()):
+            for data_prestamos in filtro_prestamo(fecha_start, fecha_end, documento_informes.get(), programa_informes.get()).values:
                 data_prestamos = list(data_prestamos)
                 tabla.insert(
                     "",
