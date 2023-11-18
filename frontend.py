@@ -103,9 +103,11 @@ def clean():
 def agregar_prestamo():
     global IDUSUARIO_GLOBAL
     estadousuario = estado_usuario.get()
+    fecha_registro = "-"
+    descripcion_registro = ""
     def fecha_entrada_l():
         fecha_entrada = (
-            entrada_Año.get()
+            entrada_ano.get()
             + "-"
             + entrada_Mes.get()
             + "-"
@@ -135,13 +137,30 @@ def agregar_prestamo():
         return fecha_salida
 
     def cerrar_ventana():
-        fecha_prestamo_equipo = fecha_entrada_l()
-        fecha_entrega_equipo = fecha_salida_l()
-        print(fecha_entrega_equipo, fecha_prestamo_equipo)
-        if fecha_prestamo_equipo != "-" or fecha_entrega_equipo != "-":
+        # if salida_Año.get() != "" and salida_Mes.get() != "" and salida_dia.get() != "" and salida_Hora.get() != "" and  salida_Minuto.get() != "":
+        #     fecha_entrega_equipo = fecha_salida_l()
+        fecha_prestamo_equipo = "-"
+        if entrada_ano.get() != "" and entrada_Mes.get() != "" and entrada_dia.get() != "" and entrada_Hora.get() != "" and  entrada_Minuto.get() != "":
+            fecha_prestamo_equipo = fecha_entrada_l()
+        print(fecha_prestamo_equipo)
+        if fecha_prestamo_equipo != "-" and entrada_descripcion.get() != "":
+            fecha_registro = fecha_prestamo_equipo
+            descripcion_registro = entrada_descripcion.get()
+            if entrada_DOCMID.get() != "" and entrada_IDequipo.get() != "" and entrada_nombre_auxiliar.get() != "" and entrada_ingrese_programa.get()  != "":
+                registro(fecha_registro,descripcion_registro)
+            else:
+                messagebox.showerror("Error", "Debe ingresar todos los datos")
             ventana_agregar_prestamos.destroy()
         else:
             messagebox.showerror("Error", "Debe ingresar una de las fechas")
+
+    def registro(fecha_registro,descripcion_registro):
+        if descripcion_registro == "Entrega equipo":
+            registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),fecha_registro,"-",entrada_ingrese_programa.get())  
+            #update_estado_usuario(entrada_DOCMID.get(), "Deshabilitado")
+        else:
+            registrar_prestamo(descripcion_registro,entrada_DOCMID.get(),entrada_IDequipo.get(),entrada_nombre_auxiliar.get(),"-",fecha_registro,entrada_ingrese_programa.get())
+            #update_estado_usuario(entrada_DOCMID.get(), "Habilitado")
 
     if estadousuario != "Deshabilitado":
         fechaentregausuario = "-"
@@ -157,28 +176,12 @@ def agregar_prestamo():
         )
         fecha_entrada_text.grid(column=6, row=6, sticky=(N, W))
 
-        fecha_salida_text = Label(
-            ventana_agregar_prestamos,
-            text="Fecha y Hora de Salida:",
-            font="arial 8 bold",
-            bg="mint cream",
-        )
-        fecha_salida_text.grid(column=6, row=9, sticky=(N, W))
-
         fecha_entrada_text = Label(
             ventana_agregar_prestamos, text="Dia:", font="arial 8 bold", bg="mint cream"
         )
         fecha_entrada_text.grid(column=9, row=6, sticky=(N, W))
         entrada_dia = Entry(ventana_agregar_prestamos, width=5)
         entrada_dia.grid(column=9, row=7, sticky="w")
-
-        fecha_salida_text = Label(
-            ventana_agregar_prestamos, text="Dia:", font="arial 8 bold", bg="mint cream"
-        )
-        fecha_salida_text.grid(column=9, row=9, sticky=(N, W))
-        salida_dia = Entry(ventana_agregar_prestamos, width=5)
-        salida_dia.grid(column=9, row=10, sticky="w")
-
         fecha_entrada_text = Label(
             ventana_agregar_prestamos, text="Mes:", font="arial 8 bold", bg="mint cream"
         )
@@ -190,38 +193,17 @@ def agregar_prestamo():
         )
         entrada_Mes.grid(column=8, row=7, sticky="w")
 
-        fecha_salida_text = Label(
-            ventana_agregar_prestamos, text="Mes:", font="arial 8 bold", bg="mint cream"
-        )
-        fecha_salida_text.grid(column=8, row=9, sticky=(N, W))
-        salida_Mes = ttk.Combobox(
-            ventana_agregar_prestamos,
-            values=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
-            width=5,
-        )
-        salida_Mes.grid(column=8, row=10, sticky="w")
 
         fecha_entrada_text = Label(
             ventana_agregar_prestamos, text="Año:", font="arial 8 bold", bg="mint cream"
         )
         fecha_entrada_text.grid(column=7, row=6, sticky=(N, W))
-        entrada_Año = ttk.Combobox(
+        entrada_ano = ttk.Combobox(
             ventana_agregar_prestamos,
             values=[2023, 2024, 2025, 2026, 2027, 2028],
             width=5,
         )
-        entrada_Año.grid(column=7, row=7, sticky="w")
-
-        fecha_salida_text = Label(
-            ventana_agregar_prestamos, text="Año:", font="arial 8 bold", bg="mint cream"
-        )
-        fecha_salida_text.grid(column=7, row=9, sticky=(N, W))
-        salida_Año = ttk.Combobox(
-            ventana_agregar_prestamos,
-            values=[2023, 2024, 2025, 2026, 2027, 2028],
-            width=5,
-        )
-        salida_Año.grid(column=7, row=10, sticky="w")
+        entrada_ano.grid(column=7, row=7, sticky="w")
 
         fecha_entrada_text = Label(
             ventana_agregar_prestamos,
@@ -237,19 +219,6 @@ def agregar_prestamo():
         )
         entrada_Hora.grid(column=10, row=7, sticky="w")
 
-        fecha_salida_text = Label(
-            ventana_agregar_prestamos,
-            text="Hora:",
-            font="arial 8 bold",
-            bg="mint cream",
-        )
-        fecha_salida_text.grid(column=10, row=9, sticky=(N, W))
-        salida_Hora = ttk.Combobox(
-            ventana_agregar_prestamos,
-            values=list(range(24)),
-            width=5,
-        )
-        salida_Hora.grid(column=10, row=10, sticky="w")
 
         fecha_entrada_text = Label(
             ventana_agregar_prestamos,
@@ -265,30 +234,8 @@ def agregar_prestamo():
         )
         entrada_Minuto.grid(column=11, row=7, sticky="w")
 
-        fecha_salida_text = Label(
-            ventana_agregar_prestamos,
-            text="Minuto:",
-            font="arial 8 bold",
-            bg="mint cream",
-        )
-        fecha_salida_text.grid(column=11, row=9, sticky=(N, W))
-        salida_Minuto = ttk.Combobox(
-            ventana_agregar_prestamos,
-            values=list(range(60)),
-            width=5,
-        )
-        salida_Minuto.grid(column=11, row=10, sticky="w")
-
-        btn_guardar_fecha = Button(
-            ventana_agregar_prestamos,
-            text="Guardar Fecha",
-            font="arial 8 bold",
-            command=guardar_fecha,
-        )
-        btn_guardar_fecha.grid(column=6, row=12, pady=5, sticky="w")
-
         exit_button = Button(
-            ventana_agregar_prestamos, text="Exit", command=cerrar_ventana
+            ventana_agregar_prestamos, text="Registrar", command=cerrar_ventana
         )
         exit_button.grid(column=6, row=13, pady=5, sticky="w")
 
@@ -297,14 +244,13 @@ def agregar_prestamo():
         )
         DOCMID_text.grid(column=6, row=11, sticky=(N, W))
         entrada_descripcion = ttk.Combobox(
-        ventana_agregar_prestamos, values=["Entrada sala", "Salida de sala"], width=15
+        ventana_agregar_prestamos, values=["Entrega equipo", "Retorno equipo"], width=15
         )
         entrada_descripcion.grid(column=7, row=11, sticky="w")
     else:
         messagebox.showerror(
             "Error", "Usuario no habilitado para realizar nuevos prestamos"
         )
-
 
 def guardar_fecha():
     descripcion = entrada_descripcion.get()
@@ -499,7 +445,7 @@ def Descargar_prestamos():
 
 def Buscar_usuario():
     global IDUSUARIO_GLOBAL
-    print("Buscar Usuario")
+    tipo_usuario.delete(0, "end")
     documento_usuario = entrada_DOCMID.get()
     print(documento_usuario)
     Usuario_recibido = buscar_usuario_sql(documento_usuario)
@@ -517,7 +463,12 @@ def Buscar_usuario():
         clean()
         Usuario_recibido = Usuario_recibido[0]
         IDUSUARIO_GLOBAL = Usuario_recibido[0]
-        print("***************************************", IDUSUARIO_GLOBAL)
+        print("***************************************", IDUSUARIO_GLOBAL,Usuario_recibido)
+        if buscar_estado_usuario(Usuario_recibido[1]) == "Deshabilitado":
+            messagebox.showinfo(
+                message="Usuario deshabilitado", title="Alerta"
+            )
+
         # entrada_IDusuario.insert(INSERT, str(IDUSUARIO_GLOBAL))
         print("este es idusuario global", IDUSUARIO_GLOBAL)
         entrada_NOM.insert(INSERT, str(Usuario_recibido[2]))
@@ -530,7 +481,6 @@ def Buscar_usuario():
         # entrada_nombre_registro.insert(INSERT, str(Usuario_recibido[2]))
         # entrada_documento_registro.insert(INSERT, str(Usuario_recibido[1]))
         tipo_usuario.insert(INSERT, str(Usuario_recibido[7]))
-
 
 def Registrar_en_sala():
     global IDUSUARIO_GLOBAL

@@ -193,17 +193,9 @@ def agregar_registro_sala(idusuario,idauxiliar,fecha,descripcion):
     conexion.close()
 #conexion.execute("insert into usuario (idusuario,numerodocumento,nombres,apellidos,semestre,jornada, idprograma,idtipousuario) values (?,?,?,?,?,?,?,?)", (1,147,'jhon','cano',None,None,1,1))
 #print(buscar_elementos())
-def registrar_prestamo(descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,fecha_salida,carrera):
+def registrar_prestamo(descripcion,documento,idequipo,auxiliar,fecha_entrada,fecha_salida,carrera):
     conexion=sqlite3.connect("control_de_modulo_salas.db")
-    df = pd.read_sql_query("SELECT  * from prestamo", conexion)
-    print(df)
-    print(generar_idprestamo())
-    print(descripcion)
-    print(int(idusuario))
-    print(int(idequipo))
-    print(int(idauxiliar))
-    print(carrera)
-    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,idusuario,idequipo,idauxiliar,fecha_entrada,fecha_salida,carrera) values (?,?,?,?,?,?,?,?)", (generar_idprestamo(),descripcion,int(idusuario),int(idequipo),int(idauxiliar),fecha_entrada,fecha_salida,carrera))#idprestamo,descripcion,3,4,int(idauxiliar),fecha_entrada,fecha_salida))
+    cursor=conexion.execute("insert into prestamo (idprestamo,descripcion,documento,idequipo,auxiliar,fecha_entrada,fecha_salida,carrera) values (?,?,?,?,?,?,?,?)", (int(generar_idprestamo()),descripcion,int(documento),int(idequipo),auxiliar,fecha_entrada,fecha_salida,carrera))#idprestamo,descripcion,3,4,int(idauxiliar),fecha_entrada,fecha_salida))
     conexion.commit()
     conexion.close()
 
