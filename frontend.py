@@ -137,8 +137,8 @@ def agregar_prestamo():
     def cerrar_ventana():
         fecha_prestamo_equipo = fecha_entrada_l()
         fecha_entrega_equipo = fecha_salida_l()
-        print(fecha_entrada_equipo, fecha_prestamo_equipo)
-        if fecha_prestamo != "-" or fecha_entrega != "-":
+        print(fecha_entrega_equipo, fecha_prestamo_equipo)
+        if fecha_prestamo_equipo != "-" or fecha_entrega_equipo != "-":
             ventana_agregar_prestamos.destroy()
         else:
             messagebox.showerror("Error", "Debe ingresar una de las fechas")
