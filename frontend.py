@@ -873,9 +873,9 @@ def informacion():
 numsala_text = Label(
     Ventana_principal, text="Salas:", font="arial 8 bold", bg="mint cream"
 )
-numsala_text.grid(row=12, column=0, sticky=(N, W))
+numsala_text.grid(row=17, column=0, sticky=(N, W))
 entrada_Sala = ttk.Combobox(Ventana_principal, values=listado_sala(), width=15)
-entrada_Sala.grid(column=1, row=12, sticky="w")
+entrada_Sala.grid(column=1, row=17, sticky="w")
 
 tipo_usuario_text = Label(
     Ventana_principal, text="Tipo de usuario:", font="arial 8 bold", bg="mint cream"
@@ -885,15 +885,21 @@ tipo_usuario = ttk.Combobox(Ventana_principal, values=listado_tipousuario(), wid
 
 tipo_usuario.grid(column=1, row=8, sticky="w")
 
+telefono_text = Label(
+    Ventana_principal, text="Telefono:", font="arial 8 bold", bg="mint cream"
+)
+telefono_text.grid(column=0, row=10, sticky=(N, W))
+entrada_telefono = Entry(Ventana_principal, width=15)
+entrada_telefono.grid(column=1, row=10, sticky="w")
 
 estado_usuario_text = Label(
     Ventana_principal, text="Estado:", font="arial 8 bold", bg="mint cream"
 )
-estado_usuario_text.grid(column=0, row=9, sticky=(N, W))
+estado_usuario_text.grid(column=0, row=11, sticky=(N, W))
 estado_usuario = ttk.Combobox(
     Ventana_principal, values=["Habilitado", "Deshabilitado"], width=20
 )
-estado_usuario.grid(column=1, row=9, sticky="w")
+estado_usuario.grid(column=1, row=11, sticky="w")
 
 
 def informe_documento():
@@ -992,7 +998,7 @@ btn_agregar_estudiante = Button(
     font="arial 8 bold",
     command=agregar_estudiante,
 )
-btn_agregar_estudiante.grid(row=10, column=1, columnspan=1, pady=15)
+btn_agregar_estudiante.grid(row=15, column=1, columnspan=1, pady=15)
 
 btn_cambiar_estado = Button(
     Ventana_principal,
@@ -1000,7 +1006,7 @@ btn_cambiar_estado = Button(
     font="arial 8 bold",
     command=cambiar_estado,
 )
-btn_cambiar_estado.grid(row=10, column=2, columnspan=1, pady=15)
+btn_cambiar_estado.grid(row=15, column=2, columnspan=1, pady=15)
 
 btn_agregar_prestamos = Button(
     Ventana_principal,
@@ -1008,7 +1014,7 @@ btn_agregar_prestamos = Button(
     font="arial 8 bold",
     command=agregar_prestamo,
 )
-btn_agregar_prestamos.grid(row=19, column=1, columnspan=1, pady=15)
+btn_agregar_prestamos.grid(row=22, column=1, columnspan=1, pady=15)
 
 btn_buscar_usuario = Button(
     Ventana_principal,
@@ -1016,7 +1022,7 @@ btn_buscar_usuario = Button(
     font="arial 8 bold",
     command=Buscar_usuario,
 )
-btn_buscar_usuario.grid(row=10, column=0, columnspan=1, pady=2)
+btn_buscar_usuario.grid(row=15, column=0, columnspan=1, pady=2)
 
 btn_registrar_en_sala = Button(
     Ventana_principal,
@@ -1024,10 +1030,10 @@ btn_registrar_en_sala = Button(
     font="arial 8 bold",
     command=Registrar_en_sala,
 )
-btn_registrar_en_sala.grid(row=19, column=0, columnspan=1, pady=0)
+btn_registrar_en_sala.grid(row=22, column=0, columnspan=1, pady=0)
 
 btn_informes = Button(Ventana_principal, text="Informes", font="arial 8 bold", command=informacion)
-btn_informes.grid(row=21, column=1, columnspan=1, pady=0)
+btn_informes.grid(row=24, column=1, columnspan=1, pady=0)
 
 titulo_sala = Label(
     Ventana_principal,
@@ -1048,37 +1054,37 @@ titulo_sala = Label(
     fg="white",
     width=24,
 )
-titulo_sala.grid(row=11, column=0, columnspan=1, sticky=(N, W))
+titulo_sala.grid(row=16, column=0, columnspan=1, sticky=(N, W))
 
 APE_text = Label(
     Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream"
 )
-APE_text.grid(column=0, row=13, sticky=(N, W))
+APE_text.grid(column=0, row=18, sticky=(N, W))
 entrada_IDequipo = ttk.Combobox(Ventana_principal, values=list(listado_idequipos()), width=15)
-entrada_IDequipo.grid(row=13, column=1, sticky="w")
+entrada_IDequipo.grid(row=18, column=1, sticky="w")
 DOCMID_text = Label(
     Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg="mint cream"
 )
-DOCMID_text.grid(column=0, row=14, sticky=(N, W))
+DOCMID_text.grid(column=0, row=19, sticky=(N, W))
 entrada_nombre_auxiliar = ttk.Combobox(
     Ventana_principal, values=listado_auxiliares(), width=15
 )
-entrada_nombre_auxiliar.grid(column=1, row=14, sticky="w")
+entrada_nombre_auxiliar.grid(column=1, row=19, sticky="w")
 NOM_text = Label(
     Ventana_principal, text="ID Auxiliar:", font="arial 8 bold", bg="mint cream"
 )
-NOM_text.grid(column=2, row=13, sticky=(N, W))
+NOM_text.grid(column=2, row=19, sticky=(N, W))
 entrada_idauxiliar = Entry(Ventana_principal, width=20)
-entrada_idauxiliar.grid(row=14, column=2, sticky="w")
+entrada_idauxiliar.grid(row=20, column=2, sticky="w")
 
 DOCMID_text = Label(
     Ventana_principal, text="Ubicacion:", font="arial 8 bold", bg="mint cream"
 )
-DOCMID_text.grid(column=0, row=15, sticky=(N, W))
+DOCMID_text.grid(column=0, row=20, sticky=(N, W))
 entrada_ubicacion = ttk.Combobox(
     Ventana_principal, values=["Bibilioteca", "Area de T.I"], width=15
 )
-entrada_ubicacion.grid(column=1, row=15, sticky="w")
+entrada_ubicacion.grid(column=1, row=20, sticky="w")
 
 img = PhotoImage(file="UCC.png")
 imagen_redimensionada = img.subsample(10)
@@ -1097,7 +1103,7 @@ btn_limpiar_formulario = Button(
     font="arial 8 bold",
     command=clean_formulario,
 )
-btn_limpiar_formulario.grid(row=19, column=2, columnspan=1, pady=0)
+btn_limpiar_formulario.grid(row=22, column=2, columnspan=1, pady=0)
 
 
 app.mainloop()
