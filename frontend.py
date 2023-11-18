@@ -134,6 +134,8 @@ def fecha_salida():
     )
     return fecha_salida
 
+    
+
     def cerrar_ventana():
         fecha_prestamo = fecha_entrada()
         fecha_entrega = fecha_salida()
