@@ -26,6 +26,7 @@ from funcionessql import (
     insert_estado_usuario,
     update_estado_usuario,
     buscar_estado_usuario,
+    listado_idequipos
 )
 from datetime import datetime
 
@@ -1354,11 +1355,6 @@ btn_ver_equipos = Button(
 )
 btn_ver_equipos.grid(row=5, column=4, columnspan=1, pady=0)
 
-#btn_ver_salas = Button(
-#    Ventana_principal, text="Ver Salas", font="arial 8 bold", command=mostrar_salas
-#)
-#btn_ver_salas.grid(row=7, column=4, columnspan=1, pady=0)
-
 btn_ver_prestamos = Button(
     Ventana_principal,
     text="Ver Prestamos",
@@ -1449,7 +1445,7 @@ APE_text = Label(
     Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream"
 )
 APE_text.grid(column=0, row=13, sticky=(N, W))
-entrada_IDequipo = ttk.Combobox(Ventana_principal, values=(), width=15)
+entrada_IDequipo = ttk.Combobox(Ventana_principal, values=list(listado_idequipos()), width=15)
 entrada_IDequipo.grid(row=13, column=1, sticky="w")
 DOCMID_text = Label(
     Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg="mint cream"
