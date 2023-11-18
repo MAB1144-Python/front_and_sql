@@ -865,7 +865,7 @@ def informacion():
     btn_descargar_equipos = Button(ventana_informes, text="Descargar Equipos", font="arial 8 bold", command=Descargar_equipos)
     btn_descargar_equipos.grid(row=2, column=2, columnspan=1, pady=0)
 
-    btn_descargar_prestamos = Button(ventana_informes, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_equipos)
+    btn_descargar_prestamos = Button(ventana_informes, text="Descargar Prestamos", font="arial 8 bold", command=Descargar_prestamos)
     btn_descargar_prestamos.grid(row=18, column=3, columnspan=1, pady=0)
 
 
