@@ -26,6 +26,7 @@ from funcionessql import (
     insert_estado_usuario,
     update_estado_usuario,
     buscar_estado_usuario,
+    listado_idequipos
 )
 from datetime import datetime
 
@@ -1493,7 +1494,7 @@ APE_text = Label(
     Ventana_principal, text="ID Equipo:", font="arial 8 bold", bg="mint cream"
 )
 APE_text.grid(column=0, row=13, sticky=(N, W))
-entrada_IDequipo = ttk.Combobox(Ventana_principal, values=(), width=15)
+entrada_IDequipo = ttk.Combobox(Ventana_principal, values=list(listado_idequipos()), width=15)
 entrada_IDequipo.grid(row=13, column=1, sticky="w")
 DOCMID_text = Label(
     Ventana_principal, text="Auxiliar:", font="arial 8 bold", bg="mint cream"

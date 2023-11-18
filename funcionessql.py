@@ -52,6 +52,16 @@ def listado_de_sala():
     #nos sirve para crear el id busca los id identificas cual es el mayor y le suma uno para garantizar que el id no existe
     print(df["descripcion"]==0)
     return df["descripcion"].values
+    
+def listado_idequipos():
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    df = pd.read_sql_query("SELECT * from equipo", conexion)
+    return df["idequipo"].values
+    
+def buscar_equipos():
+    conexion=sqlite3.connect("control_de_modulo_salas.db")
+    df = pd.read_sql_query("SELECT * from equipo", conexion)
+    return df["descripcion"].values
 
 def generar_idprestamo():
     conexion=sqlite3.connect("control_de_modulo_salas.db")
